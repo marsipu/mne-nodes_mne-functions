@@ -8,6 +8,8 @@ from pathlib import Path
 from collections import defaultdict
 from pprint import pprint
 import re
+import sys
+from typing import DefaultDict
 import docstring_parser
 
 from mne_nodes.gui.parameter_widgets import (
@@ -66,7 +68,10 @@ def parse_rst_functions(path):
 
 
 # Group functions by API category
-mnedev_api_path = Path(__file__).resolve().parents[3] / "mne-python/doc/api"
+mnedev_api_path = Path(__file__).resolve().parents[2] / "mne-python/doc/api"
+if not mnedev_api_path.exists():
+    print(f"{mnedev_api_path} does not exist!")
+    sys.exit(1)
 exclude_categories = [
     "connectivity",
     "creating_from_arrays",
@@ -147,7 +152,8 @@ def get_param_config(param, sig, obj_config):
     missing = [t for t in types if t not in default_type_guis]
     if len(types) == 0 or len(missing) > 0 or default is inspect.Parameter.empty:
         # Add params with missing types or no Default as inputs
-        missing_types.update(missing)
+        for mis in missing:
+            missing_types[mis].append(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
             "accepted": param.arg_name,  # type: ignore
             "optional": none_select,
@@ -176,10 +182,8 @@ def get_param_config(param, sig, obj_config):
 
 
 # %%
-config = {"module": {
-    "code_path": None,
-}, "functions": {}, "categories": {}}
-missing_types = set()
+config = {}
+missing_types = DefaultDict(list)
 for category, module_dict in objects.items():
     for module_name, obj_list in module_dict.items():
         m_split = module_name.split(".")
@@ -262,13 +266,16 @@ for category, module_dict in objects.items():
                 }
                 obj_config["outputs"][ret.return_name] = return_config  # type: ignore
             # Add to config
-            config["functions"][obj_name] = obj_config
+            config[obj_name] = obj_config
 
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
     json.dump(config, file, indent=4)
-print("Missing types:")
-pprint(missing_types)
-print(f"Scraped {len(config['functions'])} functions/classes from mne")
+# Save missing types
+missing_path = Path(__file__).parent / "missing_types.json"
+with open(missing_path, "w") as file:
+    json.dump(missing_types, file, indent=4)
+print(f"Scraped {len(config)} functions/classes from mne")
 print(f"Config saved to {config_path}")
+print(f"Missing types saved to {missing_path}")

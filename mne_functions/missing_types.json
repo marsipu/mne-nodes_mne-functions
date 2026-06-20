@@ -1,0 +1,3030 @@
+{
+    "instance of Epochs": [
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "epochs",
+        "inst",
+        "epochs",
+        "epochs"
+    ],
+    "": [
+        "epochs",
+        "inst",
+        "pre_dispatch",
+        "old_event_ids",
+        "new_event_id",
+        "evoked",
+        "evoked",
+        "condition",
+        "vertices",
+        "hemis",
+        "subjects_dir",
+        "inst",
+        "baseline",
+        "inst",
+        "inst",
+        "inst",
+        "preload",
+        "include",
+        "inst",
+        "dist",
+        "dist"
+    ],
+    "list of Epochs": [
+        "epochs"
+    ],
+    "list of Projection": [
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs",
+        "projs"
+    ],
+    "sklearn.model_selection object": [
+        "cv",
+        "cv"
+    ],
+    "instance of Raw": [
+        "raw",
+        "inst",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "inst",
+        "inst",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "inst",
+        "raw",
+        "raw",
+        "raw",
+        "raw_er",
+        "raw",
+        "raw",
+        "raw",
+        "other",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "inst",
+        "inst",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "raw",
+        "raw"
+    ],
+    "array-like": [
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "X",
+        "y",
+        "groups",
+        "event_desc",
+        "picks",
+        "origin",
+        "destination",
+        "picks",
+        "origin",
+        "r0",
+        "relative_radii",
+        "sigmas",
+        "wsize",
+        "tstep",
+        "picks",
+        "picks",
+        "picks",
+        "picks_artifact",
+        "picks",
+        "filter_freq",
+        "sphere",
+        "origin",
+        "origin",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "origin",
+        "picks",
+        "origin",
+        "destination",
+        "picks",
+        "t_raw",
+        "t_other",
+        "picks",
+        "picks_artifact",
+        "contours",
+        "picks",
+        "picks",
+        "picks",
+        "translation",
+        "iir_filter",
+        "picks",
+        "picks",
+        "a",
+        "b",
+        "names",
+        "picks",
+        "freqs",
+        "picks",
+        "freqs",
+        "picks",
+        "freqs",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "X",
+        "X",
+        "X",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "size",
+        "group_boundaries",
+        "picks",
+        "contours",
+        "picks",
+        "picks",
+        "contours",
+        "picks",
+        "freq",
+        "gain",
+        "destination",
+        "axes",
+        "freq",
+        "gain",
+        "picks",
+        "contours",
+        "figsize",
+        "picks",
+        "picks",
+        "contours",
+        "picks_trace",
+        "picks",
+        "picks",
+        "contours",
+        "contours",
+        "contours",
+        "sensor_scales",
+        "contours"
+    ],
+    "slice": [
+        "picks",
+        "picks",
+        "picks",
+        "decim",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "decim",
+        "picks",
+        "decim",
+        "picks",
+        "decim",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "decim",
+        "picks",
+        "decim",
+        "decim",
+        "picks",
+        "decim",
+        "decim",
+        "decim",
+        "decim",
+        "decim",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks",
+        "picks_trace",
+        "picks",
+        "picks"
+    ],
+    "Covariance": [
+        "noise_cov",
+        "cov",
+        "inst",
+        "cov",
+        "signal_cov",
+        "cov",
+        "signal_cov",
+        "orig"
+    ],
+    "mne.Info": [
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "info"
+    ],
+    "instance of Covariance": [
+        "noise_cov",
+        "noise_cov",
+        "cov",
+        "noise_cov",
+        "noise_cov",
+        "noise_cov",
+        "noise_cov",
+        "data_cov",
+        "noise_cov",
+        "data_cov",
+        "noise_cov",
+        "noise_cov",
+        "cov",
+        "noise_cov",
+        "cov",
+        "cov",
+        "noise_cov",
+        "noise_cov",
+        "noise_cov",
+        "noise_cov",
+        "noise_cov"
+    ],
+    "'bads' (default 'bads')": [
+        "exclude"
+    ],
+    "Epochs": [
+        "inst",
+        "evoked",
+        "epochs",
+        "epochs",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst"
+    ],
+    "dict of float": [
+        "std"
+    ],
+    "path-like": [
+        "fname",
+        "fname",
+        "path",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "filename",
+        "filename",
+        "destination",
+        "subjects_dir",
+        "mgz_fname",
+        "fname",
+        "annot_fname",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "input_fname",
+        "events",
+        "mrk",
+        "elp",
+        "hsp",
+        "input_fname",
+        "events",
+        "fname",
+        "filename",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname_in",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "filename",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "info",
+        "trans",
+        "src",
+        "bem",
+        "trans",
+        "subjects_dir",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "mri",
+        "bem",
+        "surface",
+        "subjects_dir",
+        "filepath",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "subjects_dir",
+        "flash5_img",
+        "subjects_dir",
+        "flash30",
+        "flash30",
+        "subjects_dir",
+        "flash5",
+        "flash5",
+        "trans",
+        "fname",
+        "fname",
+        "fname",
+        "bem",
+        "trans",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "inst",
+        "subjects_dir",
+        "trans",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "bg_image",
+        "destination",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "base_image",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "fname",
+        "input_fname",
+        "pos_fname",
+        "input_fname",
+        "input_fname",
+        "fname",
+        "vhdr_fname",
+        "pdf_fname",
+        "config_fname",
+        "head_shape_fname",
+        "input_fname",
+        "directory",
+        "fname",
+        "input_fname",
+        "input_fname",
+        "input_fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "binfile",
+        "input_fname",
+        "input_fname",
+        "mrk",
+        "elp",
+        "hsp",
+        "fname",
+        "filename",
+        "input_fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "head_pos",
+        "head_pos",
+        "head_pos",
+        "src",
+        "bem",
+        "head_pos",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "subjects_dir",
+        "annot_fname",
+        "subjects_dir",
+        "fname",
+        "fname",
+        "fname",
+        "subjects_dir",
+        "subjects_dir",
+        "trans",
+        "subjects_dir",
+        "subjects_dir",
+        "src",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "fname",
+        "theme",
+        "fname_1",
+        "fname_2",
+        "fname_out",
+        "subjects_dir",
+        "src",
+        "trans",
+        "subjects_dir",
+        "theme",
+        "noise_cov",
+        "destination",
+        "theme",
+        "theme",
+        "subjects_dir",
+        "subjects_dir",
+        "trans",
+        "subjects_dir",
+        "mri_fiducials"
+    ],
+    "\"unzip\"": [
+        "processor"
+    ],
+    "\"untar\"": [
+        "processor"
+    ],
+    "instance of pooch.Unzip": [
+        "processor"
+    ],
+    "instance of pooch.Untar": [
+        "processor"
+    ],
+    "'epoch' (default 'concat')": [
+        "cov_est"
+    ],
+    "'csp_space' (default 'average_power')": [
+        "transform_into"
+    ],
+    "\"restricting\"": [
+        "restr_type",
+        "restr_type",
+        "restr_type",
+        "restr_type"
+    ],
+    "\"whitening\"": [
+        "restr_type",
+        "restr_type",
+        "restr_type",
+        "restr_type"
+    ],
+    "'alternate' (default 'mutual_info')": [
+        "component_order"
+    ],
+    "object": [
+        "model",
+        "base_estimator",
+        "base_estimator",
+        "estimator",
+        "figure",
+        "figure",
+        "figure"
+    ],
+    "array-like of float": [
+        "freqs",
+        "sphere",
+        "positions",
+        "offsets",
+        "gaze",
+        "buffer",
+        "sphere",
+        "sphere",
+        "highlight",
+        "highlight",
+        "sphere",
+        "average",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "scores",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere"
+    ],
+    "shape (n_freqs": [
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles"
+    ],
+    ")": [
+        "freqs",
+        "feature_names",
+        "X",
+        "y",
+        "groups",
+        "onset",
+        "duration",
+        "description",
+        "onset",
+        "duration",
+        "description",
+        "hed_string",
+        "origin",
+        "destination",
+        "conductivity",
+        "conductivity",
+        "origin",
+        "sphere",
+        "gammas",
+        "pos",
+        "ori",
+        "scale",
+        "scale",
+        "scale",
+        "scale",
+        "nasion",
+        "lpa",
+        "rpa",
+        "filter_freq",
+        "sphere",
+        "origin",
+        "origin",
+        "origin",
+        "baseline",
+        "origin",
+        "destination",
+        "t_raw",
+        "t_other",
+        "template",
+        "qrs_times",
+        "translation",
+        "vertices",
+        "values",
+        "data",
+        "vertices",
+        "data",
+        "vertices",
+        "vertices",
+        "data",
+        "freqs",
+        "times",
+        "freqs",
+        "times",
+        "freqs",
+        "times",
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "freqs",
+        "n_cycles",
+        "size",
+        "highlight",
+        "average",
+        "destination",
+        "figsize",
+        "scores",
+        "overlay_times",
+        "mask",
+        "initial_pos",
+        "data",
+        "mask",
+        "data",
+        "mask",
+        "focalpoint"
+    ],
+    "array of float": [
+        "n_cycles",
+        "onset",
+        "duration",
+        "onset",
+        "duration",
+        "n_cycles",
+        "n_cycles",
+        "freqs",
+        "notch_widths",
+        "ed_matrix",
+        "times",
+        "times"
+    ],
+    "instance of sklearn.base.BaseEstimator": [
+        "estimator",
+        "estimator",
+        "estimator",
+        "estimator"
+    ],
+    "array": [
+        "feature_names",
+        "signal_cov",
+        "events",
+        "head_pos",
+        "events",
+        "events",
+        "rr",
+        "coords",
+        "weights",
+        "pos",
+        "freqs",
+        "resmat",
+        "resmat",
+        "resmat",
+        "weights",
+        "sure_alpha_grid",
+        "weights",
+        "gammas",
+        "pos",
+        "pos",
+        "scale",
+        "scale",
+        "pos",
+        "nasion",
+        "lpa",
+        "rpa",
+        "hsp",
+        "hpi",
+        "events",
+        "pos",
+        "pos",
+        "head_pos",
+        "events",
+        "head_pos",
+        "x",
+        "pos",
+        "a",
+        "b",
+        "quat",
+        "rot",
+        "data",
+        "head_pos",
+        "head_pos",
+        "head_pos",
+        "iir_filter",
+        "head_pos",
+        "stc_data",
+        "times",
+        "vertices",
+        "pos",
+        "values",
+        "data",
+        "extents",
+        "hemis",
+        "colors",
+        "X",
+        "X",
+        "X",
+        "X",
+        "tris",
+        "tris",
+        "weights",
+        "weights",
+        "weights",
+        "x",
+        "X",
+        "x",
+        "x",
+        "X",
+        "im",
+        "adjacency",
+        "events",
+        "events",
+        "fig_background",
+        "data",
+        "pos",
+        "data"
+    ],
+    "shape (n_features": [
+        "feature_names",
+        "weights"
+    ],
+    "['r2'": [
+        "scoring"
+    ],
+    "'corrcoef']": [
+        "scoring"
+    ],
+    "callable": [
+        "scoring",
+        "scoring",
+        "scoring",
+        "event_id",
+        "event_desc",
+        "time_func",
+        "mapping",
+        "method",
+        "show_names",
+        "mapping",
+        "value_fun",
+        "data_fun",
+        "solver",
+        "stat_fun",
+        "stat_fun",
+        "stat_fun",
+        "stat_fun",
+        "stat_fun",
+        "on_pick",
+        "agg_fun",
+        "zorder",
+        "show_names",
+        "ci",
+        "combine",
+        "show_names",
+        "vmin",
+        "vmax",
+        "order",
+        "combine",
+        "show_names",
+        "show_names",
+        "time_label",
+        "time_label",
+        "show_names",
+        "order",
+        "onselect",
+        "show_names",
+        "onselect",
+        "callback",
+        "callback"
+    ],
+    "{'average_power'": [
+        "transform_into"
+    ],
+    "'csp_space'}": [
+        "transform_into"
+    ],
+    "array of int": [
+        "picks",
+        "first_samps",
+        "last_samps",
+        "ids",
+        "events",
+        "n_cycles",
+        "n_cycles",
+        "n_cycles",
+        "n_cycles",
+        "order",
+        "order",
+        "order"
+    ],
+    "\u2018info\u2019": [
+        "rank"
+    ],
+    "\u2018full\u2019": [
+        "rank"
+    ],
+    "shape (n_channels": [
+        "signal_cov",
+        "signal_cov",
+        "data",
+        "data",
+        "data",
+        "data",
+        "ed_matrix",
+        "mask",
+        "mask",
+        "mask",
+        "mask",
+        "pos",
+        "mask",
+        "data",
+        "mask"
+    ],
+    "n_channels)": [
+        "signal_cov",
+        "filters",
+        "patterns",
+        "signal_cov",
+        "ed_matrix"
+    ],
+    "instance of Info": [
+        "info",
+        "info",
+        "info",
+        "info",
+        "info",
+        "pos",
+        "info_from",
+        "info_to"
+    ],
+    "ndarray": [
+        "filters",
+        "evals",
+        "patterns",
+        "events",
+        "events",
+        "events",
+        "points",
+        "triangles",
+        "sphere",
+        "pos",
+        "ori",
+        "starting_affine",
+        "xy",
+        "bg_image",
+        "signal_cov",
+        "ecg_source",
+        "eog_source",
+        "betas",
+        "qrs_times",
+        "data",
+        "system",
+        "data",
+        "x",
+        "quats",
+        "preload",
+        "values",
+        "data",
+        "design_matrix",
+        "arr",
+        "freqs",
+        "data",
+        "times",
+        "freqs",
+        "data",
+        "times",
+        "freqs",
+        "data",
+        "times",
+        "freqs",
+        "data",
+        "data",
+        "freqs",
+        "weights",
+        "data",
+        "freqs",
+        "weights",
+        "freqs",
+        "freqs",
+        "freqs",
+        "freqs",
+        "data",
+        "imdata",
+        "mask",
+        "fig_background",
+        "h",
+        "pos",
+        "initial_pos",
+        "labels"
+    ],
+    "shape ((n_classes)": [
+        "filters",
+        "evals",
+        "patterns"
+    ],
+    "n_components": [
+        "filters",
+        "patterns"
+    ],
+    "n_components)": [
+        "evals"
+    ],
+    "instance of mne.Epochs": [
+        "epochs"
+    ],
+    "cross-validation object": [
+        "cv"
+    ],
+    "shape (n_samples": [
+        "X",
+        "y",
+        "data",
+        "X",
+        "arr"
+    ],
+    "n_dimensional_features": [
+        "X"
+    ],
+    "n_targets": [
+        "y"
+    ],
+    "with shape (n_samples": [
+        "groups"
+    ],
+    "cross-validation generator": [
+        "cv"
+    ],
+    "iterable": [
+        "cv",
+        "first_samps",
+        "last_samps",
+        "stc",
+        "selection"
+    ],
+    "instance of mne.Info": [
+        "info"
+    ],
+    "shape (n_annotations": [
+        "onset",
+        "duration",
+        "description",
+        "onset",
+        "duration",
+        "description",
+        "hed_string"
+    ],
+    "array of str": [
+        "description",
+        "description",
+        "hed_string",
+        "show_names"
+    ],
+    "datetime": [
+        "orig_time",
+        "orig_time",
+        "orig_time"
+    ],
+    "list[dict[str": [
+        "extras",
+        "extras"
+    ],
+    "None]": [
+        "extras",
+        "extras",
+        "extras",
+        "extras"
+    ],
+    "list of array": [
+        "events",
+        "vertices",
+        "vertices",
+        "vertices",
+        "vertices",
+        "X",
+        "X",
+        "vertices",
+        "Ws",
+        "scores"
+    ],
+    "shape (N": [
+        "events",
+        "xy",
+        "pos",
+        "pos",
+        "vertices",
+        "pos",
+        "values"
+    ],
+    "3)": [
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "mrk",
+        "elp",
+        "hsp",
+        "events",
+        "rr",
+        "tris",
+        "events",
+        "coords",
+        "faces",
+        "pos",
+        "events",
+        "pos",
+        "pos",
+        "hsp",
+        "hpi",
+        "events",
+        "events",
+        "quat",
+        "rot",
+        "mrk",
+        "elp",
+        "hsp",
+        "pos",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events"
+    ],
+    "array-like of int": [
+        "ids",
+        "ids",
+        "mag_picks",
+        "grad_picks",
+        "bad_coils",
+        "picks",
+        "order",
+        "exclude",
+        "exclude"
+    ],
+    "Raw object": [
+        "raw",
+        "raw",
+        "raw",
+        "raw",
+        "raw"
+    ],
+    "shape (n_events_in": [
+        "events"
+    ],
+    "ndarray of int": [
+        "events",
+        "events",
+        "events",
+        "ids",
+        "tris",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events"
+    ],
+    "shape (n_events": [
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events",
+        "t_raw",
+        "t_other",
+        "events",
+        "events",
+        "events",
+        "events",
+        "events"
+    ],
+    "``'auto'``": [
+        "sfreq",
+        "event_id",
+        "stim_channel",
+        "misc",
+        "eog",
+        "ecg",
+        "data_format",
+        "header",
+        "stim_channel",
+        "eog",
+        "stim_channel",
+        "eog",
+        "ecg",
+        "emg",
+        "stim_channel",
+        "method",
+        "truncate_yaxis",
+        "reject",
+        "backend"
+    ],
+    "``'and'``": [
+        "mask_type",
+        "mask_type"
+    ],
+    "``'not_and'``": [
+        "mask_type",
+        "mask_type"
+    ],
+    "mne.Annotations": [
+        "annotations"
+    ],
+    "array-like of str": [
+        "event_names",
+        "keys",
+        "picks"
+    ],
+    "shape (3": [
+        "origin",
+        "destination",
+        "origin",
+        "pos",
+        "ori",
+        "nasion",
+        "lpa",
+        "rpa",
+        "origin",
+        "origin",
+        "origin",
+        "origin",
+        "destination",
+        "translation",
+        "destination",
+        "axes",
+        "initial_pos",
+        "focalpoint"
+    ],
+    "instance of Transform": [
+        "destination",
+        "trans",
+        "trans",
+        "trans",
+        "trans",
+        "mri_head_t",
+        "mri_head_t",
+        "trans",
+        "destination",
+        "trans",
+        "trans",
+        "trans",
+        "trans",
+        "destination",
+        "trans"
+    ],
+    "list of Epochs instances": [
+        "epochs_list"
+    ],
+    "``'truncate'``": [
+        "method"
+    ],
+    "``'mintime'``": [
+        "method"
+    ],
+    "``'random'``": [
+        "method"
+    ],
+    "instance of ~numpy.random.RandomState": [
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "random_state",
+        "seed",
+        "seed",
+        "seed",
+        "seed",
+        "seed"
+    ],
+    "shape (m": [
+        "events"
+    ],
+    "Evoked instance": [
+        "evoked",
+        "evoked"
+    ],
+    "list of Evoked instances": [
+        "evoked",
+        "evoked",
+        "evoked"
+    ],
+    "instance of SourceSpaces": [
+        "src",
+        "src",
+        "src",
+        "src",
+        "src_from",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src_to",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "vertices",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src",
+        "src"
+    ],
+    "optional": [
+        "patch_stats",
+        "patch_stats",
+        "surf_ori",
+        "force_fixed",
+        "patch_stats",
+        "patch_stats"
+    ],
+    "file-like": [
+        "fname",
+        "fname",
+        "fname",
+        "input_fname",
+        "fname",
+        "input_fname",
+        "fname"
+    ],
+    "array of shape (5": [
+        "mrk",
+        "mrk"
+    ],
+    "array of shape (8": [
+        "elp",
+        "elp"
+    ],
+    "array of shape (n_points": [
+        "hsp",
+        "hsp"
+    ],
+    "tuple of length 2": [
+        "baseline",
+        "baseline",
+        "baseline",
+        "baseline",
+        "baseline",
+        "vlim",
+        "vlim",
+        "vlim",
+        "vlim",
+        "vlim",
+        "vlim",
+        "vlim",
+        "vlim",
+        "vlim"
+    ],
+    "matplotlib color": [
+        "color",
+        "color",
+        "color",
+        "foreground",
+        "background",
+        "foreground",
+        "background",
+        "foreground",
+        "color"
+    ],
+    "list with instances of mne.Label": [
+        "labels",
+        "labels"
+    ],
+    "``'both'``": [
+        "hemi",
+        "hemi"
+    ],
+    "``'lh'``": [
+        "hemi",
+        "hemi"
+    ],
+    "``'rh'``": [
+        "hemi",
+        "hemi"
+    ],
+    "instance of ConductorModel": [
+        "bem",
+        "bem",
+        "bem",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "sphere",
+        "bem",
+        "sphere"
+    ],
+    "shape (n_vertices": [
+        "rr"
+    ],
+    "shape (n_tris": [
+        "tris"
+    ],
+    "Forward": [
+        "fwd",
+        "fwd",
+        "fwd",
+        "fwd",
+        "fwd",
+        "fwd"
+    ],
+    "Label": [
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "label",
+        "lh",
+        "rh",
+        "labels",
+        "label",
+        "labels",
+        "label",
+        "label"
+    ],
+    "shape=(n_vertices": [
+        "coords"
+    ],
+    "int array": [
+        "faces"
+    ],
+    "shape=(n_faces": [
+        "faces"
+    ],
+    "dict-like": [
+        "volume_info",
+        "covariates"
+    ],
+    "type": [
+        "output"
+    ],
+    "SourceEstimate": [
+        "stc",
+        "stc",
+        "weights",
+        "weights",
+        "stc",
+        "stcs",
+        "stc",
+        "stc"
+    ],
+    "list of Forward": [
+        "fwds"
+    ],
+    "instance of Forward": [
+        "forward",
+        "forward",
+        "fwd",
+        "forward",
+        "forward",
+        "src",
+        "src",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "forward",
+        "fwd",
+        "forward",
+        "fwd"
+    ],
+    "instance of Label": [
+        "labels",
+        "label",
+        "label"
+    ],
+    "instance of SourceEstimate": [
+        "stc",
+        "src",
+        "stcs"
+    ],
+    "array of float of shape (3": [
+        "conductivity"
+    ],
+    "(1": [
+        "conductivity"
+    ],
+    "instance of Dipole": [
+        "dipole"
+    ],
+    "list of Dipole": [
+        "dipole"
+    ],
+    "``\"fsaverage\"``": [
+        "trans",
+        "trans",
+        "trans",
+        "trans",
+        "trans",
+        "trans"
+    ],
+    "ConductorModel": [
+        "bem",
+        "sphere",
+        "bem"
+    ],
+    "Evoked": [
+        "evoked",
+        "evoked",
+        "evoked",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "evoked",
+        "evoked",
+        "inst",
+        "inst"
+    ],
+    "Raw": [
+        "evoked",
+        "inst",
+        "inst",
+        "inst",
+        "inst",
+        "inst"
+    ],
+    "``'eeg'``": [
+        "ch_type",
+        "ch_type"
+    ],
+    "``'meg'``": [
+        "ch_type"
+    ],
+    "``'accurate'``": [
+        "mode"
+    ],
+    "``'fast'``": [
+        "mode"
+    ],
+    "``'grad'``": [
+        "ch_type"
+    ],
+    "``'mag'``": [
+        "ch_type"
+    ],
+    "``'free'``": [
+        "mode"
+    ],
+    "``'fixed'``": [
+        "mode"
+    ],
+    "``'ratio'``": [
+        "mode"
+    ],
+    "``'radiality'``": [
+        "mode"
+    ],
+    "``'angle'``": [
+        "mode"
+    ],
+    "``'remaining'``": [
+        "mode"
+    ],
+    "``'dampening'``": [
+        "mode"
+    ],
+    "shape (4": [
+        "sphere",
+        "reg_affine",
+        "reg_affine",
+        "sphere",
+        "reg_affine"
+    ],
+    "Nifti1Image": [
+        "flash5_img"
+    ],
+    "list of SpatialImage": [
+        "flash30",
+        "flash5"
+    ],
+    "SpatialImage": [
+        "flash30",
+        "flash5"
+    ],
+    "True": [
+        "flash5"
+    ],
+    "shape (...": [
+        "pos",
+        "data",
+        "data",
+        "a",
+        "b",
+        "quat",
+        "rot",
+        "X"
+    ],
+    "Evoked object": [
+        "evoked"
+    ],
+    "instance of InverseOperator": [
+        "inverse_operator",
+        "inverse_operator",
+        "inverse_operator",
+        "inverse_operator",
+        "inv",
+        "inv",
+        "inverse_operator",
+        "inverse_operator",
+        "inverse_operator",
+        "src",
+        "src",
+        "inv"
+    ],
+    "\"MNE\"": [
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method"
+    ],
+    "\"dSPM\"": [
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method"
+    ],
+    "\"sLORETA\"": [
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method"
+    ],
+    "\"eLORETA\"": [
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method",
+        "method"
+    ],
+    "\"normal\"": [
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori"
+    ],
+    "\"vector\"": [
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori",
+        "pick_ori"
+    ],
+    "Epochs object": [
+        "epochs"
+    ],
+    "int (or None)": [
+        "buffer_size"
+    ],
+    "EpochsTFR object": [
+        "epochs_tfr"
+    ],
+    "instance of Evoked": [
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "inst",
+        "evoked",
+        "inst",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked",
+        "evoked"
+    ],
+    "list of Label": [
+        "label",
+        "label",
+        "idx",
+        "idx",
+        "labels",
+        "labels"
+    ],
+    "shape (n_orient * n_vertices": [
+        "resmat"
+    ],
+    "n_vertices)": [
+        "resmat",
+        "X",
+        "X"
+    ],
+    "shape (n_dipoles": [
+        "resmat",
+        "resmat",
+        "data"
+    ],
+    "n_dipoles)": [
+        "resmat",
+        "resmat"
+    ],
+    "list of instances of Evoked": [
+        "evoked"
+    ],
+    "np.inf": [
+        "dgap_freq",
+        "dgap_freq",
+        "fmax",
+        "fmax",
+        "fmax",
+        "fmax"
+    ],
+    "(float": [
+        "window"
+    ],
+    "float)": [
+        "window"
+    ],
+    "float in [0": [
+        "alpha",
+        "l1_ratio",
+        "alpha",
+        "opacity",
+        "alpha"
+    ],
+    "100)": [
+        "alpha"
+    ],
+    "1]": [
+        "l1_ratio",
+        "alpha",
+        "opacity",
+        "alpha"
+    ],
+    "shape=(n_sources": [
+        "gammas"
+    ],
+    "Dipole": [
+        "dipoles",
+        "dipoles"
+    ],
+    "list of instances of Dipole": [
+        "dipoles",
+        "dipoles"
+    ],
+    "instance of Beamformer": [
+        "filters",
+        "filters",
+        "filters",
+        "filters",
+        "filters",
+        "filters",
+        "filters",
+        "filters",
+        "filters"
+    ],
+    "mne.io.Raw": [
+        "raw",
+        "raw",
+        "raw_event",
+        "raw",
+        "raw_event"
+    ],
+    "instance of CrossSpectralDensity": [
+        "csd",
+        "noise_csd",
+        "csd",
+        "csd",
+        "csd"
+    ],
+    "EpochsTFR": [
+        "epochs_tfr",
+        "epochs_tfr",
+        "tfr"
+    ],
+    "instance of pandas.DataFrame": [
+        "metadata",
+        "metadata"
+    ],
+    "iterator of dict": [
+        "pts"
+    ],
+    "DigMontage": [
+        "montage",
+        "montage"
+    ],
+    "Transform": [
+        "trans"
+    ],
+    "shape (n_pos": [
+        "pos",
+        "pos",
+        "quats",
+        "pos",
+        "pos"
+    ],
+    "array_like": [
+        "scale",
+        "scale",
+        "picks",
+        "pval",
+        "pvals",
+        "random_state",
+        "overlay_times"
+    ],
+    "shape = (3": [
+        "scale",
+        "scale",
+        "scale",
+        "scale"
+    ],
+    "instance of SpatialImage": [
+        "moving",
+        "static",
+        "moving",
+        "static",
+        "moving",
+        "static",
+        "moving",
+        "static",
+        "bg_img"
+    ],
+    "ndarray of float": [
+        "reg_affine",
+        "reg_affine",
+        "reg_affine"
+    ],
+    "4)": [
+        "reg_affine",
+        "reg_affine",
+        "pos",
+        "reg_affine",
+        "trans",
+        "a",
+        "b",
+        "colors",
+        "colors",
+        "colormap",
+        "colormap",
+        "colormap",
+        "colormap"
+    ],
+    "instance of dipy.align.DiffeomorphicMap": [
+        "sdr_morph",
+        "sdr_morph",
+        "sdr_morph"
+    ],
+    "float between ``0`` and ``1``": [
+        "n_grad",
+        "n_mag",
+        "n_eeg",
+        "n_grad",
+        "n_mag",
+        "n_eeg",
+        "n_grad",
+        "n_mag",
+        "n_eeg"
+    ],
+    "tuple of length 4": [
+        "box"
+    ],
+    "shape=(n_channels": [
+        "pos"
+    ],
+    "instance of DigMontage": [
+        "montage",
+        "montage",
+        "montage",
+        "montage"
+    ],
+    "``'m'``": [
+        "unit",
+        "unit",
+        "unit"
+    ],
+    "``'cm'``": [
+        "unit",
+        "unit",
+        "unit"
+    ],
+    "``'mm'``": [
+        "unit",
+        "unit",
+        "unit"
+    ],
+    "shape (n_points": [
+        "hsp"
+    ],
+    "shape (n_hpi": [
+        "hpi"
+    ],
+    "{'mag'": [
+        "ch_type"
+    ],
+    "'eeg'}": [
+        "ch_type"
+    ],
+    "2)": [
+        "xy",
+        "highlight",
+        "axes",
+        "axes",
+        "pos"
+    ],
+    "(default 2)": [
+        "n_components"
+    ],
+    "iterable of str": [
+        "ignore"
+    ],
+    "10)": [
+        "pos",
+        "pos",
+        "quats",
+        "pos",
+        "pos"
+    ],
+    "shape (2": [
+        "filter_freq",
+        "baseline",
+        "data",
+        "data",
+        "vertices",
+        "vertices",
+        "data",
+        "size",
+        "figsize"
+    ],
+    "list of Raw": [
+        "raw"
+    ],
+    "list of ndarray": [
+        "pos",
+        "pos",
+        "labels"
+    ],
+    "list of length 2": [
+        "baseline",
+        "baseline"
+    ],
+    "np.ndarray": [
+        "data",
+        "weights",
+        "template",
+        "brains"
+    ],
+    "n_features)": [
+        "data",
+        "weights"
+    ],
+    "1d array": [
+        "x0"
+    ],
+    "{-1": [
+        "extrema"
+    ],
+    "1}": [
+        "extrema"
+    ],
+    "shape (n_picks": [
+        "betas"
+    ],
+    "n_picks_ref)": [
+        "betas"
+    ],
+    "list of mne.preprocessing.ICA": [
+        "icas"
+    ],
+    "shape (n_components": [
+        "template"
+    ],
+    "\"auto\"": [
+        "threshold",
+        "times",
+        "times",
+        "distance"
+    ],
+    "matplotlib colormap": [
+        "cmap",
+        "cmap",
+        "cmap",
+        "mask_cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap"
+    ],
+    "shape (n_peaks": [
+        "qrs_times"
+    ],
+    "instance of mne.channels.DigMontage": [
+        "montage",
+        "montage"
+    ],
+    "nibabel.spatialimages.SpatialImage": [
+        "base_image"
+    ],
+    "shape ``(n_calibration_points": [
+        "positions",
+        "offsets",
+        "gaze"
+    ],
+    "2)``": [
+        "positions",
+        "gaze"
+    ],
+    ")``": [
+        "offsets",
+        "screen_size",
+        "screen_resolution",
+        "screen_size",
+        "screen_resolution"
+    ],
+    "array-like of shape ``(2": [
+        "screen_size",
+        "screen_resolution",
+        "screen_size",
+        "screen_resolution"
+    ],
+    "Calibration": [
+        "calibration",
+        "calibration"
+    ],
+    "shape ``(2": [
+        "buffer"
+    ],
+    "))``": [
+        "buffer"
+    ],
+    "n_times)": [
+        "data",
+        "data",
+        "stc_data",
+        "data",
+        "data",
+        "data",
+        "data",
+        "data",
+        "data",
+        "data",
+        "data",
+        "data",
+        "X",
+        "X",
+        "X",
+        "x",
+        "x",
+        "x",
+        "data",
+        "data",
+        "data",
+        "X",
+        "mask",
+        "mask",
+        "mask"
+    ],
+    "instance of RawKIT": [
+        "raw"
+    ],
+    "array of shape (4": [
+        "trans"
+    ],
+    "4": [
+        "a",
+        "b"
+    ],
+    "3": [
+        "rot",
+        "data",
+        "data",
+        "data",
+        "colormap",
+        "colormap",
+        "colormap",
+        "colormap"
+    ],
+    "\"his_id\"": [
+        "keep_his"
+    ],
+    "\"sex\"": [
+        "keep_his",
+        "keep_his"
+    ],
+    "\"hand\"": [
+        "keep_his"
+    ],
+    "sequence of {\"his_id\"": [
+        "keep_his"
+    ],
+    "\"hand\"}": [
+        "keep_his"
+    ],
+    "list of (int": [
+        "eog",
+        "misc"
+    ],
+    "str)": [
+        "eog",
+        "eog",
+        "misc",
+        "misc"
+    ],
+    "tuple of (int": [
+        "eog",
+        "misc"
+    ],
+    "``'header'``": [
+        "eog"
+    ],
+    "``'int16'``": [
+        "data_format"
+    ],
+    "``'int32'``": [
+        "data_format"
+    ],
+    "``'mm/dd/yy'``": [
+        "date_format"
+    ],
+    "``'dd/mm/yy'``": [
+        "date_format"
+    ],
+    "``'new'``": [
+        "header"
+    ],
+    "``'old'``": [
+        "header"
+    ],
+    "``'<'``": [
+        "stim"
+    ],
+    "``'>'``": [
+        "stim"
+    ],
+    "``'+'``": [
+        "slope"
+    ],
+    "``'-'``": [
+        "slope"
+    ],
+    "``'binary'``": [
+        "stim_code"
+    ],
+    "``'channel'``": [
+        "stim_code"
+    ],
+    "bytes": [
+        "password"
+    ],
+    "dtype": [
+        "dtype"
+    ],
+    "list of Evoked": [
+        "all_evoked",
+        "all_inst",
+        "evoked"
+    ],
+    "``'equal'``": [
+        "weights"
+    ],
+    "``'nave'``": [
+        "weights"
+    ],
+    "AverageTFR": [
+        "all_inst",
+        "tfr",
+        "tfr"
+    ],
+    "Spectrum": [
+        "all_inst"
+    ],
+    "(optional)": [
+        "exclude"
+    ],
+    "1D array": [
+        "times"
+    ],
+    "SourceEstimate object": [
+        "stc"
+    ],
+    "Covariance object": [
+        "cov"
+    ],
+    "SourceSimulator": [
+        "stc"
+    ],
+    "shape (n_labels": [
+        "stc_data",
+        "values"
+    ],
+    "instance of (Vol": [
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est"
+    ],
+    "Mixed)SourceEstimate": [
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est",
+        "stc_true",
+        "stc_est"
+    ],
+    "color": [
+        "color",
+        "fig_facecolor",
+        "axis_facecolor",
+        "axis_spinecolor",
+        "bgcolor",
+        "highlight_color",
+        "color",
+        "background_color",
+        "fig_facecolor",
+        "font_color"
+    ],
+    "array of shape (n_dipoles": [
+        "data",
+        "data",
+        "data",
+        "data",
+        "data"
+    ],
+    "scalar": [
+        "tmin",
+        "tstep",
+        "tmin",
+        "tstep",
+        "tmin",
+        "tstep",
+        "tmin",
+        "tstep",
+        "tmin",
+        "tstep",
+        "tmin",
+        "tstep"
+    ],
+    "shape (n_src": [
+        "vertices"
+    ],
+    "list of array of int": [
+        "vertices",
+        "vertices"
+    ],
+    "list (or generator) of SourceEstimate": [
+        "stcs"
+    ],
+    "BiHemiLabel": [
+        "labels",
+        "label",
+        "labels"
+    ],
+    "shape (n": [
+        "colors",
+        "highlight"
+    ],
+    "(": [
+        "colors"
+    ],
+    "SourceSpaces": [
+        "src",
+        "src",
+        "src"
+    ],
+    "...)": [
+        "values",
+        "arr"
+    ],
+    "int >= 2": [
+        "parts"
+    ],
+    "list-like": [
+        "factor_levels",
+        "factor_levels"
+    ],
+    "iterable of SourceEstimate": [
+        "inst"
+    ],
+    "shape (n_observations": [
+        "design_matrix",
+        "X",
+        "X",
+        "X",
+        "X"
+    ],
+    "n_regressors)": [
+        "design_matrix"
+    ],
+    "p[": [
+        "X",
+        "X",
+        "X",
+        "X"
+    ],
+    "q][": [
+        "X",
+        "X"
+    ],
+    "r])": [
+        "X",
+        "X"
+    ],
+    "scipy.sparse.spmatrix": [
+        "adjacency",
+        "adjacency",
+        "adjacency",
+        "adjacency"
+    ],
+    "False": [
+        "adjacency",
+        "adjacency",
+        "adjacency",
+        "adjacency"
+    ],
+    "bool array": [
+        "exclude",
+        "exclude"
+    ],
+    "n_tests)": [
+        "X"
+    ],
+    "-1": [
+        "tail"
+    ],
+    "0": [
+        "tail"
+    ],
+    "1 (default = 0)": [
+        "tail"
+    ],
+    "q]": [
+        "X",
+        "X"
+    ],
+    "mne.Epochs": [
+        "epochs"
+    ],
+    "``'morlet'``": [
+        "method",
+        "method",
+        "method"
+    ],
+    "``'multitaper'``": [
+        "method",
+        "method",
+        "method",
+        "method"
+    ],
+    "n_freqs": [
+        "data",
+        "data",
+        "data",
+        "data",
+        "data"
+    ],
+    "shape (n_times": [
+        "times",
+        "times",
+        "times",
+        "average"
+    ],
+    "shape (n_tapers": [
+        "weights",
+        "weights",
+        "weights"
+    ],
+    "n_freqs)": [
+        "weights",
+        "weights",
+        "weights"
+    ],
+    "``'stockwell'``": [
+        "method"
+    ],
+    "shape ((n_channels**2 + n_channels) // 2": [
+        "data"
+    ],
+    "n_frequencies)": [
+        "data"
+    ],
+    "``'welch'``": [
+        "method"
+    ],
+    "[n_tapers]": [
+        "data",
+        "data"
+    ],
+    "[n_segments])": [
+        "data",
+        "data"
+    ],
+    "shape (n_epochs": [
+        "data",
+        "X",
+        "X",
+        "X",
+        "data",
+        "overlay_times"
+    ],
+    "n_channels": [
+        "data",
+        "X",
+        "X",
+        "X",
+        "data",
+        "data",
+        "data"
+    ],
+    "list of Spectrum": [
+        "all_spectrum"
+    ],
+    "list of AverageTFR": [
+        "all_tfr",
+        "tfr"
+    ],
+    "float ``\u2265 2.0``": [
+        "time_bandwidth",
+        "time_bandwidth"
+    ],
+    "RawTFR": [
+        "tfr"
+    ],
+    "list of RawTFR": [
+        "tfr"
+    ],
+    "list of EpochsTFR": [
+        "tfr"
+    ],
+    "2": [
+        "norm"
+    ],
+    "``'approximate'``": [
+        "norm"
+    ],
+    "``'subsample'``": [
+        "norm"
+    ],
+    "shape (n_signals": [
+        "x",
+        "X"
+    ],
+    "wsize / 2 + 1": [
+        "X"
+    ],
+    "n_step)": [
+        "X"
+    ],
+    "shape=(...": [
+        "x",
+        "x"
+    ],
+    "array of shape (n_epochs": [
+        "data",
+        "data"
+    ],
+    "tuple(int": [
+        "background"
+    ],
+    "int)": [
+        "background"
+    ],
+    "list of Figure": [
+        "figure"
+    ],
+    "instance of mne.Evoked": [
+        "evoked",
+        "evoked",
+        "evoked",
+        "evokeds"
+    ],
+    "instance of Figure3D": [
+        "fig",
+        "fig",
+        "figure",
+        "figure",
+        "fig"
+    ],
+    "Figure": [
+        "fig",
+        "fig"
+    ],
+    "shape (M": [
+        "im"
+    ],
+    "N": [
+        "im"
+    ],
+    "{3": [
+        "im"
+    ],
+    "4})": [
+        "im"
+    ],
+    "instance of mne.channels.Layout": [
+        "layout"
+    ],
+    "matplotlib.figure.Figure": [
+        "fig",
+        "fig",
+        "fig",
+        "fig",
+        "fig",
+        "fig"
+    ],
+    "array-like of length 3": [
+        "limits"
+    ],
+    "6": [
+        "limits"
+    ],
+    "instance of Axes": [
+        "ax",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "ax",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes"
+    ],
+    "np.ndarray of float": [
+        "colormap",
+        "colormap",
+        "colormap",
+        "colormap"
+    ],
+    "shape(n_colors": [
+        "colormap",
+        "colormap",
+        "colormap",
+        "colormap"
+    ],
+    "list of matplotlib.axes.Axes": [
+        "axes"
+    ],
+    "list of instance of Dipole": [
+        "dipoles"
+    ],
+    "list of color": [
+        "colors",
+        "color"
+    ],
+    "instance of matplotlib Axes3D": [
+        "ax"
+    ],
+    "list of matplotlib Axes": [
+        "ax"
+    ],
+    "color object": [
+        "event_color",
+        "color",
+        "color",
+        "color",
+        "bgcolor",
+        "color",
+        "bad_color",
+        "event_color"
+    ],
+    "list of (n_epochs) list (of n_channels)": [
+        "epoch_colors"
+    ],
+    "ndarray of bool": [
+        "mask",
+        "mask",
+        "mask",
+        "mask",
+        "mask",
+        "mask"
+    ],
+    "(colormap": [
+        "cmap",
+        "cmap",
+        "mask_cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap"
+    ],
+    "bool)": [
+        "cmap",
+        "cmap",
+        "mask_cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap",
+        "cmap"
+    ],
+    "\"joint\"": [
+        "vlim",
+        "vlim",
+        "vlim"
+    ],
+    "matplotlib.colors.Normalize": [
+        "cnorm",
+        "cnorm",
+        "cnorm",
+        "cnorm",
+        "cnorm",
+        "cnorm",
+        "cnorm",
+        "cnorm"
+    ],
+    "list of Axes": [
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "axes",
+        "ax",
+        "axes"
+    ],
+    "``'bads'``": [
+        "exclude",
+        "exclude",
+        "exclude"
+    ],
+    "``'tight'``": [
+        "xlim"
+    ],
+    "``'only'``": [
+        "gfp"
+    ],
+    "shape(2": [
+        "highlight"
+    ],
+    "instance of Layout": [
+        "layout",
+        "layout"
+    ],
+    "``'interactive'``": [
+        "proj"
+    ],
+    "instance of matplotlib Axes": [
+        "axes"
+    ],
+    "\"peaks\"": [
+        "times",
+        "times"
+    ],
+    "\"interactive\"": [
+        "times"
+    ],
+    "Figure3D": [
+        "fig",
+        "fig",
+        "fig",
+        "fig",
+        "fig",
+        "fig",
+        "fig"
+    ],
+    "mne.viz.Brain": [
+        "fig"
+    ],
+    "colormap": [
+        "cmap",
+        "cmap",
+        "cmap"
+    ],
+    "(4": [
+        "axes"
+    ],
+    "instance of matplotlib.colors.Colormap": [
+        "cmap",
+        "cmap"
+    ],
+    "``\"auto\"``": [
+        "vlines"
+    ],
+    "Axes instance": [
+        "axes"
+    ],
+    "``'topo'``": [
+        "axes"
+    ],
+    "instance of mne.preprocessing.ICA": [
+        "ica",
+        "ica",
+        "ica",
+        "ica",
+        "ica"
+    ],
+    "Axes": [
+        "axes"
+    ],
+    "array of Axes": [
+        "axes"
+    ],
+    "{'power'": [
+        "estimate",
+        "estimate"
+    ],
+    "'amplitude'}": [
+        "estimate",
+        "estimate"
+    ],
+    "shape (n_ica_components": [
+        "scores"
+    ],
+    "dict of list of Axes": [
+        "axes"
+    ],
+    "Layout": [
+        "layout"
+    ],
+    "``'all'``": [
+        "picks"
+    ],
+    "instance of Axes3D": [
+        "axes",
+        "axes"
+    ],
+    "EOGRegression": [
+        "model"
+    ],
+    "instance of matplotlib.figure.Figure": [
+        "figure"
+    ],
+    "``'s'``": [
+        "time_unit"
+    ],
+    "``'ms'``": [
+        "time_unit"
+    ],
+    "``'pyvistaqt'``": [
+        "backend"
+    ],
+    "``'matplotlib'``": [
+        "backend"
+    ],
+    "VectorSourceEstimate": [
+        "stc",
+        "stc"
+    ],
+    "instance of SourceMorph": [
+        "src"
+    ],
+    "``'stat_map'``": [
+        "mode"
+    ],
+    "``'glass_brain'``": [
+        "mode"
+    ],
+    "MixedVectorSourceEstimate": [
+        "stc"
+    ],
+    "list of instances of SourceEstimate": [
+        "stcs"
+    ],
+    "tuple of length 3": [
+        "bgcolor",
+        "brain_color"
+    ],
+    "instance of :class:`~mne.Epochs`": [
+        "epochs"
+    ],
+    "shape (n_chan": [
+        "data"
+    ],
+    "array-like of color": [
+        "sensor_colors"
+    ],
+    "Info": [
+        "montage"
+    ],
+    "{'pyvistaqt'": [
+        "backend_name"
+    ],
+    "'notebook'}": [
+        "backend_name"
+    ],
+    "{'qt'": [
+        "backend_name"
+    ],
+    "'matplotlib'}": [
+        "backend_name"
+    ],
+    "instance of Calibration": [
+        "calibration"
+    ],
+    "UIEvent": [
+        "event"
+    ]
+}
