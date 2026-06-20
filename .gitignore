@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+.pytest_cache/
+*.egg-info/
+dist/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# mne-nodes
+function_node_audit_report.md
