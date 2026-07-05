@@ -8,13 +8,14 @@ description = "This is a module scraping all functions and instantiatable classe
 requires-python = ">=3.11"
 dependencies = [
     "mne",
+    "mne-nodes",
 ]
 dynamic = ["version"]
 readme = "README.md"
 license = "BSD-3-Clause"
 
 [project.entry-points."mne_nodes.plugins"]
-mne_functions = "mne_functions"
+mne_functions = "mne_nodes_mne_functions"
 
 [tool.hatch.version]
 source = "vcs"

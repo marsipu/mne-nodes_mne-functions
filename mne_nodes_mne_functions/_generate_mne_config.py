@@ -6,7 +6,6 @@ import inspect
 import json
 from pathlib import Path
 from collections import defaultdict
-from pprint import pprint
 import re
 import sys
 from typing import DefaultDict
@@ -181,7 +180,90 @@ def get_param_config(param, sig, obj_config):
     obj_config["parameters"][param.arg_name] = param_config  # type: ignore
 
 
-# %%
+def should_skip_object(doc):
+    skip_phrases = [
+        "Direct class instantiation is discouraged",
+        "This class should usually not be instantiated directly",
+        "This class should not be instantiated directly",
+        "This class is generally not meant to be instantiated directly",
+        "Direct class instantiation is not supported",
+        "should be instantiated with",
+    ]
+    return any(d in str(doc.description) for d in skip_phrases)
+
+
+def build_object_config(
+    obj,
+    *,
+    module_name,
+    category,
+    sub_category,
+    object_path,
+    parent_class=None,
+):
+    docstring = inspect.getdoc(obj)
+    if not docstring:
+        return None
+    doc = docstring_parser.parse(docstring)
+    obj_config = {
+        "inputs": {},
+        "parameters": {},
+        "outputs": {},
+        "target": "file",
+        "category": category,
+        "sub_category": sub_category,
+        "description": doc.long_description
+        if doc.long_description
+        else doc.short_description,
+        "module": module_name,
+        "object_path": object_path,
+        "parent_class": parent_class
+    }
+    try:
+        sig = inspect.signature(obj)
+    except ValueError:
+        print(
+            f"Could not get signature for {object_path} in module {module_name}. Skipping."
+        )
+        return None
+    parameters = [i for i in doc.meta if "param" in i.args]
+    for param in parameters:
+        if "," in param.arg_name:  # type: ignore
+            # If multiple parameters are described in one line, split them.
+            param_names = [name.strip() for name in param.arg_name.split(",")]  # type: ignore
+            for name in param_names:
+                param_copy = docstring_parser.DocstringParam(
+                    args=param.args,
+                    is_optional=param.is_optional,  # type: ignore
+                    default=param.default,  # type: ignore
+                    arg_name=name,
+                    type_name=param.type_name,  # type: ignore
+                    description=param.description,
+                )
+                if name not in sig.parameters:
+                    continue
+                get_param_config(param_copy, sig, obj_config)
+        else:
+            if param.arg_name not in sig.parameters:  # type: ignore
+                continue
+            get_param_config(param, sig, obj_config)
+    for ret in doc.many_returns:
+        return_config = {"accepted": ret.return_name}  # type: ignore
+        obj_config["outputs"][ret.return_name] = return_config  # type: ignore
+    return doc, obj_config
+
+
+def iter_public_class_methods(cls):
+    for method_name, method_obj in cls.__dict__.items():
+        if method_name.startswith("_"):
+            continue
+        if isinstance(method_obj, (staticmethod, classmethod)):
+            method_obj = method_obj.__func__
+        if inspect.isfunction(method_obj):
+            yield method_name, method_obj
+
+
+# %% Generate config
 config = {}
 missing_types = DefaultDict(list)
 for category, module_dict in objects.items():
@@ -202,71 +284,38 @@ for category, module_dict in objects.items():
                     f"Skipping {obj_item} in module {complete_module_name} because it's not a function or class."
                 )
                 continue
-            doc = docstring_parser.parse(inspect.getdoc(obj))
-            # Skip if descriptions does not recommend direct instantiation
-            if any(
-                [
-                    d in str(doc.description)
-                    for d in [
-                        "Direct class instantiation is discouraged",
-                        "This class should usually not be instantiated directly",
-                        "This class should not be instantiated directly",
-                        "This class is generally not meant to be instantiated directly",
-                        "Direct class instantiation is not supported",
-                        "should be instantiated with",
-                    ]
-                ]
-            ):
+            obj_config_result = build_object_config(
+                obj,
+                module_name=complete_module_name,
+                category=category,
+                sub_category=sub_category,
+                object_path=obj_name,
+            )
+            if obj_config_result is None:
+                continue
+            doc, obj_config = obj_config_result
+            if should_skip_object(doc):
                 print(
                     f"Skipping {obj_item} because direct instantiation is discouraged."
                 )
                 continue
-            obj_config = {
-                "inputs": {},
-                "parameters": {},
-                "outputs": {},
-                "target": "file",
-                "category": category,
-                "sub_category": sub_category,
-                "description": doc.long_description
-                if doc.long_description
-                else doc.short_description,
-                "module": complete_module_name,
-            }
-            # Get function signature for defaults
-            try:
-                sig = inspect.signature(obj)
-            except ValueError:
-                print(
-                    f"Could not get signature for {obj_item} in module {complete_module_name}. Skipping."
-                )
-                continue
-            # Get inputs and parameters
-            parameters = [i for i in doc.meta if "param" in i.args]
-            for param in parameters:
-                if "," in param.arg_name:  # type: ignore
-                    # If multiple parameters are described in one line, split them
-                    param_names = [name.strip() for name in param.arg_name.split(",")]  # type: ignore
-                    for name in param_names:
-                        param_copy = docstring_parser.DocstringParam(
-                            args=param.args,
-                            is_optional=param.is_optional,  # type: ignore
-                            default=param.default,  # type: ignore
-                            arg_name=name,
-                            type_name=param.type_name,  # type: ignore
-                            description=param.description,
-                        )
-                        get_param_config(param_copy, sig, obj_config)
-                else:
-                    get_param_config(param, sig, obj_config)
-            # Get outputs
-            for ret in doc.many_returns:
-                return_config = {
-                    "accepted": ret.return_name  # type: ignore
-                }
-                obj_config["outputs"][ret.return_name] = return_config  # type: ignore
-            # Add to config
             config[obj_name] = obj_config
+
+            if inspect.isclass(obj):
+                for method_name, method_obj in iter_public_class_methods(obj):
+                    method_path = f"{obj_name}.{method_name}"
+                    method_config_result = build_object_config(
+                        method_obj,
+                        module_name=complete_module_name,
+                        category=category,
+                        sub_category=sub_category,
+                        object_path=method_path,
+                        parent_class=obj_name
+                    )
+                    if method_config_result is None:
+                        continue
+                    _, method_config = method_config_result
+                    config[method_path] = method_config
 
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
