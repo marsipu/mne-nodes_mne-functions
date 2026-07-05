@@ -34,6 +34,19 @@ default_type_guis = {
     "combo": ComboGui,
 }
 
+type_defaults = {
+            "int": 0,
+            "float": 0.0,
+            "bool": False,
+            "str": "",
+            "list": [],
+            "dict": {},
+            "tuple": (0, 0),
+            "combo": "",
+            "checklist": [],
+            "slider": 0.0,
+        }
+
 
 # %%
 def parse_rst_functions(path):
@@ -144,7 +157,8 @@ def get_param_config(param, sig, obj_config):
         none_select = True
         types.remove("None")
     else:
-        none_select = False
+        # If default is None, still enable none_select
+        none_select = default is None
     # Get string options and remove them from types
     options = [t.strip("'") for t in types if t.startswith("'") and t.endswith("'")]
     types = [t for t in types if t.strip("'") not in options]
@@ -152,10 +166,10 @@ def get_param_config(param, sig, obj_config):
         types.append("combo")
     # Missing types
     missing = [t for t in types if t not in default_type_guis]
-    if len(types) == 0 or len(missing) > 0 or default is inspect.Parameter.empty:
+    if len(types) == 0 or len(missing) > 0:
         # Add params with missing types or no Default as inputs
         for mis in missing:
-            missing_types[mis].append(param.arg_name)  # type: ignore
+            missing_types[mis].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
             "accepted": param.arg_name,  # type: ignore
             "optional": none_select,
@@ -163,6 +177,23 @@ def get_param_config(param, sig, obj_config):
         }
         obj_config["inputs"][param.arg_name] = input_config  # type: ignore
         return
+    # get rid of empty default
+    if default is inspect.Parameter.empty:
+        default = type_defaults.get(types[0], None)
+        none_select = default is None or none_select
+    # Check default with type for sometimes mismatch between type description and types
+    if default is not None and type(default).__name__ not in types:
+        if isinstance(default, int) and "float" in types:
+            default = float(default)
+        elif isinstance(default, float) and "int" in types:
+            if default.is_integer():
+                default = int(default)
+        elif isinstance(default, tuple) and "list" in types:
+            default = list(default)
+        elif isinstance(default, list) and "tuple" in types:
+            default = tuple(default)
+        else:
+            types.append(type(default).__name__)
     # Regular parameters with known types
     param_config = {}
     if len(types) > 1:
@@ -173,6 +204,7 @@ def get_param_config(param, sig, obj_config):
         param_config.update({"gui": default_type_guis[types[0]].__name__})
         if len(options) > 0:
             param_config["options"] = options
+
     param_config.update(
         {
             "default": default,
@@ -262,8 +294,15 @@ def build_object_config(
                 continue
             get_param_config(param, sig, obj_config)
     for ret in doc.many_returns:
-        return_config = {"accepted": ret.return_name}  # type: ignore
-        obj_config["outputs"][ret.return_name] = return_config  # type: ignore
+        # Set output name to class name if it is an instance of the class
+        if ret.return_name is None:
+            continue
+        if class_name is not None and any(x in ret.return_name.lower() for x in ["inst", "instance", "self"]):
+            output_name = class_name.lower()
+        else:
+            output_name = ret.return_name
+        return_config = {"accepted": output_name}  # type: ignore
+        obj_config["outputs"][output_name] = return_config  # type: ignore
     return doc, obj_config
 
 
@@ -287,7 +326,7 @@ def iter_public_class_methods(cls):
 
 # %% Generate config
 config = {}
-missing_types = DefaultDict(list)
+missing_types = DefaultDict(set)
 for category, module_dict in objects.items():
     for module_name, obj_list in module_dict.items():
         m_split = module_name.split(".")
@@ -343,6 +382,10 @@ for category, module_dict in objects.items():
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
     json.dump(config, file, indent=4, cls=TypedJSONEncoder)
+
+# Sort dictionary keys on length of their lists
+missing_types = dict(sorted(missing_types.items(), key=lambda item: len(item[1]), reverse=True))
+
 # Save missing types
 missing_path = Path(__file__).parent / "missing_types.json"
 with open(missing_path, "w") as file:
