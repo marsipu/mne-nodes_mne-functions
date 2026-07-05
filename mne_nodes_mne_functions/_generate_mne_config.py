@@ -143,7 +143,8 @@ def get_param_config(param, sig, obj_config):
         none_select = True
         types.remove("None")
     else:
-        none_select = False
+        # If default is None, still enable none_select
+        none_select = default is None
     # Get string options and remove them from types
     options = [t.strip("'") for t in types if t.startswith("'") and t.endswith("'")]
     types = [t for t in types if t.strip("'") not in options]
@@ -154,7 +155,7 @@ def get_param_config(param, sig, obj_config):
     if len(types) == 0 or len(missing) > 0 or default is inspect.Parameter.empty:
         # Add params with missing types or no Default as inputs
         for mis in missing:
-            missing_types[mis].append(param.arg_name)  # type: ignore
+            missing_types[mis].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
             "accepted": param.arg_name,  # type: ignore
             "optional": none_select,
@@ -286,7 +287,7 @@ def iter_public_class_methods(cls):
 
 # %% Generate config
 config = {}
-missing_types = DefaultDict(list)
+missing_types = DefaultDict(set)
 for category, module_dict in objects.items():
     for module_name, obj_list in module_dict.items():
         m_split = module_name.split(".")
@@ -342,6 +343,10 @@ for category, module_dict in objects.items():
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
     json.dump(config, file, indent=4)
+# Convert sets to lists
+missing_types = {k: list(v) for k, v in missing_types.items()}
+# Sort dictionary keys on length of their lists
+missing_types = dict(sorted(missing_types.items(), key=lambda item: len(item[1]), reverse=True))
 # Save missing types
 missing_path = Path(__file__).parent / "missing_types.json"
 with open(missing_path, "w") as file:
