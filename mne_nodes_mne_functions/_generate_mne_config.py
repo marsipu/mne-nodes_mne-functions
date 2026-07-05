@@ -11,7 +11,8 @@ import sys
 from typing import DefaultDict
 import docstring_parser
 
-from mne_nodes.gui.parameter_widgets import (
+from mne_nodes.pipeline.io import TypedJSONEncoder
+from mne_nodes.gui.parameter import (
     BoolGui,
     ComboGui,
     DictGui,
@@ -341,7 +342,7 @@ for category, module_dict in objects.items():
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
-    json.dump(config, file, indent=4)
+    json.dump(config, file, indent=4, cls=TypedJSONEncoder)
 # Save missing types
 missing_path = Path(__file__).parent / "missing_types.json"
 with open(missing_path, "w") as file:
