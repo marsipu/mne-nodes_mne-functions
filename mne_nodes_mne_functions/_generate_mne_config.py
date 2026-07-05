@@ -389,7 +389,7 @@ missing_types = dict(sorted(missing_types.items(), key=lambda item: len(item[1])
 # Save missing types
 missing_path = Path(__file__).parent / "missing_types.json"
 with open(missing_path, "w") as file:
-    json.dump(missing_types, file, indent=4)
+    json.dump(missing_types, file, indent=4, cls=TypedJSONEncoder)
 print(f"Scraped {len(config)} functions/classes from mne")
 print(f"Config saved to {config_path}")
 print(f"Missing types saved to {missing_path}")
