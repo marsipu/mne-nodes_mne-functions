@@ -135,6 +135,8 @@ def get_param_config(param, sig, obj_config):
                         default = literal_eval(default_str)
                     except (ValueError, SyntaxError):
                         default = default_str
+    # Remove empty strings
+    types = [t for t in types if t != ""]
     # # Remove parentheses
     # types = [t.replace("(", "").replace(")", "") for t in types]
     if "None" in types:
@@ -199,7 +201,7 @@ def build_object_config(
     category,
     sub_category,
     object_path,
-    parent_class=None,
+    class_name=None,
 ):
     docstring = inspect.getdoc(obj)
     if not docstring:
@@ -217,7 +219,7 @@ def build_object_config(
         else doc.short_description,
         "module": module_name,
         "object_path": object_path,
-        "parent_class": parent_class
+        "class_name": class_name,
     }
     try:
         sig = inspect.signature(obj)
@@ -227,6 +229,17 @@ def build_object_config(
         )
         return None
     parameters = [i for i in doc.meta if "param" in i.args]
+    # add lower class-name as input if class_name is not None
+    if class_name is not None:
+        lower_name = class_name.lower()
+        input_config = {
+            "accepted": lower_name,
+            "optional": False,
+            "types": [lower_name],
+        }
+        obj_config["inputs"][lower_name] = input_config
+        # change sub-category
+        obj_config["sub_category"] = ".".join([sub_category, lower_name]) if sub_category else lower_name
     for param in parameters:
         if "," in param.arg_name:  # type: ignore
             # If multiple parameters are described in one line, split them.
@@ -254,13 +267,21 @@ def build_object_config(
 
 
 def iter_public_class_methods(cls):
-    for method_name, method_obj in cls.__dict__.items():
-        if method_name.startswith("_"):
+    seen = set()
+    for owner_cls in cls.__mro__:
+        if owner_cls is object:
             continue
-        if isinstance(method_obj, (staticmethod, classmethod)):
-            method_obj = method_obj.__func__
-        if inspect.isfunction(method_obj):
-            yield method_name, method_obj
+        # Only include methods declared on classes that belong to mne.
+        if not owner_cls.__module__.startswith("mne"):
+            continue
+        for method_name, method_obj in owner_cls.__dict__.items():
+            if method_name.startswith("_") or method_name in seen:
+                continue
+            if isinstance(method_obj, (staticmethod, classmethod)):
+                method_obj = method_obj.__func__
+            if inspect.isfunction(method_obj):
+                seen.add(method_name)
+                yield method_name, method_obj
 
 
 # %% Generate config
@@ -298,8 +319,8 @@ for category, module_dict in objects.items():
                 print(
                     f"Skipping {obj_item} because direct instantiation is discouraged."
                 )
-                continue
-            config[obj_name] = obj_config
+            else:
+                config[obj_name] = obj_config
 
             if inspect.isclass(obj):
                 for method_name, method_obj in iter_public_class_methods(obj):
@@ -310,7 +331,7 @@ for category, module_dict in objects.items():
                         category=category,
                         sub_category=sub_category,
                         object_path=method_path,
-                        parent_class=obj_name
+                        class_name=obj_name,
                     )
                     if method_config_result is None:
                         continue
