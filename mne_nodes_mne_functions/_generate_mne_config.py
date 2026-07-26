@@ -47,6 +47,8 @@ type_defaults = {
             "slider": 0.0,
         }
 
+MODULE_NAME = "mne"
+
 
 # %%
 def parse_rst_functions(path):
@@ -250,7 +252,6 @@ def build_object_config(
         "description": doc.long_description
         if doc.long_description
         else doc.short_description,
-        "module": module_name,
         "object_path": object_path,
         "class_name": class_name,
     }
@@ -381,7 +382,8 @@ for category, module_dict in objects.items():
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
-    json.dump(config, file, indent=4, cls=TypedJSONEncoder)
+    module_config = {"module_name": MODULE_NAME, "functions": config}
+    json.dump(module_config, file, indent=4, cls=TypedJSONEncoder)
 
 # Sort dictionary keys on length of their lists
 missing_types = dict(sorted(missing_types.items(), key=lambda item: len(item[1]), reverse=True))
