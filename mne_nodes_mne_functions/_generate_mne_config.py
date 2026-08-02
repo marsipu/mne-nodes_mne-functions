@@ -20,6 +20,7 @@ from mne_nodes.gui.parameter import (
     FloatGui,
     IntGui,
     ListGui,
+    PathGui,
     StringGui,
 )
 
@@ -32,6 +33,7 @@ default_type_guis = {
     "dict": DictGui,
     "tuple": DualTupleGui,
     "combo": ComboGui,
+    "path-like": PathGui
 }
 
 type_defaults = {
@@ -45,6 +47,7 @@ type_defaults = {
             "combo": "",
             "checklist": [],
             "slider": 0.0,
+            "path-like": "",
         }
 
 MODULE_NAME = "mne"
@@ -110,6 +113,8 @@ def get_param_config(param, sig, obj_config):
     # Skip parameters that don't have a valid name (e.g. *args, **kwargs)
     if not param.arg_name[0].isalpha():  # type: ignore
         return
+    if param.arg_name == "filename":
+        pass
     types = param.type_name.split("|")  # type: ignore
     # split or
     types = [item for sublist in types for item in sublist.split(" or ")]
@@ -194,8 +199,13 @@ def get_param_config(param, sig, obj_config):
             default = list(default)
         elif isinstance(default, list) and "tuple" in types:
             default = tuple(default)
+        elif isinstance(default, str) and "path-like" in types:
+            pass  # Skip path-like since path-gui suffices
         else:
             types.append(type(default).__name__)
+    # If types is "str" and "combo", then remove "str" and keep "combo"
+    if len(types) == 2 and "str" in types and "combo" in types:
+        types.remove("str")
     # Regular parameters with known types
     param_config = {}
     if len(types) > 1:
@@ -346,6 +356,8 @@ for category, module_dict in objects.items():
                     f"Skipping {obj_item} in module {complete_module_name} because it's not a function or class."
                 )
                 continue
+            if obj_name == "write_events":
+                pass
             obj_config_result = build_object_config(
                 obj,
                 module_name=complete_module_name,
