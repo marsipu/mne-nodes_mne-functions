@@ -8,7 +8,6 @@ description = "This is a module scraping all functions and instantiatable classe
 requires-python = ">=3.11"
 dependencies = [
     "mne",
-    "mne-nodes",
 ]
 dynamic = ["version"]
 readme = "README.md"

@@ -50,8 +50,6 @@ type_defaults = {
             "path-like": "",
         }
 
-MODULE_NAME = "mne"
-
 
 # %%
 def parse_rst_functions(path):
@@ -242,7 +240,7 @@ def should_skip_object(doc):
 def build_object_config(
     obj,
     *,
-    module_name,
+    plugin_name,
     category,
     sub_category,
     object_path,
@@ -269,7 +267,7 @@ def build_object_config(
         sig = inspect.signature(obj)
     except ValueError:
         print(
-            f"Could not get signature for {object_path} in module {module_name}. Skipping."
+            f"Could not get signature for {object_path} in module {plugin_name}. Skipping."
         )
         return None
     parameters = [i for i in doc.meta if "param" in i.args]
@@ -339,8 +337,8 @@ def iter_public_class_methods(cls):
 config = {}
 missing_types = DefaultDict(set)
 for category, module_dict in objects.items():
-    for module_name, obj_list in module_dict.items():
-        m_split = module_name.split(".")
+    for plugin_name, obj_list in module_dict.items():
+        m_split = plugin_name.split(".")
         if len(m_split) == 1 or m_split[-1] == category:
             sub_category = None
         else:
@@ -348,19 +346,19 @@ for category, module_dict in objects.items():
         for obj_item in obj_list:
             sub_modules = obj_item.split(".")[:-1]
             obj_name = obj_item.split(".")[-1]
-            complete_module_name = ".".join([module_name] + sub_modules)
-            module = importlib.import_module(complete_module_name)
+            complete_plugin_name = ".".join([plugin_name] + sub_modules)
+            module = importlib.import_module(complete_plugin_name)
             obj = getattr(module, obj_name)
             if not inspect.isfunction(obj) and not inspect.isclass(obj):
                 print(
-                    f"Skipping {obj_item} in module {complete_module_name} because it's not a function or class."
+                    f"Skipping {obj_item} in module {complete_plugin_name} because it's not a function or class."
                 )
                 continue
             if obj_name == "write_events":
                 pass
             obj_config_result = build_object_config(
                 obj,
-                module_name=complete_module_name,
+                plugin_name=complete_plugin_name,
                 category=category,
                 sub_category=sub_category,
                 object_path=obj_name,
@@ -380,7 +378,7 @@ for category, module_dict in objects.items():
                     method_path = f"{obj_name}.{method_name}"
                     method_config_result = build_object_config(
                         method_obj,
-                        module_name=complete_module_name,
+                        plugin_name=complete_plugin_name,
                         category=category,
                         sub_category=sub_category,
                         object_path=method_path,
@@ -394,8 +392,7 @@ for category, module_dict in objects.items():
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
-    module_config = {"module_name": MODULE_NAME, "functions": config}
-    json.dump(module_config, file, indent=4, cls=TypedJSONEncoder)
+    json.dump(config, file, indent=4, cls=TypedJSONEncoder)
 
 # Sort dictionary keys on length of their lists
 missing_types = dict(sorted(missing_types.items(), key=lambda item: len(item[1]), reverse=True))
