@@ -15,11 +15,13 @@ from mne_nodes.pipeline.io import TypedJSONEncoder
 from mne_nodes.gui.parameter import (
     ArrayGui,
     BoolGui,
+    ColorGui,
     ComboGui,
     DataFrameGui,
     DictGui,
     DualTupleGui,
     FloatGui,
+    CallableGui,
     IntGui,
     ListGui,
     PathGui,
@@ -38,11 +40,20 @@ default_type_guis = {
     "combo": ComboGui,
     "path-like": PathGui,
     "slice": SliceGui,
-    "dataframe": DataFrameGui,
+    "DataFrame": DataFrameGui,
     "array": ArrayGui,
     "array-like": ArrayGui,
+    "array_like": ArrayGui,
     "ndarray": ArrayGui,
+    "color": ColorGui,
+    "callable": CallableGui,
 }
+
+# Container types recognized as arrays, derived from default_type_guis so both
+# stay in sync, e.g. "array of int" or "ndarray of float"
+array_container_types = tuple(
+    name for name, gui in default_type_guis.items() if gui is ArrayGui
+)
 
 type_defaults = {
             "int": 0,
@@ -58,6 +69,50 @@ type_defaults = {
             "path-like": "",
             "slice": slice(0, 1),
         }
+
+
+def _strip_shape_annotations(text):
+    """Remove "(of/with) shape (...)" segments from a type description.
+
+    Docstrings often annotate array types with their shape, e.g.
+    "array, shape (n_samples, n_channels)" or "array-like of shape ``(2,)``".
+    Since the dimensions use free-form names (not just digits) and may be
+    wrapped in nested/mismatched brackets or rst markup (backticks), a plain
+    regex can't reliably match them; a leftover fragment like "n_channels)"
+    would otherwise be split off as a bogus type later on. This scans the
+    text and drops each such segment using bracket-depth tracking.
+    """
+    open_brackets = "([{"
+    close_brackets = ")]}"
+    result = []
+    i = 0
+    n = len(text)
+    while i < n:
+        m = re.match(r"(?:of|with)?\s*shape\s*", text[i:], re.IGNORECASE)
+        if m:
+            j = i + m.end()
+            # Skip markup/quote characters surrounding the shape, e.g. ``(...)``
+            while j < n and text[j] in "`'\"= ":
+                j += 1
+            if j < n and text[j] in open_brackets:
+                depth = 0
+                k = j
+                while k < n:
+                    if text[k] in open_brackets:
+                        depth += 1
+                    elif text[k] in close_brackets:
+                        depth -= 1
+                        if depth == 0:
+                            k += 1
+                            break
+                    k += 1
+                while k < n and text[k] in "`'\"":
+                    k += 1
+                i = k
+                continue
+        result.append(text[i])
+        i += 1
+    return "".join(result)
 
 
 # %%
@@ -122,19 +177,20 @@ def get_param_config(param, sig, obj_config):
         return
     if param.arg_name == "filename":
         pass
-    types = param.type_name.split("|")  # type: ignore
+    type_name = param.type_name  # type: ignore
     # Filter (<type> of length <length>)
-    pattern = r"(\w+)\s*of\s*length\s*\d+"
-    types = [re.sub(pattern, r"\1", t) for t in types]
-    # Filter shape (x, y) or shape (x, y, z) and remove it
-    pattern = r"shape\s*\([\d,\s]+\)"
-    types = [re.sub(pattern, "", t) for t in types]
+    type_name = re.sub(r"(\w+)\s*of\s*length\s*\d+", r"\1", type_name)
+    # Strip shape annotations, e.g. "array, shape (n_samples, n_channels)"
+    type_name = _strip_shape_annotations(type_name)
+    types = type_name.split("|")
     # split or
     types = [item for sublist in types for item in sublist.split(" or ")]
     # split ,
     types = [item for sublist in types for item in sublist.split(",")]
     # Remove spaces
     types = [t.strip() for t in types]
+    # Strip rst inline-code markup, e.g. "``'auto'``" -> "'auto'"
+    types = [t.strip("`") for t in types]
     # Get instance of <class> and use lower case
     pattern = r"instance of ([\w\.]+)"
     for idx, t in enumerate(types):
@@ -142,8 +198,9 @@ def get_param_config(param, sig, obj_config):
         if match:
             instance_type = match.group(1).split(".")[-1]
             types[idx] = instance_type
-    # Get containters
-    pattern = r"(\w+)\s*of\s*(\w+)"
+    # Get containers, e.g. "list of int" -> "list" or "array of int" -> "array"
+    array_dtypes = {}
+    pattern = r"(\w+(?:-\w+)*)\s*of\s*(\w+)"
     for idx, t in enumerate(types):
         match = re.match(pattern, t)
         if match:
@@ -154,6 +211,13 @@ def get_param_config(param, sig, obj_config):
                 and contained_type in default_type_guis
             ):
                 types[idx] = container_type
+            elif container_type in array_container_types and (
+                contained_type in default_type_guis
+                or contained_type in ("int", "float")
+            ):
+                types[idx] = container_type
+                if contained_type in ("int", "float"):
+                    array_dtypes[container_type] = contained_type
     # Get default from inspection signature
     default = sig.parameters[param.arg_name].default  # type: ignore
     # Get "type (default ***)" pattern
@@ -184,8 +248,13 @@ def get_param_config(param, sig, obj_config):
         # If default is None, still enable none_select
         none_select = default is None
     # Get string options and remove them from types
-    options = [t.strip("'") for t in types if t.startswith("'") and t.endswith("'")]
-    types = [t for t in types if t.strip("'") not in options]
+    def _is_quoted(t):
+        return (t.startswith("'") and t.endswith("'")) or (
+            t.startswith('"') and t.endswith('"')
+        )
+
+    options = [t.strip("'\"") for t in types if _is_quoted(t)]
+    types = [t for t in types if not _is_quoted(t)]
     if len(options) > 0:
         types.append("combo")
     # Missing types
@@ -220,6 +289,9 @@ def get_param_config(param, sig, obj_config):
             pass  # Skip path-like since path-gui suffices
         else:
             types.append(type(default).__name__)
+    # Functions/other callables aren't JSON serializable; store as their name
+    if callable(default) and not isinstance(default, type):
+        default = getattr(default, "__name__", repr(default))
     # If types is "str" and "combo", then remove "str" and keep "combo"
     if len(types) == 2 and "str" in types and "combo" in types:
         types.remove("str")
@@ -227,12 +299,20 @@ def get_param_config(param, sig, obj_config):
     param_config = {}
     if len(types) > 1:
         param_config.update({"types": types, "gui": "MultiTypeGui"})
+        type_kwargs = {}
         if len(options) > 0:
-            param_config["type_kwargs"] = {"combo": {"options": options}}
+            type_kwargs["combo"] = {"options": options}
+        for arr_type, dtype in array_dtypes.items():
+            if arr_type in types:
+                type_kwargs[arr_type] = {"dtype": dtype}
+        if type_kwargs:
+            param_config["type_kwargs"] = type_kwargs
     else:
         param_config.update({"gui": default_type_guis[types[0]].__name__})
         if len(options) > 0:
             param_config["options"] = options
+        if types[0] in array_dtypes:
+            param_config["gui_kwargs"] = {"dtype": array_dtypes[types[0]]}
 
     param_config.update(
         {
