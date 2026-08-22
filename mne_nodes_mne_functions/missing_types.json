@@ -1,171 +1,171 @@
 {
     "Covariance": [
-        "orig",
         "cov",
-        "noise_cov",
-        "data_cov",
+        "signal_cov",
         "inst",
-        "signal_cov"
+        "data_cov",
+        "orig",
+        "noise_cov"
     ],
     "iterable": [
+        "last_samps",
+        "selection",
         "cv",
         "first_samps",
-        "stc",
-        "selection",
         "ch_names",
-        "last_samps"
+        "stc"
     ],
     "SourceSpaces": [
-        "src_from",
-        "restrict_vertices",
         "src_to",
+        "src_orig",
         "src",
         "vertices",
-        "src_orig"
+        "src_from",
+        "restrict_vertices"
     ],
     "Raw": [
-        "raw_er",
-        "other",
+        "evoked",
         "inst",
+        "other",
         "raw",
-        "evoked"
+        "raw_er"
     ],
     "Info": [
         "info_to",
+        "montage",
         "info_from",
         "info",
-        "pos",
-        "montage"
+        "pos"
     ],
     "datetime": [
         "meas_date",
-        "origin",
+        "tmin",
         "tmax",
         "orig_time",
-        "tmin"
+        "origin"
     ],
     "SourceEstimate": [
-        "stc",
-        "stc_from",
-        "src",
         "stcs",
-        "weights"
+        "src",
+        "stc_from",
+        "weights",
+        "stc"
     ],
     "SpatialImage": [
-        "bg_img",
-        "static",
-        "flash30",
+        "flash5",
         "moving",
-        "flash5"
+        "flash30",
+        "static",
+        "bg_img"
     ],
     "scalar": [
-        "tstart",
-        "width",
+        "tmin",
         "tstep",
         "tstop",
-        "tmin"
+        "width",
+        "tstart"
     ],
     "object": [
+        "base_estimator",
         "figure",
         "estimator",
-        "model",
-        "base_estimator"
+        "model"
     ],
     "Label": [
-        "label",
         "lh",
         "rh",
-        "labels"
+        "labels",
+        "label"
     ],
     "Evoked": [
-        "inst",
         "info",
+        "evoked",
         "evokeds",
-        "evoked"
+        "inst"
     ],
     "color object": [
+        "color",
         "event_color",
         "bad_color",
-        "color",
         "bgcolor"
     ],
     "float in [0": [
         "alpha",
-        "opacity",
         "l1_ratio",
-        "smooth"
+        "smooth",
+        "opacity"
     ],
     "np.ndarray": [
         "brains",
+        "template",
         "weights",
-        "data",
-        "template"
+        "data"
     ],
     "list of Evoked": [
         "all_evoked",
-        "all_inst",
         "evokeds",
+        "all_inst",
         "evoked"
     ],
     "Epochs": [
-        "inst",
+        "evoked",
         "epochs",
-        "evoked"
+        "inst"
     ],
     "Transform": [
         "mri_head_t",
-        "trans",
-        "destination"
+        "destination",
+        "trans"
     ],
     "optional": [
-        "patch_stats",
         "surf_ori",
-        "force_fixed"
+        "force_fixed",
+        "patch_stats"
     ],
     "matplotlib color": [
-        "foreground",
         "color",
+        "foreground",
         "background"
     ],
     "Forward": [
+        "forward",
         "src",
-        "fwd",
-        "forward"
+        "fwd"
     ],
     "InverseOperator": [
         "inv",
-        "inverse_operator",
-        "src"
+        "src",
+        "inverse_operator"
     ],
     "list of Label": [
-        "label",
         "idx",
-        "labels"
+        "labels",
+        "label"
     ],
     "1]": [
         "alpha",
-        "opacity",
-        "l1_ratio"
+        "l1_ratio",
+        "opacity"
     ],
     "mne.io.Raw": [
-        "inst",
+        "raw",
         "raw_event",
-        "raw"
+        "inst"
     ],
     "float between ``0`` and ``1": [
-        "n_mag",
+        "n_grad",
         "n_eeg",
-        "n_grad"
+        "n_mag"
     ],
     "mne.Evoked": [
-        "inst",
+        "eog_evoked",
         "ecg_evoked",
-        "eog_evoked"
+        "inst"
     ],
     "numpy array": [
+        "vertices",
         "time",
-        "array",
-        "vertices"
+        "array"
     ],
     "ConductorModel": [
         "sphere",
@@ -192,24 +192,24 @@
         "axes"
     ],
     "instance of ~numpy.random.RandomState": [
-        "seed",
-        "random_state"
+        "random_state",
+        "seed"
     ],
     "file-like": [
-        "input_fname",
-        "fname"
+        "fname",
+        "input_fname"
     ],
     "dict-like": [
-        "covariates",
-        "volume_info"
+        "volume_info",
+        "covariates"
     ],
     "Figure": [
         "figure",
         "fig"
     ],
     "DigMontage": [
-        "montage",
-        "sensors"
+        "sensors",
+        "montage"
     ],
     "list-like": [
         "times",
@@ -240,8 +240,8 @@
         "csd"
     ],
     "EpochsTFR": [
-        "epochs_tfr",
-        "tfr"
+        "tfr",
+        "epochs_tfr"
     ],
     "matplotlib": [
         "ax",
@@ -260,44 +260,44 @@
         "eog"
     ],
     "mne.Epochs": [
-        "inst",
-        "epochs"
+        "epochs",
+        "inst"
     ],
     "path-line": [
-        "ecg_evoked",
-        "eog_evoked"
+        "eog_evoked",
+        "ecg_evoked"
     ],
     "AverageTFR": [
-        "all_inst",
-        "tfr"
+        "tfr",
+        "all_inst"
     ],
     "instance of (Vol": [
-        "stc_true",
-        "stc_est"
+        "stc_est",
+        "stc_true"
     ],
     "Mixed)SourceEstimate": [
-        "stc_true",
-        "stc_est"
+        "stc_est",
+        "stc_true"
     ],
     "BiHemiLabel": [
-        "label",
-        "labels"
+        "labels",
+        "label"
     ],
     "scipy.sparse.csr_array": [
         "vol_morph_mat",
         "morph_mat"
     ],
     "VectorSourceEstimate": [
-        "stc",
-        "stc_from"
+        "stc_from",
+        "stc"
     ],
     "list of AverageTFR": [
         "tfr",
         "all_tfr"
     ],
     "matplotlib-style color": [
-        "colors",
-        "color"
+        "color",
+        "colors"
     ],
     "mne.Info": [
         "info"

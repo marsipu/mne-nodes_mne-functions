@@ -312,7 +312,7 @@ def get_param_config(param, sig, obj_config):
         if len(options) > 0:
             param_config["options"] = options
         if types[0] in array_dtypes:
-            param_config["gui_kwargs"] = {"dtype": array_dtypes[types[0]]}
+            param_config["dtype"] = array_dtypes[types[0]]
 
     param_config.update(
         {
