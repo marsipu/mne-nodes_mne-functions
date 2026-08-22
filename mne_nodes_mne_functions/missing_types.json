@@ -1,587 +1,437 @@
 {
-    "array": [
-        "im",
-        "vertices",
-        "sure_alpha_grid",
-        "weights",
-        "feature_names",
-        "waveform",
-        "gof",
-        "colors",
-        "gammas",
-        "hemis",
-        "nasion",
-        "X",
-        "scale",
-        "tra",
-        "hpi",
-        "rot",
-        "coords",
-        "extents",
-        "adjacency",
-        "nfree",
-        "alpha",
-        "times",
-        "hsp",
-        "khi2",
-        "rpa",
-        "stc_data",
-        "idx",
-        "fig_background",
-        "epochs_data",
-        "resmat",
-        "iir_filter",
-        "grade",
-        "head_pos",
-        "colormap",
-        "x",
-        "tris",
-        "pos",
-        "a",
-        "y",
-        "freqs",
-        "events",
-        "lpa",
-        "subject_to",
-        "signal_cov",
-        "fig",
-        "ori",
-        "data",
-        "values",
-        "amplitude",
-        "ssd_sources",
-        "sca",
-        "rr",
-        "b"
-    ],
-    "array-like": [
-        "wsize",
-        "t_other",
-        "eigvec",
-        "picks_trace",
-        "freq",
-        "names",
-        "size",
-        "X",
-        "sensor_scales",
-        "destination",
-        "origin",
-        "t_raw",
-        "sphere",
-        "translation",
-        "groups",
-        "relative_radii",
-        "duration",
-        "sd_distances",
-        "r0",
-        "sigmas",
-        "item",
-        "description",
-        "eig",
-        "picks",
-        "iir_filter",
-        "group_boundaries",
-        "event_desc",
-        "tstep",
-        "n_cycles",
-        "a",
-        "y",
-        "contours",
-        "freqs",
-        "figsize",
-        "picks_artifact",
-        "limits",
-        "gain",
-        "onset",
-        "data",
-        "target",
-        "axes",
-        "filter_freq",
-        "b"
-    ],
-    "ndarray": [
-        "weights",
-        "qrs_times",
-        "betas",
-        "X",
-        "quats",
-        "patterns",
-        "bg_image",
-        "sphere",
-        "coords",
-        "eog_source",
-        "system",
-        "filters",
-        "starting_affine",
-        "affine",
-        "times",
-        "inst",
-        "arr",
-        "h",
-        "fig_background",
-        "preload",
-        "imdata",
-        "mask",
-        "x",
-        "xy",
-        "initial_pos",
-        "pos",
-        "y",
-        "freqs",
-        "events",
-        "directions",
-        "labels",
-        "points",
-        "signal_cov",
-        "data",
-        "ori",
-        "values",
-        "ecg_source",
-        "evals",
-        "triangles",
-        "design_matrix"
-    ],
     ")": [
+        "freqs",
+        "t_raw",
+        "y",
+        "scale",
+        "duration",
+        "nfree",
+        "onset",
+        "hed_string",
+        "khi2",
+        "scores",
         "vertices",
+        "gammas",
+        "conductivity",
+        "groups",
+        "gof",
+        "data",
+        "X",
+        "mask",
+        "average",
+        "description",
+        "waveform",
         "t_other",
         "qrs_times",
-        "feature_names",
-        "waveform",
-        "gof",
-        "average",
-        "gammas",
-        "X",
-        "scale",
-        "t_raw",
-        "template",
-        "conductivity",
-        "nfree",
-        "groups",
-        "hed_string",
-        "duration",
-        "alpha",
-        "times",
-        "khi2",
-        "description",
-        "mask",
-        "overlay_times",
         "n_cycles",
-        "y",
-        "freqs",
-        "scores",
-        "onset",
-        "data",
+        "times",
+        "template",
+        "overlay_times",
+        "amplitude",
         "values",
-        "amplitude"
+        "feature_names",
+        "alpha"
     ],
     "callable": [
-        "value_fun",
         "agg_fun",
-        "method",
-        "time_label",
-        "combine",
-        "ci",
-        "data_fun",
         "vmax",
+        "score_func",
+        "data_fun",
         "zorder",
-        "event_id",
-        "onselect",
-        "scoring",
         "time_func",
         "solver",
+        "vmin",
+        "fun",
+        "value_fun",
+        "scoring",
+        "onselect",
+        "ci",
+        "mapping",
+        "order",
+        "callback",
+        "func",
+        "time_label",
+        "combine",
+        "method",
         "event_desc",
         "show_names",
-        "fun",
-        "order",
-        "func",
+        "event_id",
         "stat_fun",
-        "score_func",
-        "mapping",
-        "callback",
-        "vmin",
         "on_pick"
     ],
     "``'auto'``": [
-        "header",
-        "stim_channel",
-        "backend",
         "trans",
+        "data_format",
+        "misc",
         "method",
         "emg",
-        "misc",
-        "eog",
-        "event_id",
-        "data_format",
         "truncate_yaxis",
         "reject",
         "ecg",
-        "sfreq"
+        "event_id",
+        "backend",
+        "sfreq",
+        "header",
+        "eog",
+        "stim_channel"
     ],
     "3)": [
-        "pos",
-        "events",
-        "hpi",
-        "rot",
         "directions",
-        "coords",
-        "faces",
-        "ori",
+        "rot",
         "hsp",
+        "faces",
+        "events",
         "rr",
+        "coords",
+        "ori",
+        "pos",
+        "hpi",
         "tris"
     ],
     "array of float": [
-        "notch_widths",
-        "freqs",
-        "ed_matrix",
-        "onset",
         "duration",
-        "components",
-        "eog_scores",
-        "times",
         "ecg_scores",
-        "n_cycles"
+        "onset",
+        "components",
+        "freqs",
+        "notch_widths",
+        "ed_matrix",
+        "eog_scores",
+        "n_cycles",
+        "times"
     ],
     "array of int": [
-        "first_samps",
-        "y",
-        "events",
-        "indices",
-        "order",
-        "picks",
         "restrict_vertices",
+        "events",
         "ids",
         "last_samps",
+        "order",
+        "picks",
+        "first_samps",
+        "y",
+        "indices",
         "n_cycles"
     ],
     "array-like of float": [
-        "buffer",
-        "freqs",
-        "scores",
-        "gaze",
-        "sphere",
-        "offsets",
         "average",
+        "offsets",
+        "positions",
         "highlight",
-        "positions"
+        "scores",
+        "sphere",
+        "gaze",
+        "freqs",
+        "buffer"
     ],
     "array-like of int": [
-        "exclude",
-        "bad_coils",
-        "order",
         "mag_picks",
         "grad_picks",
-        "picks",
-        "components",
+        "bad_coils",
         "ids",
+        "order",
+        "components",
+        "picks",
+        "exclude",
         "idx"
     ],
     "shape (n_dipoles": [
-        "pos",
-        "resmat",
         "nfree",
-        "ori",
         "data",
-        "gof",
         "amplitude",
-        "times",
-        "khi2"
+        "khi2",
+        "ori",
+        "pos",
+        "gof",
+        "resmat",
+        "times"
     ],
     "n_times)": [
+        "X",
+        "inst",
+        "mask",
+        "waveform",
         "epochs_data",
         "stc_data",
-        "inst",
-        "data",
-        "waveform",
-        "mask",
         "x",
-        "X"
+        "data"
     ],
     "array-like of str": [
-        "exclude",
-        "keys",
-        "caption",
         "drop_log_ignore",
-        "ch_type",
-        "tags",
+        "caption",
+        "keys",
         "picks",
-        "event_names"
+        "event_names",
+        "tags",
+        "exclude",
+        "ch_type"
     ],
     "color": [
-        "color",
-        "fig_facecolor",
-        "font_color",
         "highlight_color",
+        "color",
         "axis_spinecolor",
-        "background_color",
         "axis_facecolor",
-        "bgcolor"
+        "background_color",
+        "bgcolor",
+        "fig_facecolor",
+        "font_color"
     ],
     "Covariance": [
-        "cov",
-        "orig",
+        "inst",
         "signal_cov",
         "noise_cov",
+        "cov",
         "data_cov",
-        "inst"
+        "orig"
     ],
     "iterable": [
-        "first_samps",
-        "ch_names",
-        "selection",
-        "cv",
+        "last_samps",
         "stc",
-        "last_samps"
-    ],
-    "list of array": [
-        "subject_to",
-        "vertices",
-        "scores",
-        "events",
-        "Ws",
-        "X"
+        "ch_names",
+        "first_samps",
+        "selection",
+        "cv"
     ],
     "SourceSpaces": [
-        "src_to",
-        "vertices",
-        "src_orig",
-        "src_from",
         "restrict_vertices",
-        "src"
+        "src_orig",
+        "src",
+        "vertices",
+        "src_to",
+        "src_from"
     ],
     "array_like": [
-        "scale",
         "random_state",
-        "picks",
-        "overlay_times",
         "pvals",
+        "overlay_times",
+        "picks",
+        "scale",
         "pval"
     ],
     "shape (...": [
+        "X",
+        "rot",
+        "b",
         "pos",
         "a",
-        "rot",
-        "data",
-        "X",
-        "b"
+        "data"
     ],
     "shape (n_channels": [
-        "pos",
-        "ed_matrix",
+        "mask",
         "signal_cov",
-        "data",
-        "mask"
+        "ed_matrix",
+        "pos",
+        "data"
     ],
     "Raw": [
-        "raw",
-        "other",
+        "inst",
         "raw_er",
+        "other",
         "evoked",
-        "inst"
+        "raw"
     ],
     "shape (n_epochs": [
-        "y",
-        "epochs_data",
-        "data",
+        "X",
         "overlay_times",
-        "X"
+        "epochs_data",
+        "y",
+        "data"
     ],
     "n_channels)": [
-        "patterns",
-        "ed_matrix",
+        "X",
         "signal_cov",
+        "patterns",
         "filters",
-        "X"
+        "ed_matrix"
     ],
     "Info": [
-        "pos",
-        "info_from",
-        "montage",
         "info_to",
+        "info_from",
+        "pos",
+        "montage",
         "info"
     ],
     "datetime": [
         "origin",
-        "tmin",
         "tmax",
+        "tmin",
         "orig_time",
         "meas_date"
     ],
     "shape (N": [
-        "pos",
-        "vertices",
+        "xy",
         "events",
+        "vertices",
         "values",
-        "xy"
+        "pos"
     ],
     "SourceEstimate": [
-        "stcs",
-        "stc_from",
-        "stc",
+        "src",
         "weights",
-        "src"
+        "stc_from",
+        "stcs",
+        "stc"
     ],
     "SpatialImage": [
-        "bg_img",
         "moving",
+        "flash5",
         "flash30",
-        "static",
-        "flash5"
+        "bg_img",
+        "static"
     ],
     "scalar": [
-        "tmin",
-        "tstop",
+        "tstep",
         "tstart",
+        "tmin",
         "width",
-        "tstep"
+        "tstop"
     ],
     "object": [
-        "estimator",
-        "figure",
         "model",
-        "base_estimator"
+        "figure",
+        "base_estimator",
+        "estimator"
     ],
     "shape (n_samples": [
-        "data",
-        "arr",
+        "X",
         "y",
-        "X"
+        "arr",
+        "data"
     ],
     "shape (n_annotations": [
-        "description",
         "duration",
+        "hed_string",
         "onset",
-        "hed_string"
+        "description"
     ],
     "ndarray of int": [
         "ids",
         "vertices",
-        "events",
-        "tris"
+        "tris",
+        "events"
     ],
     "shape (n_vertices": [
-        "alpha",
-        "vertices",
         "rr",
-        "directions"
+        "vertices",
+        "directions",
+        "alpha"
     ],
     "Label": [
-        "labels",
-        "label",
         "lh",
-        "rh"
+        "rh",
+        "labels",
+        "label"
     ],
     "Evoked": [
-        "evokeds",
-        "info",
         "inst",
-        "evoked"
+        "evoked",
+        "evokeds",
+        "info"
     ],
     "color object": [
-        "bgcolor",
-        "event_color",
         "bad_color",
+        "event_color",
+        "bgcolor",
         "color"
     ],
     "float in [0": [
-        "alpha",
-        "smooth",
         "l1_ratio",
-        "opacity"
+        "opacity",
+        "smooth",
+        "alpha"
     ],
     "2)": [
-        "axes",
-        "pos",
+        "xy",
         "highlight",
-        "xy"
+        "pos",
+        "axes"
     ],
     "4)": [
+        "b",
         "colors",
         "pos",
-        "a",
-        "b"
+        "a"
     ],
     "np.ndarray": [
-        "data",
-        "brains",
         "weights",
+        "brains",
+        "data",
         "template"
     ],
     "list of Evoked": [
-        "all_inst",
-        "evokeds",
         "evoked",
+        "evokeds",
+        "all_inst",
         "all_evoked"
     ],
     "Epochs": [
         "epochs",
-        "inst",
-        "evoked"
+        "evoked",
+        "inst"
     ],
     "n_channels": [
-        "epochs_data",
         "X",
+        "epochs_data",
         "data"
     ],
     "n_features)": [
-        "data",
         "X",
+        "data",
         "weights"
     ],
     "shape ([n_epochs": [
-        "epochs_data",
         "X",
+        "epochs_data",
         "inst"
     ],
     "]n_channels": [
-        "epochs_data",
         "X",
+        "epochs_data",
         "inst"
     ],
     "n_components": [
-        "filters",
         "X",
-        "patterns"
+        "patterns",
+        "filters"
     ],
     "shape ((n_classes)": [
+        "patterns",
         "evals",
-        "filters",
-        "patterns"
+        "filters"
     ],
     "array of str": [
-        "description",
         "show_names",
-        "hed_string"
+        "hed_string",
+        "description"
     ],
     "shape (n_events": [
+        "t_raw",
         "t_other",
-        "events",
-        "t_raw"
+        "events"
     ],
     "Transform": [
-        "destination",
         "mri_head_t",
-        "trans"
+        "trans",
+        "destination"
     ],
     "optional": [
         "force_fixed",
-        "surf_ori",
-        "patch_stats"
+        "patch_stats",
+        "surf_ori"
     ],
     "array of": [
-        "mrk",
         "elp",
-        "trans"
+        "trans",
+        "mrk"
     ],
     "matplotlib color": [
+        "color",
         "foreground",
-        "background",
-        "color"
+        "background"
     ],
     "Forward": [
-        "src",
         "forward",
-        "fwd"
+        "fwd",
+        "src"
     ],
     "InverseOperator": [
         "inv",
@@ -590,18 +440,18 @@
     ],
     "list of Label": [
         "labels",
-        "label",
-        "idx"
+        "idx",
+        "label"
     ],
     "1]": [
-        "alpha",
         "l1_ratio",
-        "opacity"
+        "opacity",
+        "alpha"
     ],
     "mne.io.Raw": [
+        "inst",
         "raw",
-        "raw_event",
-        "inst"
+        "raw_event"
     ],
     "shape (n_times": [
         "waveform",
@@ -609,8 +459,8 @@
         "times"
     ],
     "list of color": [
-        "colors",
         "colormap",
+        "colors",
         "color"
     ],
     "\"auto\"": [
@@ -628,11 +478,6 @@
         "eog_evoked",
         "ecg_evoked"
     ],
-    "list of ndarray": [
-        "labels",
-        "pos",
-        "vertices_to"
-    ],
     "shape ``(n_calibration_points": [
         "positions",
         "gaze",
@@ -640,41 +485,41 @@
     ],
     ")``": [
         "screen_resolution",
-        "screen_size",
-        "offsets"
+        "offsets",
+        "screen_size"
     ],
     "numpy array": [
         "vertices",
-        "array",
-        "time"
+        "time",
+        "array"
     ],
     "ConductorModel": [
-        "sphere",
-        "bem"
+        "bem",
+        "sphere"
     ],
     "matplotlib colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "(colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "bool)": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "Axes": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "list of Axes": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "n_components)": [
-        "evals",
-        "X"
+        "X",
+        "evals"
     ],
     "n_times])": [
         "epochs_data",
@@ -689,16 +534,16 @@
         "weights"
     ],
     "shape (n_times[": [
-        "y",
-        "X"
+        "X",
+        "y"
     ],
     "n_epochs]": [
-        "y",
-        "X"
+        "X",
+        "y"
     ],
     "shape (n_samples[": [
-        "y",
-        "X"
+        "X",
+        "y"
     ],
     "instance of ~numpy.random.RandomState": [
         "random_state",
@@ -717,24 +562,24 @@
         "fig"
     ],
     "``'raise'``": [
-        "on_unit_change",
-        "on_error"
+        "on_error",
+        "on_unit_change"
     ],
     "``'warn'``": [
-        "on_unit_change",
-        "on_error"
+        "on_error",
+        "on_unit_change"
     ],
     "``'ignore'``": [
-        "on_unit_change",
-        "on_error"
+        "on_error",
+        "on_unit_change"
     ],
     "DigMontage": [
         "sensors",
         "montage"
     ],
     "list-like": [
-        "times",
-        "factor_levels"
+        "factor_levels",
+        "times"
     ],
     "Figure3D": [
         "figure",
@@ -745,8 +590,8 @@
         "dipoles"
     ],
     "list of SpatialImage": [
-        "flash30",
-        "flash5"
+        "flash5",
+        "flash30"
     ],
     "n_vertices)": [
         "X",
@@ -757,32 +602,32 @@
         "dgap_freq"
     ],
     "CrossSpectralDensity": [
-        "noise_csd",
-        "csd"
+        "csd",
+        "noise_csd"
     ],
     "EpochsTFR": [
-        "tfr",
-        "epochs_tfr"
+        "epochs_tfr",
+        "tfr"
     ],
     "matplotlib": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "shape (n": [
         "colors",
         "highlight"
     ],
     "shape (n_pos": [
-        "pos",
-        "quats"
+        "quats",
+        "pos"
     ],
     "array_like of int": [
         "exclude",
         "include"
     ],
     "10)": [
-        "pos",
-        "quats"
+        "quats",
+        "pos"
     ],
     "2)``": [
         "positions",
@@ -793,52 +638,48 @@
         "screen_size"
     ],
     "4": [
-        "a",
-        "b"
+        "b",
+        "a"
     ],
     "3": [
-        "data",
-        "rot"
+        "rot",
+        "data"
     ],
     "list of (int": [
-        "misc",
-        "eog"
+        "eog",
+        "misc"
     ],
     "str)": [
-        "misc",
-        "eog"
+        "eog",
+        "misc"
     ],
     "tuple of (int": [
-        "misc",
-        "eog"
+        "eog",
+        "misc"
     ],
     "mne.Epochs": [
-        "epochs",
-        "inst"
+        "inst",
+        "epochs"
     ],
     "path-line": [
-        "ecg_evoked",
-        "eog_evoked"
-    ],
-    "list of array of float": [
-        "ecg_scores",
-        "eog_scores"
+        "eog_evoked",
+        "ecg_evoked"
     ],
     "AverageTFR": [
-        "all_inst",
-        "tfr"
+        "tfr",
+        "all_inst"
     ],
     "shape (n_labels": [
-        "values",
-        "stc_data"
+        "stc_data",
+        "values"
     ],
     "instance of (Vol": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
     ],
     "Mixed)SourceEstimate": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
     ],
     "BiHemiLabel": [
         "labels",
@@ -853,20 +694,20 @@
         "stc"
     ],
     "...)": [
-        "values",
-        "arr"
+        "arr",
+        "values"
     ],
     "shape (n_observations": [
         "X",
         "design_matrix"
     ],
     "list of AverageTFR": [
-        "tfr",
-        "all_tfr"
+        "all_tfr",
+        "tfr"
     ],
     "shape (n_signals": [
-        "x",
-        "X"
+        "X",
+        "x"
     ],
     "matplotlib-style color": [
         "colors",
@@ -1540,9 +1381,6 @@
     ],
     "None}": [
         "hemi"
-    ],
-    "list of array of int": [
-        "vertices"
     ],
     "SourceMorph": [
         "src"

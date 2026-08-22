@@ -13,6 +13,7 @@ import docstring_parser
 
 from mne_nodes.pipeline.io import TypedJSONEncoder
 from mne_nodes.gui.parameter import (
+    ArrayGui,
     BoolGui,
     ComboGui,
     DataFrameGui,
@@ -38,6 +39,9 @@ default_type_guis = {
     "path-like": PathGui,
     "slice": SliceGui,
     "dataframe": DataFrameGui,
+    "array": ArrayGui,
+    "array-like": ArrayGui,
+    "ndarray": ArrayGui,
 }
 
 type_defaults = {
