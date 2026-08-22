@@ -15,6 +15,7 @@ from mne_nodes.pipeline.io import TypedJSONEncoder
 from mne_nodes.gui.parameter import (
     BoolGui,
     ComboGui,
+    DataFrameGui,
     DictGui,
     DualTupleGui,
     FloatGui,
@@ -22,6 +23,7 @@ from mne_nodes.gui.parameter import (
     ListGui,
     PathGui,
     StringGui,
+    SliceGui,
 )
 
 default_type_guis = {
@@ -33,7 +35,9 @@ default_type_guis = {
     "dict": DictGui,
     "tuple": DualTupleGui,
     "combo": ComboGui,
-    "path-like": PathGui
+    "path-like": PathGui,
+    "slice": SliceGui,
+    "dataframe": DataFrameGui,
 }
 
 type_defaults = {
@@ -48,6 +52,7 @@ type_defaults = {
             "checklist": [],
             "slider": 0.0,
             "path-like": "",
+            "slice": slice(0, 1),
         }
 
 
@@ -114,15 +119,25 @@ def get_param_config(param, sig, obj_config):
     if param.arg_name == "filename":
         pass
     types = param.type_name.split("|")  # type: ignore
+    # Filter (<type> of length <length>)
+    pattern = r"(\w+)\s*of\s*length\s*\d+"
+    types = [re.sub(pattern, r"\1", t) for t in types]
+    # Filter shape (x, y) or shape (x, y, z) and remove it
+    pattern = r"shape\s*\([\d,\s]+\)"
+    types = [re.sub(pattern, "", t) for t in types]
     # split or
     types = [item for sublist in types for item in sublist.split(" or ")]
     # split ,
     types = [item for sublist in types for item in sublist.split(",")]
     # Remove spaces
     types = [t.strip() for t in types]
-    # Filter (default ***)
-    pattern = r"(\w+)\s\(default ([\w']+)\)"
-    types = [re.sub(pattern, r"\1", t) for t in types]
+    # Get instance of <class> and use lower case
+    pattern = r"instance of ([\w\.]+)"
+    for idx, t in enumerate(types):
+        match = re.match(pattern, t)
+        if match:
+            instance_type = match.group(1).split(".")[-1]
+            types[idx] = instance_type
     # Get containters
     pattern = r"(\w+)\s*of\s*(\w+)"
     for idx, t in enumerate(types):
