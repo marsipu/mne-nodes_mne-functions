@@ -95,12 +95,6 @@
         "smooth",
         "opacity"
     ],
-    "np.ndarray": [
-        "brains",
-        "template",
-        "weights",
-        "data"
-    ],
     "list of Evoked": [
         "all_evoked",
         "evokeds",
@@ -161,11 +155,6 @@
         "eog_evoked",
         "ecg_evoked",
         "inst"
-    ],
-    "numpy array": [
-        "vertices",
-        "time",
-        "array"
     ],
     "ConductorModel": [
         "sphere",

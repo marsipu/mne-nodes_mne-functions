@@ -42,18 +42,18 @@ default_type_guis = {
     "slice": SliceGui,
     "DataFrame": DataFrameGui,
     "array": ArrayGui,
-    "array-like": ArrayGui,
-    "array_like": ArrayGui,
-    "ndarray": ArrayGui,
     "color": ColorGui,
     "callable": CallableGui,
 }
 
-# Container types recognized as arrays, derived from default_type_guis so both
-# stay in sync, e.g. "array of int" or "ndarray of float"
-array_container_types = tuple(
-    name for name, gui in default_type_guis.items() if gui is ArrayGui
-)
+array_type_aliases = {
+    "array-like": "array",
+    "array_like": "array",
+    "ndarray": "array",
+    "np.ndarray": "array",
+    "numpy array": "array",
+}
+array_container_types = ("array",)
 
 type_defaults = {
             "int": 0,
@@ -191,6 +191,9 @@ def get_param_config(param, sig, obj_config):
     types = [t.strip() for t in types]
     # Strip rst inline-code markup, e.g. "``'auto'``" -> "'auto'"
     types = [t.strip("`") for t in types]
+    types = [array_type_aliases.get(t, t) for t in types]
+    # Remove duplicates while preserving order
+    types = list(dict.fromkeys(types))
     # Get instance of <class> and use lower case
     pattern = r"instance of ([\w\.]+)"
     for idx, t in enumerate(types):
@@ -204,7 +207,7 @@ def get_param_config(param, sig, obj_config):
     for idx, t in enumerate(types):
         match = re.match(pattern, t)
         if match:
-            container_type = match.group(1)
+            container_type = array_type_aliases.get(match.group(1), match.group(1))
             contained_type = match.group(2)
             if (
                 container_type in ["list", "tuple"]
