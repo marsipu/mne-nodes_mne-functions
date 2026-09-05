@@ -93,8 +93,17 @@ always_inputs = [
     "SpatialImage"
 ]
 
-class_output_alias = {
-    "covariance": "noise_cov"
+group_functions = {
+    "mne.grand_average",
+}
+
+class_alias = {
+    "covariance": ["noise_cov", "cov"],
+    "cov": ["cov", "noise_cov"],
+    "averagetfr": ["tfr"],
+    "grand_average": ["evoked", "tfr", "spectrum"],
+    "sourcespaces": ["src", "src_to", "src_from", "src_orig"],
+    "forward": ["fwd"]
 }
 
 exclude_categories = [
@@ -221,6 +230,37 @@ def _docutils_html_to_qt_html(html):
     parser.feed(html)
     parser.close()
     return "".join(parser.output).strip()
+
+
+def _accepted_aliases(name):
+    """Return accepted port names for a class or output name."""
+    return class_alias.get(name.lower(), [name.lower()])
+
+
+def _accepted_names_from_types(types):
+    accepted = []
+    for type_name in types:
+        accepted_type = type_name.split(" of ", 1)[-1].strip()
+        accepted_type = accepted_type.rsplit(".", 1)[-1]
+        for name in _accepted_aliases(accepted_type):
+            if name not in accepted:
+                accepted.append(name)
+    return accepted
+
+
+def _accepted_names_from_type_name(type_name):
+    if not type_name:
+        return []
+    types = re.split(r"\s*\|\s*|\s+or\s+|,", type_name)
+    return _accepted_names_from_types([type.strip() for type in types])
+
+
+def _accepted_names(*names):
+    accepted = []
+    for name in names:
+        if name and name not in accepted:
+            accepted.append(name)
+    return accepted
 
 
 # %%
@@ -373,11 +413,13 @@ def get_param_config(param, sig, obj_config):
     if param.arg_name in always_inputs or len(types) == 0 or len(missing) > 0:
         # Add params with missing types or no Default as inputs
         for mis in missing:
-            missing_types[mis].add(param.arg_name)  # type: ignore
+            if mis not in always_inputs:
+                missing_types[mis].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
-            "accepted": param.arg_name,  # type: ignore
+            "accepted": _accepted_names(
+                param.arg_name, *_accepted_names_from_types(types)
+            ),
             "optional": default is not inspect.Parameter.empty,
-            "types": types,
         }
         obj_config["inputs"][param.arg_name] = input_config  # type: ignore
         return
@@ -466,7 +508,11 @@ def build_object_config(
         "inputs": {},
         "parameters": {},
         "outputs": {},
-        "target": "file",
+        "target": (
+            "group"
+            if f"{module_name}.{obj.__name__}" in group_functions
+            else "file"
+        ),
         "category": category,
         "sub_category": sub_category,
         "description": _rst_to_qt_rich_text(
@@ -487,9 +533,8 @@ def build_object_config(
     if class_name is not None:
         lower_name = class_name.lower()
         input_config = {
-            "accepted": lower_name,
+            "accepted": _accepted_names(lower_name, *_accepted_aliases(lower_name)),
             "optional": False,
-            "types": [lower_name],
         }
         obj_config["inputs"][lower_name] = input_config
         # change sub-category
@@ -516,9 +561,11 @@ def build_object_config(
             get_param_config(param, sig, obj_config)
 
     if inspect.isclass(obj):
-        output_name = class_output_alias.get(obj.__name__.lower(), obj.__name__.lower())
-        return_config = {"accepted": output_name}  # type: ignore
-        obj_config["outputs"][output_name] = return_config  # type: ignore
+        output_key = obj.__name__.lower()
+        accepted = _accepted_aliases(output_key)
+        output_key = accepted[0]
+        return_config = {"accepted": accepted}  # type: ignore
+        obj_config["outputs"][output_key] = return_config  # type: ignore
     else:
         for ret in doc.many_returns:
             # Set output name to class name if it is an instance of the class for methods
@@ -528,7 +575,12 @@ def build_object_config(
                 output_name = class_name.lower()
             else:
                 output_name = ret.return_name
-            return_config = {"accepted": output_name}  # type: ignore
+            accepted = _accepted_names(
+                output_name,
+                *_accepted_aliases(output_name),
+                *_accepted_names_from_type_name(ret.type_name),
+            )
+            return_config = {"accepted": accepted}  # type: ignore
             obj_config["outputs"][output_name] = return_config  # type: ignore
     return doc, obj_config
 
