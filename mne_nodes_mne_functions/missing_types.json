@@ -1,54 +1,54 @@
 {
     "Covariance": [
-        "orig",
-        "inst",
-        "cov",
         "noise_cov",
         "signal_cov",
-        "data_cov"
+        "inst",
+        "data_cov",
+        "cov",
+        "orig"
     ],
     "SourceSpaces": [
         "restrict_vertices",
-        "src_to",
         "src",
-        "src_orig",
+        "src_to",
         "src_from",
+        "src_orig",
         "vertices"
     ],
     "Raw": [
         "evoked",
-        "inst",
         "other",
         "raw",
+        "inst",
         "raw_er"
     ],
     "Info": [
-        "pos",
-        "info_from",
-        "montage",
+        "info_to",
         "info",
-        "info_to"
+        "pos",
+        "montage",
+        "info_from"
     ],
     "SourceEstimate": [
-        "src",
-        "stcs",
         "weights",
-        "stc",
-        "stc_from"
+        "stcs",
+        "src",
+        "stc_from",
+        "stc"
     ],
     "SpatialImage": [
-        "flash30",
-        "moving",
-        "bg_img",
         "static",
-        "flash5"
+        "flash5",
+        "bg_img",
+        "flash30",
+        "moving"
     ],
     "scalar": [
-        "tmin",
-        "tstep",
+        "tstart",
         "tstop",
+        "tstep",
         "width",
-        "tstart"
+        "tmin"
     ],
     "object": [
         "model",
@@ -57,39 +57,39 @@
         "figure"
     ],
     "iterable": [
-        "selection",
         "cv",
-        "ch_names",
-        "stc"
+        "selection",
+        "stc",
+        "ch_names"
     ],
     "Label": [
-        "label",
         "rh",
-        "labels",
-        "lh"
+        "label",
+        "lh",
+        "labels"
     ],
     "Evoked": [
-        "inst",
+        "evokeds",
         "evoked",
         "info",
-        "evokeds"
+        "inst"
     ],
     "float in [0": [
+        "l1_ratio",
         "opacity",
         "alpha",
-        "smooth",
-        "l1_ratio"
+        "smooth"
     ],
     "list of Evoked": [
-        "all_inst",
-        "evoked",
+        "evokeds",
         "all_evoked",
-        "evokeds"
+        "all_inst",
+        "evoked"
     ],
     "Epochs": [
-        "inst",
+        "epochs",
         "evoked",
-        "epochs"
+        "inst"
     ],
     "Transform": [
         "mri_head_t",
@@ -97,9 +97,9 @@
         "trans"
     ],
     "Forward": [
-        "forward",
         "src",
-        "fwd"
+        "fwd",
+        "forward"
     ],
     "optional": [
         "patch_stats",
@@ -117,8 +117,8 @@
         "labels"
     ],
     "1]": [
-        "opacity",
         "l1_ratio",
+        "opacity",
         "alpha"
     ],
     "mne.io.Raw": [
@@ -128,13 +128,13 @@
     ],
     "float between ``0`` and ``1": [
         "n_eeg",
-        "n_mag",
-        "n_grad"
+        "n_grad",
+        "n_mag"
     ],
     "mne.Evoked": [
-        "inst",
         "ecg_evoked",
-        "eog_evoked"
+        "eog_evoked",
+        "inst"
     ],
     "list of ndarray": [
         "pos",
@@ -166,16 +166,16 @@
         "axes"
     ],
     "instance of ~numpy.random.RandomState": [
-        "random_state",
-        "seed"
+        "seed",
+        "random_state"
     ],
     "Figure3D": [
-        "figure",
-        "fig"
+        "fig",
+        "figure"
     ],
     ")": [
-        "buffer",
-        "conductivity"
+        "conductivity",
+        "buffer"
     ],
     "Dipole": [
         "dipoles",
@@ -186,44 +186,44 @@
         "flash5"
     ],
     "np.inf": [
-        "fmax",
-        "dgap_freq"
+        "dgap_freq",
+        "fmax"
     ],
     "CrossSpectralDensity": [
         "noise_csd",
         "csd"
     ],
     "EpochsTFR": [
-        "tfr",
-        "epochs_tfr"
+        "epochs_tfr",
+        "tfr"
     ],
     "matplotlib": [
         "ax",
         "axes"
     ],
     "list-like": [
-        "factor_levels",
-        "times"
+        "times",
+        "factor_levels"
     ],
     "DigMontage": [
         "montage",
         "sensors"
     ],
     "Figure": [
-        "figure",
-        "fig"
+        "fig",
+        "figure"
     ],
     "mne.Epochs": [
-        "inst",
-        "epochs"
+        "epochs",
+        "inst"
     ],
     "path-line": [
         "ecg_evoked",
         "eog_evoked"
     ],
     "AverageTFR": [
-        "all_inst",
-        "tfr"
+        "tfr",
+        "all_inst"
     ],
     "instance of (Vol": [
         "stc_true",
@@ -238,12 +238,12 @@
         "labels"
     ],
     "scipy.sparse.csr_array": [
-        "morph_mat",
-        "vol_morph_mat"
+        "vol_morph_mat",
+        "morph_mat"
     ],
     "VectorSourceEstimate": [
-        "stc",
-        "stc_from"
+        "stc_from",
+        "stc"
     ],
     "list of AverageTFR": [
         "tfr",

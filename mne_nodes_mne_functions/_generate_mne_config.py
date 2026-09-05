@@ -3,13 +3,16 @@ from ast import literal_eval
 import importlib
 
 import inspect
+import io
 import json
+from html.parser import HTMLParser
 from pathlib import Path
 from collections import defaultdict
 import re
 import sys
 from typing import DefaultDict
 import docstring_parser
+from docutils.core import publish_parts
 
 from mne_nodes.pipeline.io import TypedJSONEncoder
 from mne_nodes.gui.parameter import (
@@ -147,6 +150,77 @@ def _strip_shape_annotations(text):
         result.append(text[i])
         i += 1
     return "".join(result)
+
+
+def _rst_to_qt_rich_text(text):
+    """Convert an MNE docstring fragment from RST to Qt-compatible HTML."""
+    if not text:
+        return text
+    parts = publish_parts(
+        text,
+        writer_name="html5",
+        settings_overrides={
+            "halt_level": 6,
+            "report_level": 5,
+            "warning_stream": io.StringIO(),
+        },
+    )
+    return _docutils_html_to_qt_html(parts["html_body"])
+
+
+class _DocutilsHTMLToQtHTML(HTMLParser):
+    """Translate docutils CSS classes into markup supported by Qt rich text."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=False)
+        self.output = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = set(attrs.pop("class", "").split())
+        if tag == "main":
+            return
+        if "literal" in classes:
+            self.output.append('<span style="font-family: monospace;">')
+        elif "literal-block" in classes:
+            self.output.append("<pre>")
+        elif tag in {"html", "head", "body"}:
+            return
+        else:
+            self.output.append("<" + tag)
+            for name, value in attrs.items():
+                if value is not None:
+                    escaped = value.replace("&", "&amp;").replace('"', "&quot;")
+                    self.output.append(f' {name}="{escaped}"')
+            self.output.append(">")
+
+    def handle_endtag(self, tag):
+        if tag == "main":
+            return
+        if tag in {"html", "head", "body"}:
+            return
+        if tag == "span":
+            self.output.append("</span>")
+        elif tag == "pre":
+            self.output.append("</pre>")
+        else:
+            self.output.append(f"</{tag}>")
+
+    def handle_data(self, data):
+        self.output.append(data)
+
+    def handle_entityref(self, name):
+        self.output.append(f"&{name};")
+
+    def handle_charref(self, name):
+        self.output.append(f"&#{name};")
+
+
+def _docutils_html_to_qt_html(html):
+    parser = _DocutilsHTMLToQtHTML()
+    parser.feed(html)
+    parser.close()
+    return "".join(parser.output).strip()
 
 
 # %%
@@ -358,7 +432,7 @@ def get_param_config(param, sig, obj_config):
         {
             "default": default,
             "none_select": none_select,
-            "description": param.description,  # type: ignore
+            "description": _rst_to_qt_rich_text(param.description),  # type: ignore
         }
     )
     obj_config["parameters"][param.arg_name] = param_config  # type: ignore
@@ -395,9 +469,9 @@ def build_object_config(
         "target": "file",
         "category": category,
         "sub_category": sub_category,
-        "description": doc.long_description
-        if doc.long_description
-        else doc.short_description,
+        "description": _rst_to_qt_rich_text(
+            doc.long_description if doc.long_description else doc.short_description
+        ),
         "module_name": module_name,
         "class_name": class_name,
     }
