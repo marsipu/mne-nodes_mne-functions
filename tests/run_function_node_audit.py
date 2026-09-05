@@ -21,6 +21,9 @@ from pathlib import Path
 
 from tqdm import tqdm
 
+import mne_nodes
+
+mne_nodes.gui_mode = False
 
 def _repo_root() -> Path:
     return Path(__file__).resolve().parents[2]
@@ -63,8 +66,10 @@ def _create_controller(run_dir: Path):
     config_path = _config_path_for_run(run_dir)
     _create_config_file(config_path)
 
-    return Controller(config_path=config_path, settings=settings)
-
+    controller = Controller(config_path=config_path, settings=settings)
+    plugin_path = Path(__file__).parent.parent / "mne_nodes_mne_functions" / "mne_functions_config.json"
+    controller.load_plugin_path(plugin_path)
+    return controller
 
 def _normalize_output(value: str | bytes | None) -> str:
     if value is None:

@@ -1,160 +1,145 @@
 {
     "Covariance": [
-        "cov",
         "signal_cov",
-        "inst",
         "data_cov",
+        "noise_cov",
+        "inst",
         "orig",
-        "noise_cov"
-    ],
-    "iterable": [
-        "last_samps",
-        "selection",
-        "cv",
-        "first_samps",
-        "ch_names",
-        "stc"
+        "cov"
     ],
     "SourceSpaces": [
-        "src_to",
         "src_orig",
-        "src",
         "vertices",
+        "src_to",
         "src_from",
-        "restrict_vertices"
+        "restrict_vertices",
+        "src"
     ],
     "Raw": [
-        "evoked",
         "inst",
-        "other",
         "raw",
+        "other",
+        "evoked",
         "raw_er"
     ],
     "Info": [
-        "info_to",
-        "montage",
         "info_from",
         "info",
-        "pos"
-    ],
-    "datetime": [
-        "meas_date",
-        "tmin",
-        "tmax",
-        "orig_time",
-        "origin"
+        "pos",
+        "info_to",
+        "montage"
     ],
     "SourceEstimate": [
         "stcs",
-        "src",
+        "stc",
         "stc_from",
         "weights",
-        "stc"
+        "src"
     ],
     "SpatialImage": [
+        "bg_img",
         "flash5",
-        "moving",
-        "flash30",
         "static",
-        "bg_img"
+        "flash30",
+        "moving"
     ],
     "scalar": [
-        "tmin",
-        "tstep",
         "tstop",
-        "width",
-        "tstart"
+        "tstart",
+        "tstep",
+        "tmin",
+        "width"
     ],
     "object": [
         "base_estimator",
-        "figure",
         "estimator",
-        "model"
+        "model",
+        "figure"
+    ],
+    "iterable": [
+        "cv",
+        "stc",
+        "ch_names",
+        "selection"
     ],
     "Label": [
-        "lh",
-        "rh",
+        "label",
         "labels",
-        "label"
+        "lh",
+        "rh"
     ],
     "Evoked": [
+        "evokeds",
+        "inst",
         "info",
-        "evoked",
-        "evokeds",
-        "inst"
-    ],
-    "color object": [
-        "color",
-        "event_color",
-        "bad_color",
-        "bgcolor"
-    ],
-    "float in [0": [
-        "alpha",
-        "l1_ratio",
-        "smooth",
-        "opacity"
-    ],
-    "list of Evoked": [
-        "all_evoked",
-        "evokeds",
-        "all_inst",
         "evoked"
     ],
-    "Epochs": [
+    "float in [0": [
+        "opacity",
+        "l1_ratio",
+        "alpha",
+        "smooth"
+    ],
+    "list of Evoked": [
+        "evokeds",
         "evoked",
+        "all_inst",
+        "all_evoked"
+    ],
+    "Epochs": [
         "epochs",
-        "inst"
+        "inst",
+        "evoked"
     ],
     "Transform": [
-        "mri_head_t",
         "destination",
+        "mri_head_t",
         "trans"
+    ],
+    "Forward": [
+        "fwd",
+        "forward",
+        "src"
     ],
     "optional": [
         "surf_ori",
-        "force_fixed",
-        "patch_stats"
-    ],
-    "matplotlib color": [
-        "color",
-        "foreground",
-        "background"
-    ],
-    "Forward": [
-        "forward",
-        "src",
-        "fwd"
+        "patch_stats",
+        "force_fixed"
     ],
     "InverseOperator": [
         "inv",
-        "src",
-        "inverse_operator"
+        "inverse_operator",
+        "src"
     ],
     "list of Label": [
-        "idx",
+        "label",
         "labels",
-        "label"
+        "idx"
     ],
     "1]": [
+        "opacity",
         "alpha",
-        "l1_ratio",
-        "opacity"
+        "l1_ratio"
     ],
     "mne.io.Raw": [
-        "raw",
         "raw_event",
-        "inst"
+        "inst",
+        "raw"
     ],
     "float between ``0`` and ``1": [
-        "n_grad",
         "n_eeg",
+        "n_grad",
         "n_mag"
     ],
     "mne.Evoked": [
         "eog_evoked",
-        "ecg_evoked",
-        "inst"
+        "inst",
+        "ecg_evoked"
+    ],
+    "list of ndarray": [
+        "pos",
+        "labels",
+        "vertices_to"
     ],
     "ConductorModel": [
         "sphere",
@@ -173,80 +158,60 @@
         "mask_cmap"
     ],
     "Axes": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "list of Axes": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "instance of ~numpy.random.RandomState": [
-        "random_state",
-        "seed"
-    ],
-    "file-like": [
-        "fname",
-        "input_fname"
-    ],
-    "dict-like": [
-        "volume_info",
-        "covariates"
-    ],
-    "Figure": [
-        "figure",
-        "fig"
-    ],
-    "DigMontage": [
-        "sensors",
-        "montage"
-    ],
-    "list-like": [
-        "times",
-        "factor_levels"
+        "seed",
+        "random_state"
     ],
     "Figure3D": [
-        "figure",
-        "fig"
+        "fig",
+        "figure"
     ],
     ")": [
-        "conductivity",
-        "buffer"
+        "buffer",
+        "conductivity"
     ],
     "Dipole": [
-        "dipole",
-        "dipoles"
+        "dipoles",
+        "dipole"
     ],
     "list of SpatialImage": [
-        "flash30",
-        "flash5"
+        "flash5",
+        "flash30"
     ],
     "np.inf": [
-        "dgap_freq",
-        "fmax"
+        "fmax",
+        "dgap_freq"
     ],
     "CrossSpectralDensity": [
         "noise_csd",
         "csd"
     ],
     "EpochsTFR": [
-        "tfr",
-        "epochs_tfr"
+        "epochs_tfr",
+        "tfr"
     ],
     "matplotlib": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
-    "list of (int": [
-        "misc",
-        "eog"
+    "list-like": [
+        "factor_levels",
+        "times"
     ],
-    "str)": [
-        "misc",
-        "eog"
+    "DigMontage": [
+        "sensors",
+        "montage"
     ],
-    "tuple of (int": [
-        "misc",
-        "eog"
+    "Figure": [
+        "fig",
+        "figure"
     ],
     "mne.Epochs": [
         "epochs",
@@ -257,36 +222,36 @@
         "ecg_evoked"
     ],
     "AverageTFR": [
-        "tfr",
-        "all_inst"
+        "all_inst",
+        "tfr"
     ],
     "instance of (Vol": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
     ],
     "Mixed)SourceEstimate": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
     ],
     "BiHemiLabel": [
-        "labels",
-        "label"
+        "label",
+        "labels"
     ],
     "scipy.sparse.csr_array": [
         "vol_morph_mat",
         "morph_mat"
     ],
     "VectorSourceEstimate": [
-        "stc_from",
-        "stc"
+        "stc",
+        "stc_from"
     ],
     "list of AverageTFR": [
-        "tfr",
-        "all_tfr"
+        "all_tfr",
+        "tfr"
     ],
     "matplotlib-style color": [
-        "color",
-        "colors"
+        "colors",
+        "color"
     ],
     "mne.Info": [
         "info"
@@ -378,51 +343,6 @@
     "list of Evoked instances": [
         "evoked"
     ],
-    "list with instances of mne.Label": [
-        "labels"
-    ],
-    "int array": [
-        "faces"
-    ],
-    "type": [
-        "output"
-    ],
-    "Path": [
-        "filename"
-    ],
-    "Annotations": [
-        "annotations"
-    ],
-    "list of (n_epochs) list (of n_channels)": [
-        "epoch_colors"
-    ],
-    "Layout": [
-        "layout"
-    ],
-    "colormap": [
-        "cmap"
-    ],
-    "dict of list of Axes": [
-        "axes"
-    ],
-    "numpy.dtype": [
-        "dtype"
-    ],
-    "{'power'": [
-        "estimate"
-    ],
-    "'amplitude'}": [
-        "estimate"
-    ],
-    "Axes3D": [
-        "axes"
-    ],
-    "sequence of {\"his_id\"": [
-        "keep_his"
-    ],
-    "\"hand\"}": [
-        "keep_his"
-    ],
     "list of Forward": [
         "fwds"
     ],
@@ -471,11 +391,47 @@
     "list of matplotlib Axes": [
         "ax"
     ],
+    "file-like": [
+        "fname"
+    ],
+    "Annotations": [
+        "annotations"
+    ],
+    "numpy.dtype": [
+        "dtype"
+    ],
     "2D array": [
         "events"
     ],
     "Raw instance": [
         "raws"
+    ],
+    "Axes3D": [
+        "axes"
+    ],
+    "sequence of {\"his_id\"": [
+        "keep_his"
+    ],
+    "\"hand\"}": [
+        "keep_his"
+    ],
+    "{'power'": [
+        "estimate"
+    ],
+    "'amplitude'}": [
+        "estimate"
+    ],
+    "Layout": [
+        "layout"
+    ],
+    "list of (n_epochs) list (of n_channels)": [
+        "epoch_colors"
+    ],
+    "colormap": [
+        "cmap"
+    ],
+    "dict of list of Axes": [
+        "axes"
     ],
     "mne.viz.Brain": [
         "fig"
@@ -530,12 +486,6 @@
     ],
     "RawKIT": [
         "raw"
-    ],
-    "bytes": [
-        "password"
-    ],
-    "dtype": [
-        "dtype"
     ],
     "iterable of mne.Projection": [
         "projs"
@@ -618,8 +568,14 @@
     "4)": [
         "colors"
     ],
+    "list with instances of mne.Label": [
+        "labels"
+    ],
     "iterable of SourceEstimate": [
         "inst"
+    ],
+    "dict-like": [
+        "covariates"
     ],
     "scipy.sparse.spmatrix": [
         "adjacency"

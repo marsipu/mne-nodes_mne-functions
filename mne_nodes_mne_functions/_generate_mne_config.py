@@ -18,6 +18,7 @@ from mne_nodes.gui.parameter import (
     ColorGui,
     ComboGui,
     DataFrameGui,
+    DateTimeGui,
     DictGui,
     DualTupleGui,
     FloatGui,
@@ -27,6 +28,7 @@ from mne_nodes.gui.parameter import (
     PathGui,
     StringGui,
     SliceGui,
+    TupleGui,
 )
 
 default_type_guis = {
@@ -36,14 +38,15 @@ default_type_guis = {
     "bool": BoolGui,
     "list": ListGui,
     "dict": DictGui,
-    "tuple": DualTupleGui,
+    "tuple": TupleGui,
     "combo": ComboGui,
-    "path-like": PathGui,
+    "path": PathGui,
     "slice": SliceGui,
     "DataFrame": DataFrameGui,
     "array": ArrayGui,
     "color": ColorGui,
     "callable": CallableGui,
+    "datetime": DateTimeGui,
 }
 
 array_type_aliases = {
@@ -54,6 +57,9 @@ array_type_aliases = {
     "numpy array": "array",
 }
 array_container_types = ("array",)
+
+color_type_aliases = {"color object": "color", "matplotlib color": "color"}
+path_type_aliases = {"path-like": "path", "path_like": "path"}
 
 type_defaults = {
             "int": 0,
@@ -66,10 +72,38 @@ type_defaults = {
             "combo": "",
             "checklist": [],
             "slider": 0.0,
-            "path-like": "",
+            "path": "",
             "slice": slice(0, 1),
         }
 
+always_inputs = [
+    "events",
+    "event_id",
+    "raw",
+    "epochs",
+    "Covariance",
+    "SourceEstimate",
+    "Evoked",
+    "Raw",
+    "Epochs",
+    "Info",
+    "SpatialImage"
+]
+
+class_output_alias = {
+    "covariance": "noise_cov"
+}
+
+exclude_categories = [
+    "connectivity",
+    "creating_from_arrays",
+    "logging",
+    "misc",
+    "python_reference",
+    "realtime",
+    "file_io",
+    "reading_raw_data",
+]
 
 def _strip_shape_annotations(text):
     """Remove "(of/with) shape (...)" segments from a type description.
@@ -152,14 +186,6 @@ mnedev_api_path = Path(__file__).resolve().parents[2] / "mne-python/doc/api"
 if not mnedev_api_path.exists():
     print(f"{mnedev_api_path} does not exist!")
     sys.exit(1)
-exclude_categories = [
-    "connectivity",
-    "creating_from_arrays",
-    "logging",
-    "misc",
-    "python_reference",
-    "realtime",
-]
 api_categories = {
     f.stem: f
     for f in Path(mnedev_api_path).glob("*.rst")
@@ -175,9 +201,12 @@ def get_param_config(param, sig, obj_config):
     # Skip parameters that don't have a valid name (e.g. *args, **kwargs)
     if not param.arg_name[0].isalpha():  # type: ignore
         return
-    if param.arg_name == "filename":
+    if param.arg_name == "epochs":
         pass
     type_name = param.type_name  # type: ignore
+    is_dual_tuple = bool(
+        re.search(r"\btuple\s+of\s+length\s+2\b", type_name, re.IGNORECASE)
+    )
     # Filter (<type> of length <length>)
     type_name = re.sub(r"(\w+)\s*of\s*length\s*\d+", r"\1", type_name)
     # Strip shape annotations, e.g. "array, shape (n_samples, n_channels)"
@@ -191,7 +220,12 @@ def get_param_config(param, sig, obj_config):
     types = [t.strip() for t in types]
     # Strip rst inline-code markup, e.g. "``'auto'``" -> "'auto'"
     types = [t.strip("`") for t in types]
-    types = [array_type_aliases.get(t, t) for t in types]
+    types = [
+        array_type_aliases.get(
+            t, color_type_aliases.get(t, path_type_aliases.get(t, t))
+        )
+        for t in types
+    ]
     # Remove duplicates while preserving order
     types = list(dict.fromkeys(types))
     # Get instance of <class> and use lower case
@@ -262,13 +296,13 @@ def get_param_config(param, sig, obj_config):
         types.append("combo")
     # Missing types
     missing = [t for t in types if t not in default_type_guis]
-    if len(types) == 0 or len(missing) > 0:
+    if param.arg_name in always_inputs or len(types) == 0 or len(missing) > 0:
         # Add params with missing types or no Default as inputs
         for mis in missing:
             missing_types[mis].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
             "accepted": param.arg_name,  # type: ignore
-            "optional": none_select,
+            "optional": default is not inspect.Parameter.empty,
             "types": types,
         }
         obj_config["inputs"][param.arg_name] = input_config  # type: ignore
@@ -288,8 +322,8 @@ def get_param_config(param, sig, obj_config):
             default = list(default)
         elif isinstance(default, list) and "tuple" in types:
             default = tuple(default)
-        elif isinstance(default, str) and "path-like" in types:
-            pass  # Skip path-like since path-gui suffices
+        elif isinstance(default, str) and "path" in types:
+            pass  # Skip path since path-gui suffices
         else:
             types.append(type(default).__name__)
     # Functions/other callables aren't JSON serializable; store as their name
@@ -311,7 +345,10 @@ def get_param_config(param, sig, obj_config):
         if type_kwargs:
             param_config["type_kwargs"] = type_kwargs
     else:
-        param_config.update({"gui": default_type_guis[types[0]].__name__})
+        gui_class = default_type_guis[types[0]]
+        if types[0] == "tuple" and is_dual_tuple:
+            gui_class = DualTupleGui
+        param_config.update({"gui": gui_class.__name__})
         if len(options) > 0:
             param_config["options"] = options
         if types[0] in array_dtypes:
@@ -342,10 +379,9 @@ def should_skip_object(doc):
 def build_object_config(
     obj,
     *,
-    plugin_name,
+    module_name,
     category,
     sub_category,
-    object_path,
     class_name=None,
 ):
     docstring = inspect.getdoc(obj)
@@ -362,14 +398,14 @@ def build_object_config(
         "description": doc.long_description
         if doc.long_description
         else doc.short_description,
-        "object_path": object_path,
+        "module_name": module_name,
         "class_name": class_name,
     }
     try:
         sig = inspect.signature(obj)
     except ValueError:
         print(
-            f"Could not get signature for {object_path} in module {plugin_name}. Skipping."
+            f"Could not get signature for {module_name}. Skipping."
         )
         return None
     parameters = [i for i in doc.meta if "param" in i.args]
@@ -404,16 +440,22 @@ def build_object_config(
             if param.arg_name not in sig.parameters:  # type: ignore
                 continue
             get_param_config(param, sig, obj_config)
-    for ret in doc.many_returns:
-        # Set output name to class name if it is an instance of the class
-        if ret.return_name is None:
-            continue
-        if class_name is not None and any(x in ret.return_name.lower() for x in ["inst", "instance", "self"]):
-            output_name = class_name.lower()
-        else:
-            output_name = ret.return_name
+
+    if inspect.isclass(obj):
+        output_name = class_output_alias.get(obj.__name__.lower(), obj.__name__.lower())
         return_config = {"accepted": output_name}  # type: ignore
         obj_config["outputs"][output_name] = return_config  # type: ignore
+    else:
+        for ret in doc.many_returns:
+            # Set output name to class name if it is an instance of the class for methods
+            if ret.return_name is None:
+                continue
+            if class_name is not None and any(x in ret.return_name.lower() for x in ["inst", "instance", "self"]):
+                output_name = class_name.lower()
+            else:
+                output_name = ret.return_name
+            return_config = {"accepted": output_name}  # type: ignore
+            obj_config["outputs"][output_name] = return_config  # type: ignore
     return doc, obj_config
 
 
@@ -448,22 +490,21 @@ for category, module_dict in objects.items():
         for obj_item in obj_list:
             sub_modules = obj_item.split(".")[:-1]
             obj_name = obj_item.split(".")[-1]
-            complete_plugin_name = ".".join([plugin_name] + sub_modules)
-            module = importlib.import_module(complete_plugin_name)
+            module_name = ".".join([plugin_name] + sub_modules)
+            module = importlib.import_module(module_name)
             obj = getattr(module, obj_name)
             if not inspect.isfunction(obj) and not inspect.isclass(obj):
                 print(
-                    f"Skipping {obj_item} in module {complete_plugin_name} because it's not a function or class."
+                    f"Skipping {obj_item} in module {module_name} because it's not a function or class."
                 )
                 continue
             if obj_name == "write_events":
                 pass
             obj_config_result = build_object_config(
                 obj,
-                plugin_name=complete_plugin_name,
+                module_name=module_name,
                 category=category,
                 sub_category=sub_category,
-                object_path=obj_name,
             )
             if obj_config_result is None:
                 continue
@@ -480,10 +521,9 @@ for category, module_dict in objects.items():
                     method_path = f"{obj_name}.{method_name}"
                     method_config_result = build_object_config(
                         method_obj,
-                        plugin_name=complete_plugin_name,
+                        module_name=module_name,
                         category=category,
                         sub_category=sub_category,
-                        object_path=method_path,
                         class_name=obj_name,
                     )
                     if method_config_result is None:
