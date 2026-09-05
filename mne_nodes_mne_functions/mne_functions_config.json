@@ -1406,7 +1406,7 @@
                 "description": "Some MNE-supplied datasets require acceptance of an additional license.\nDefault is ``False``."
             },
             "auth": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "Optional authentication tuple containing the username and\npassword/token, passed to ``pooch.HTTPDownloader`` (e.g.,\n``auth=('foo', 012345)``)."
@@ -7278,7 +7278,7 @@
                 "description": "Name of the sklearn's pipeline step to get the coefs from.\nIf inverse_transform is True, the inverse transformations\nwill be applied using transformers before this step.\nIf None, the last step will be used. Defaults to None."
             },
             "get_coefs": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         "filters_",
@@ -16354,7 +16354,7 @@
                 "description": "The scale (size in meters) of the dipoles if ``mode`` is not\n``'orthoview'``. The default is 0.03 when mode is ``'outlines'`` and\n0.005 otherwise."
             },
             "color": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "The color of the dipoles.\nThe default (None) will use ``'y'`` if mode is ``'orthoview'`` and\n``show_all`` is True, else 'r'. Can also be a list of colors to use\nwhen mode is ``'outlines'``.\n\n.. versionchanged:: 0.19.0\n   Color is now passed in orthoview mode."
@@ -34029,7 +34029,7 @@
         "inputs": {},
         "parameters": {
             "box": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         0,
@@ -37574,7 +37574,7 @@
                 "description": "The figure title."
             },
             "figsize": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "The figure size. If None it gets set automatically."
@@ -40407,7 +40407,7 @@
                 "description": "End time of the interpolation window in seconds."
             },
             "baseline": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "The baseline to use when ``mode='constant'``, in which case it\nmust be non-None.\n\n.. versionadded:: 1.8"
@@ -58416,7 +58416,7 @@
                 "description": "The voxel size of volume for each spatial dimension in mm.\nIf spacing is None, MRIs won't be resliced, and both volumes\nmust have the same number of spatial dimensions.\nCan also be ``'auto'`` to use ``5.`` if ``src_to is None`` and\nthe zooms from ``src_to`` otherwise.\n\n.. versionchanged:: 0.20\n   Support for 'auto' mode."
             },
             "niter_affine": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         100,
@@ -58428,7 +58428,7 @@
                 "description": "Number of levels (``len(niter_affine)``) and number of\niterations per level - for each successive stage of iterative\nrefinement - to perform the affine transform.\nDefault is niter_affine=(100, 100, 10)."
             },
             "niter_sdr": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         5,
@@ -60860,7 +60860,7 @@
         },
         "parameters": {
             "clu": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         0,
@@ -69329,7 +69329,7 @@
                 "description": "Comment on the method used to compute the data, e.g., ``\"hilbert\"``.\nDefault is ``None``."
             },
             "drop_log": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "Tuple of tuple of strings indicating which epochs have been marked to\nbe ignored."
@@ -77100,7 +77100,7 @@
                 "description": "The frequencies in Hz."
             },
             "dim_names": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         "channel",
@@ -79734,7 +79734,7 @@
                 "description": "The frequencies in Hz."
             },
             "dim_names": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         "epoch",
@@ -84656,7 +84656,7 @@
                 "description": "Name of the text (text label can be updated using update_text())."
             },
             "color": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "Color of the text. Default is the foreground color set during\ninitialization (default is black or white depending on the\nbackground color)."
@@ -86562,7 +86562,7 @@
                 "description": "The scale (size in meters) of the dipoles if ``mode`` is not\n``'orthoview'``. The default is 0.03 when mode is ``'outlines'`` and\n0.005 otherwise."
             },
             "color": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "The color of the dipoles.\nThe default (None) will use ``'y'`` if mode is ``'orthoview'`` and\n``show_all`` is True, else 'r'. Can also be a list of colors to use\nwhen mode is ``'outlines'``.\n\n.. versionchanged:: 0.19.0\n   Color is now passed in orthoview mode."
@@ -88685,7 +88685,7 @@
                 "description": "The color to use (default '#1f77b4')."
             },
             "flim": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "If not None, the x-axis frequency limits (Hz) to use.\nIf None, freq will be used. If None (default) and freq is None,\n``(0.1, sfreq / 2.)`` will be used."
@@ -88697,7 +88697,7 @@
                 "description": "Frequency scaling to use, can be \"log\" (default) or \"linear\"."
             },
             "alim": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         -80,
@@ -88737,7 +88737,7 @@
                 "description": "A list of the requested plots from ``time``, ``magnitude`` and\n``delay``. Default is to plot all three filter properties\n('time', 'magnitude', 'delay').\n\n.. versionadded:: 0.21.0"
             },
             "dlim": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "The y-axis delay limits (s) to use (default:\n``(-tmax / 2., tmax / 2.)``).\n\n.. versionadded:: 1.1.0"
@@ -88876,7 +88876,7 @@
                 "description": "The title to use, (default: '')."
             },
             "flim": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "If not None, the x-axis frequency limits (Hz) to use.\nIf None (default), freq used."
@@ -88888,7 +88888,7 @@
                 "description": "Frequency scaling to use, can be \"log\" (default) or \"linear\"."
             },
             "alim": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         -80,
@@ -89831,7 +89831,7 @@
                 "description": "The figure title."
             },
             "figsize": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": null,
                 "none_select": true,
                 "description": "The figure size. If None it gets set automatically."
@@ -92243,7 +92243,7 @@
                 "description": "Font size."
             },
             "bgcolor": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         0.05,
@@ -92255,7 +92255,7 @@
                 "description": "Background color in 3D."
             },
             "brain_color": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         0.7,
@@ -93611,7 +93611,7 @@
         "inputs": {},
         "parameters": {
             "size": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         0,
@@ -93622,7 +93622,7 @@
                 "description": "The dimensions of the 3d figure (width, height)."
             },
             "bgcolor": {
-                "gui": "DualTupleGui",
+                "gui": "TupleGui",
                 "default": {
                     "tuple_type": [
                         0,
