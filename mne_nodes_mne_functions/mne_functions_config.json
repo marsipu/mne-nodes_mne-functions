@@ -212,7 +212,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -2200,7 +2200,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -2482,7 +2482,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -5495,7 +5495,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -5777,7 +5777,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -6746,7 +6746,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -7049,7 +7049,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -10071,7 +10071,7 @@
                     "destination",
                     "path",
                     "array",
-                    "transform"
+                    "trans"
                 ],
                 "optional": true
             }
@@ -11288,8 +11288,7 @@
             "trans": {
                 "accepted": [
                     "trans",
-                    "str",
-                    "transform"
+                    "str"
                 ],
                 "optional": false
             }
@@ -11699,7 +11698,7 @@
             "bem": {
                 "accepted": [
                     "bem",
-                    "conductormodel"
+                    "sphere"
                 ]
             }
         },
@@ -11805,7 +11804,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": false
@@ -11824,7 +11822,7 @@
                 "accepted": [
                     "bem",
                     "path",
-                    "conductormodel"
+                    "sphere"
                 ],
                 "optional": false
             }
@@ -11912,7 +11910,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": true
@@ -12118,7 +12115,7 @@
             "sphere": {
                 "accepted": [
                     "sphere",
-                    "conductormodel"
+                    "bem"
                 ]
             }
         },
@@ -12639,7 +12636,7 @@
                 "accepted": [
                     "sphere",
                     "array",
-                    "conductormodel"
+                    "bem"
                 ],
                 "optional": true
             },
@@ -12647,7 +12644,7 @@
                 "accepted": [
                     "bem",
                     "path",
-                    "conductormodel"
+                    "sphere"
                 ],
                 "optional": true
             }
@@ -13388,7 +13385,7 @@
             "bem": {
                 "accepted": [
                     "bem",
-                    "conductormodel"
+                    "sphere"
                 ],
                 "optional": false
             },
@@ -13397,7 +13394,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": true
@@ -17262,8 +17258,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             }
@@ -17322,8 +17317,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             }
@@ -17383,7 +17377,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": false
@@ -17825,7 +17818,7 @@
                 "accepted": [
                     "bem",
                     "path",
-                    "conductormodel"
+                    "sphere"
                 ],
                 "optional": false
             }
@@ -20173,7 +20166,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -21118,7 +21111,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -21701,7 +21694,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -22046,7 +22039,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -24249,7 +24242,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -24687,7 +24680,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -25632,7 +25625,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -26873,7 +26866,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -27523,7 +27516,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -27776,7 +27769,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -28152,7 +28145,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -28628,7 +28621,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -28840,7 +28833,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -29394,7 +29387,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -29793,7 +29786,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -30738,7 +30731,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -31873,7 +31866,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -32438,7 +32431,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -32853,8 +32846,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ]
             }
         },
@@ -33023,8 +33015,7 @@
             "trans": {
                 "accepted": [
                     "trans",
-                    "path",
-                    "transform"
+                    "path"
                 ],
                 "optional": true
             }
@@ -33191,7 +33182,7 @@
             "mri_head_t": {
                 "accepted": [
                     "mri_head_t",
-                    "transform"
+                    "trans"
                 ],
                 "optional": false
             }
@@ -33249,7 +33240,7 @@
             "mri_head_t": {
                 "accepted": [
                     "mri_head_t",
-                    "transform"
+                    "trans"
                 ],
                 "optional": false
             }
@@ -33412,7 +33403,7 @@
             "mri_mni_t": {
                 "accepted": [
                     "mri_mni_t",
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -33796,8 +33787,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             },
@@ -33852,7 +33842,7 @@
             "trans2": {
                 "accepted": [
                     "trans2",
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -34557,7 +34547,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -35578,7 +35568,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -35813,8 +35803,7 @@
             },
             "trans": {
                 "accepted": [
-                    "trans",
-                    "transform"
+                    "trans"
                 ],
                 "optional": false
             }
@@ -36004,7 +35993,7 @@
             "native_head_t": {
                 "accepted": [
                     "native_head_t",
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -36599,7 +36588,7 @@
             "dev_head_t": {
                 "accepted": [
                     "dev_head_t",
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -37964,7 +37953,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -38356,7 +38345,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -39600,7 +39589,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -40205,7 +40194,7 @@
             "dev_head_t": {
                 "accepted": [
                     "dev_head_t",
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -42413,7 +42402,7 @@
                     "destination",
                     "path",
                     "array",
-                    "transform"
+                    "trans"
                 ],
                 "optional": true
             }
@@ -43000,7 +42989,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -43619,8 +43608,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             }
@@ -45557,9 +45545,9 @@
             }
         },
         "outputs": {
-            "transform": {
+            "trans": {
                 "accepted": [
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -45574,7 +45562,8 @@
         "inputs": {
             "transform": {
                 "accepted": [
-                    "transform"
+                    "transform",
+                    "trans"
                 ],
                 "optional": false
             }
@@ -45616,7 +45605,8 @@
         "inputs": {
             "transform": {
                 "accepted": [
-                    "transform"
+                    "transform",
+                    "trans"
                 ],
                 "optional": false
             }
@@ -45727,7 +45717,7 @@
             "ras_mni_t": {
                 "accepted": [
                     "ras_mni_t",
-                    "transform"
+                    "trans"
                 ]
             }
         },
@@ -46528,7 +46518,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": false
@@ -61811,7 +61800,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": false
@@ -62108,8 +62096,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": true
             }
@@ -64938,7 +64925,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -66946,7 +66933,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -68866,7 +68853,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -70791,7 +70778,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -72993,7 +72980,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -75310,7 +75297,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -77285,7 +77272,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -78956,7 +78943,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -79194,7 +79181,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -80283,7 +80270,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -80521,7 +80508,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -81589,7 +81576,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -81827,7 +81814,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -83017,7 +83004,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -83255,7 +83242,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -87248,8 +87235,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             },
@@ -87314,8 +87300,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             },
@@ -87696,8 +87681,7 @@
                 "accepted": [
                     "trans",
                     "str",
-                    "dict",
-                    "transform"
+                    "dict"
                 ],
                 "optional": false
             }
@@ -89206,7 +89190,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": true
@@ -90211,7 +90194,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -90626,7 +90609,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -90878,7 +90861,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -91255,7 +91238,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -91834,7 +91817,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -92074,7 +92057,7 @@
                     "destination",
                     "path",
                     "array",
-                    "transform"
+                    "trans"
                 ],
                 "optional": true
             },
@@ -92273,7 +92256,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -92643,7 +92626,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -93526,7 +93509,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -93616,7 +93599,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -94221,7 +94204,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -94428,7 +94411,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -94645,7 +94628,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -95686,7 +95669,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -96088,7 +96071,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],
@@ -96294,7 +96277,6 @@
                     "trans",
                     "path",
                     "dict",
-                    "transform",
                     "combo"
                 ],
                 "optional": true
@@ -96318,7 +96300,7 @@
                 "accepted": [
                     "bem",
                     "list",
-                    "conductormodel"
+                    "sphere"
                 ],
                 "optional": true
             },
@@ -96613,7 +96595,7 @@
                     "sphere",
                     "float",
                     "array",
-                    "conductormodel",
+                    "bem",
                     "str",
                     "list"
                 ],

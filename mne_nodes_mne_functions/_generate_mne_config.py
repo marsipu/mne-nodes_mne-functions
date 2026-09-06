@@ -33,6 +33,7 @@ from mne_nodes.gui.parameter import (
     SliceGui,
     TupleGui,
 )
+from tqdm import tqdm
 
 default_type_guis = {
     "int": IntGui,
@@ -103,7 +104,9 @@ class_alias = {
     "averagetfr": ["tfr"],
     "grand_average": ["evoked", "tfr", "spectrum"],
     "sourcespaces": ["src", "src_to", "src_from", "src_orig"],
-    "forward": ["fwd"]
+    "forward": ["fwd"],
+    "transform": ["trans"],
+    "conductormodel": ["bem", "sphere"]
 }
 
 exclude_categories = [
@@ -613,7 +616,7 @@ for category, module_dict in objects.items():
             sub_category = None
         else:
             sub_category = m_split[-1]
-        for obj_item in obj_list:
+        for obj_item in tqdm(obj_list):
             sub_modules = obj_item.split(".")[:-1]
             obj_name = obj_item.split(".")[-1]
             module_name = ".".join([plugin_name] + sub_modules)

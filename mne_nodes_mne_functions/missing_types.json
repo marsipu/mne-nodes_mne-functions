@@ -1,57 +1,57 @@
 {
     "SourceSpaces": [
+        "restrict_vertices",
+        "src_to",
         "src_from",
         "src_orig",
-        "vertices",
         "src",
-        "src_to",
-        "restrict_vertices"
+        "vertices"
     ],
     "scalar": [
-        "tstop",
-        "width",
         "tstart",
+        "tmin",
+        "width",
         "tstep",
-        "tmin"
+        "tstop"
     ],
     "object": [
-        "model",
-        "figure",
+        "estimator",
         "base_estimator",
-        "estimator"
+        "figure",
+        "model"
     ],
     "iterable": [
         "selection",
-        "ch_names",
         "cv",
-        "stc"
+        "stc",
+        "ch_names"
     ],
     "Label": [
-        "label",
+        "labels",
         "lh",
-        "rh",
-        "labels"
+        "label",
+        "rh"
     ],
     "float in [0": [
-        "l1_ratio",
         "opacity",
         "alpha",
-        "smooth"
+        "smooth",
+        "l1_ratio"
     ],
     "list of Evoked": [
-        "evoked",
-        "all_inst",
         "evokeds",
-        "all_evoked"
+        "all_evoked",
+        "all_inst",
+        "evoked"
     ],
     "Transform": [
         "destination",
-        "trans",
-        "mri_head_t"
+        "mri_head_t",
+        "trans"
     ],
     "Forward": [
-        "forward",
         "fwd",
+        "forward",
         "src"
     ],
     "optional": [
@@ -60,9 +60,9 @@
         "force_fixed"
     ],
     "InverseOperator": [
-        "inverse_operator",
+        "src",
         "inv",
-        "src"
+        "inverse_operator"
     ],
     "list of Label": [
         "labels",
@@ -70,14 +70,14 @@
         "label"
     ],
     "1]": [
+        "alpha",
         "opacity",
-        "l1_ratio",
-        "alpha"
+        "l1_ratio"
     ],
     "mne.io.Raw": [
-        "raw_event",
         "raw",
-        "inst"
+        "inst",
+        "raw_event"
     ],
     "float between ``0`` and ``1": [
         "n_eeg",
@@ -85,54 +85,54 @@
         "n_grad"
     ],
     "mne.Evoked": [
+        "eog_evoked",
         "inst",
-        "ecg_evoked",
-        "eog_evoked"
+        "ecg_evoked"
     ],
     "list of ndarray": [
-        "pos",
+        "labels",
         "vertices_to",
-        "labels"
+        "pos"
     ],
     "ConductorModel": [
         "bem",
         "sphere"
     ],
     "matplotlib colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "(colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "bool)": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "Axes": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "list of Axes": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "instance of ~numpy.random.RandomState": [
         "random_state",
         "seed"
     ],
     "Figure3D": [
-        "figure",
-        "fig"
+        "fig",
+        "figure"
     ],
     ")": [
-        "buffer",
-        "conductivity"
+        "conductivity",
+        "buffer"
     ],
     "Dipole": [
-        "dipole",
-        "dipoles"
+        "dipoles",
+        "dipole"
     ],
     "list of SpatialImage": [
         "flash30",
@@ -143,16 +143,16 @@
         "fmax"
     ],
     "CrossSpectralDensity": [
-        "csd",
-        "noise_csd"
+        "noise_csd",
+        "csd"
     ],
     "EpochsTFR": [
         "tfr",
         "epochs_tfr"
     ],
     "matplotlib": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "list-like": [
         "factor_levels",
@@ -163,20 +163,20 @@
         "montage"
     ],
     "Figure": [
-        "figure",
-        "fig"
+        "fig",
+        "figure"
     ],
     "mne.Epochs": [
         "inst",
         "epochs"
     ],
     "path-line": [
-        "ecg_evoked",
-        "eog_evoked"
+        "eog_evoked",
+        "ecg_evoked"
     ],
     "AverageTFR": [
-        "all_inst",
-        "tfr"
+        "tfr",
+        "all_inst"
     ],
     "instance of (Vol": [
         "stc_true",
@@ -187,24 +187,24 @@
         "stc_est"
     ],
     "BiHemiLabel": [
-        "label",
-        "labels"
+        "labels",
+        "label"
     ],
     "scipy.sparse.csr_array": [
-        "vol_morph_mat",
-        "morph_mat"
+        "morph_mat",
+        "vol_morph_mat"
     ],
     "VectorSourceEstimate": [
         "stc_from",
         "stc"
     ],
     "list of AverageTFR": [
-        "all_tfr",
-        "tfr"
+        "tfr",
+        "all_tfr"
     ],
     "matplotlib-style color": [
-        "colors",
-        "color"
+        "color",
+        "colors"
     ],
     "mne.Info": [
         "info"
