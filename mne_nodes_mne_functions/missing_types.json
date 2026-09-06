@@ -1,34 +1,34 @@
 {
     "scalar": [
-        "tmin",
+        "tstop",
         "tstart",
         "width",
-        "tstep",
-        "tstop"
+        "tmin",
+        "tstep"
     ],
     "object": [
-        "estimator",
-        "model",
         "figure",
-        "base_estimator"
+        "estimator",
+        "base_estimator",
+        "model"
     ],
     "iterable": [
-        "selection",
-        "ch_names",
         "stc",
-        "cv"
+        "cv",
+        "ch_names",
+        "selection"
     ],
     "float in [0": [
-        "smooth",
-        "alpha",
+        "l1_ratio",
         "opacity",
-        "l1_ratio"
+        "smooth",
+        "alpha"
     ],
     "list of Evoked": [
         "all_inst",
+        "evoked",
         "all_evoked",
-        "evokeds",
-        "evoked"
+        "evokeds"
     ],
     "optional": [
         "surf_ori",
@@ -41,45 +41,45 @@
         "labels"
     ],
     "1]": [
-        "alpha",
+        "l1_ratio",
         "opacity",
-        "l1_ratio"
+        "alpha"
     ],
     "mne.io.Raw": [
-        "raw",
         "raw_event",
-        "inst"
+        "inst",
+        "raw"
     ],
     "float between ``0`` and ``1": [
-        "n_eeg",
         "n_grad",
+        "n_eeg",
         "n_mag"
     ],
     "mne.Evoked": [
-        "eog_evoked",
         "ecg_evoked",
-        "inst"
+        "inst",
+        "eog_evoked"
     ],
     "list of ndarray": [
-        "pos",
         "vertices_to",
+        "pos",
         "labels"
     ],
     "matplotlib colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "(colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "bool)": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "list of Axes": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "instance of ~numpy.random.RandomState": [
         "random_state",
@@ -90,16 +90,16 @@
         "buffer"
     ],
     "list of SpatialImage": [
-        "flash5",
-        "flash30"
+        "flash30",
+        "flash5"
     ],
     "np.inf": [
-        "fmax",
-        "dgap_freq"
+        "dgap_freq",
+        "fmax"
     ],
     "matplotlib": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "list-like": [
         "times",
@@ -110,16 +110,20 @@
         "inst"
     ],
     "path-line": [
-        "eog_evoked",
-        "ecg_evoked"
+        "ecg_evoked",
+        "eog_evoked"
     ],
     "instance of (Vol": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
+    ],
+    "Mixed)SourceEstimate": [
+        "stc_true",
+        "stc_est"
     ],
     "scipy.sparse.csr_array": [
-        "morph_mat",
-        "vol_morph_mat"
+        "vol_morph_mat",
+        "morph_mat"
     ],
     "list of AverageTFR": [
         "all_tfr",
@@ -192,11 +196,20 @@
     "list[dict[str": [
         "extras"
     ],
+    "None]": [
+        "extras"
+    ],
+    "Raw object": [
+        "raw"
+    ],
     "mne.Annotations": [
         "annotations"
     ],
     "list of Epochs instances": [
         "epochs_list"
+    ],
+    "Evoked instance": [
+        "evoked"
     ],
     "list of Evoked instances": [
         "evoked"
@@ -210,8 +223,17 @@
     "list of Dipole": [
         "dipole"
     ],
+    "Evoked object": [
+        "evoked"
+    ],
+    "Epochs object": [
+        "epochs"
+    ],
     "int (or None)": [
         "buffer_size"
+    ],
+    "EpochsTFR object": [
+        "epochs_tfr"
     ],
     "list of instances of Evoked": [
         "evoked"
@@ -327,6 +349,12 @@
     "1D array": [
         "times"
     ],
+    "SourceEstimate object": [
+        "stc"
+    ],
+    "Covariance object": [
+        "cov"
+    ],
     "(n_events": [
         "waveform"
     ],
@@ -433,6 +461,9 @@
         "axes"
     ],
     "2)": [
+        "axes"
+    ],
+    "Axes instance": [
         "axes"
     ],
     "list of instances of SourceEstimate": [

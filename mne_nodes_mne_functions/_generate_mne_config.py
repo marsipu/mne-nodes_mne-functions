@@ -270,7 +270,10 @@ def _extract_type_tokens(type_name):
     Only capitalized tokens (e.g. "Covariance", the X in "instance of X") are
     kept, since real mne classes are capitalized while primitive type
     keywords (int, str, array, ...) are not; this keeps the auto-derived
-    aliases below from being polluted by generic type names.
+    aliases below from being polluted by generic type names. Tokens must also
+    look like a single identifier, so junk like "None (default None)" (left
+    over from stripping a "<type> (default ...)" annotation) is rejected
+    instead of being kept as a bogus "class".
     """
     if not type_name:
         return []
@@ -280,9 +283,15 @@ def _extract_type_tokens(type_name):
     for part in re.split(r"\s*\|\s*|\s+or\s+|,", text):
         part = part.strip().strip("`")
         match = re.match(r"instance of ([\w\.]+)", part)
-        part = match.group(1) if match else part.split(" of ", 1)[-1].strip()
+        if match:
+            part = match.group(1)
+        else:
+            part = part.split(" of ", 1)[-1].strip()
+            default_match = re.match(r"^(\w+)\s*\(default", part)
+            if default_match:
+                part = default_match.group(1)
         part = part.rsplit(".", 1)[-1]
-        if part and part[0].isupper() and part != "None":
+        if re.fullmatch(r"[A-Za-z_]\w*", part) and part[0].isupper() and part != "None":
             tokens.append(part)
     return tokens
 
@@ -380,12 +389,18 @@ for category, category_path in api_categories.items():
 class_alias = _collect_object_aliases(objects)
 
 
-def _is_known_object(name):
-    """Whether name (case-insensitive) refers to a recognized object/class alias."""
+def _is_class_alias(name):
+    """Whether name (case-insensitive) refers to a recognized class/alias."""
     key = name.lower()
     if key in class_alias:
         return True
     return any(key in aliases for aliases in class_alias.values())
+
+
+def _is_known_io_name(name):
+    """Whether name matches a file_io read/write function's object alias."""
+    key = name.lower()
+    return any(key in entry["aliases"] for entry in io_read_entries + io_write_entries)
 
 
 def _s_variants(name):
@@ -590,10 +605,22 @@ def get_param_config(param, sig, obj_config):
         types.append("combo")
     # Non-primitive types (object references) are treated as node inputs.
     non_primitive = [t for t in types if t not in default_type_guis]
-    if _is_known_object(param.arg_name) or len(types) == 0 or len(non_primitive) > 0:
+    # A name matching a known class/io alias only forces a param into being an
+    # input when its type isn't already a clean, GUI-backed primitive (e.g.
+    # "DataFrame") or is a container commonly used for pipeline data (e.g.
+    # array-typed "events"); this avoids sweeping in unrelated params that
+    # merely share a name with an alias (e.g. Epochs' "proj" bool vs.
+    # Projection's "proj"/"projs", or "metadata" vs. the DataFrame class).
+    container_types = ("array", "dict", "list", "tuple")
+    force_input = False
+    if not types or non_primitive or any(t in container_types for t in types):
+        force_input = _is_class_alias(param.arg_name) or _is_known_io_name(
+            param.arg_name
+        )
+    if force_input or len(types) == 0 or len(non_primitive) > 0:
         # Report only genuinely unrecognized types, not known object classes.
         for t in non_primitive:
-            if not _is_known_object(t):
+            if not _is_class_alias(t):
                 missing_types[t].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
             "accepted_ports": _accepted_names(

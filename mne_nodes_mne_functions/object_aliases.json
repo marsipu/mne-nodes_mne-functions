@@ -13,9 +13,6 @@
     "axes": [
         "ax"
     ],
-    "axes instance": [
-        "axes"
-    ],
     "axes3d": [
         "axes"
     ],
@@ -53,9 +50,6 @@
         "orig",
         "signal_cov"
     ],
-    "covariance object": [
-        "cov"
-    ],
     "crossspectraldensity": [
         "csd",
         "noise_csd"
@@ -82,20 +76,11 @@
         "evoked",
         "inst"
     ],
-    "epochs instances": [
-        "epochs_list"
-    ],
-    "epochs object": [
-        "epochs"
-    ],
     "epochsspectrum": [],
     "epochsspectrumarray": [],
     "epochstfr": [
         "epochs_tfr",
         "tfr"
-    ],
-    "epochstfr object": [
-        "epochs_tfr"
     ],
     "epochstfrarray": [],
     "evoked": [
@@ -103,15 +88,6 @@
         "all_inst",
         "evokeds",
         "inst"
-    ],
-    "evoked instance": [
-        "evoked"
-    ],
-    "evoked instances": [
-        "evoked"
-    ],
-    "evoked object": [
-        "evoked"
     ],
     "evokedfield": [],
     "false": [
@@ -155,36 +131,12 @@
     ],
     "layout": [],
     "linearmodel": [],
-    "mixed)sourceestimate": [
-        "stc_est",
-        "stc_true"
-    ],
     "mixedsourceestimate": [],
     "mixedvectorsourceestimate": [
         "stc"
     ],
     "nifti1image": [
         "flash5_img"
-    ],
-    "none (default 'empirical')": [
-        "method"
-    ],
-    "none (default none)": [
-        "cov_method_params",
-        "flat",
-        "method_params",
-        "n_components",
-        "picks",
-        "preload",
-        "projs",
-        "reg",
-        "reject",
-        "scalings",
-        "tmax",
-        "tmin"
-    ],
-    "none]": [
-        "extras"
     ],
     "normalize": [
         "cnorm"
@@ -205,9 +157,6 @@
         "raw_er",
         "raw_event"
     ],
-    "raw object": [
-        "raw"
-    ],
     "rawkit": [
         "raw"
     ],
@@ -225,9 +174,6 @@
         "stc",
         "stcs",
         "weights"
-    ],
-    "sourceestimate object": [
-        "stc"
     ],
     "sourcemorph": [
         "src"
