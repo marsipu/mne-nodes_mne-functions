@@ -80,42 +80,21 @@ type_defaults = {
             "slice": slice(0, 1),
         }
 
-always_inputs = [
-    "events",
-    "event_id",
-    "raw",
-    "epochs",
-    "Covariance",
-    "SourceEstimate",
-    "Evoked",
-    "Raw",
-    "Epochs",
-    "Info",
-    "SpatialImage"
-]
-
 object_suffixes = {
     "epochs": "epo",
     "evokeds": "ave",
     "covariance": "cov",
     "forward": "fwd",
     "transform": "trans",
+    "sourcespaces": "src"
 }
 
 group_functions = {
     "mne.grand_average",
 }
 
-class_alias = {
-    "covariance": ["noise_cov", "cov"],
-    "cov": ["cov", "noise_cov"],
-    "averagetfr": ["tfr"],
-    "grand_average": ["evoked", "tfr", "spectrum"],
-    "sourcespaces": ["src", "src_to", "src_from", "src_orig"],
-    "forward": ["fwd"],
-    "transform": ["trans"],
-    "conductormodel": ["bem", "sphere"]
-}
+# Populated from _collect_object_aliases() once `objects` has been built below.
+class_alias = {}
 
 exclude_categories = [
     "connectivity",
@@ -245,7 +224,8 @@ def _docutils_html_to_qt_html(html):
 
 def _accepted_aliases(name):
     """Return accepted port names for a class or output name."""
-    return class_alias.get(name.lower(), [name.lower()])
+    key = name.lower()
+    return _accepted_names(key, *class_alias.get(key, []))
 
 
 def _accepted_names_from_types(types):
@@ -272,6 +252,82 @@ def _accepted_names(*names):
         if name and name not in accepted:
             accepted.append(name)
     return accepted
+
+
+def _suffix_for_ports(port_names):
+    """Return the object_suffixes value matching any of the given port names."""
+    for port in port_names:
+        stripped = port.rstrip("s")
+        for key, suffix in object_suffixes.items():
+            if stripped == key.rstrip("s"):
+                return suffix
+    return None
+
+
+def _extract_type_tokens(type_name):
+    """Split a docstring type string into raw class-name tokens.
+
+    Only capitalized tokens (e.g. "Covariance", the X in "instance of X") are
+    kept, since real mne classes are capitalized while primitive type
+    keywords (int, str, array, ...) are not; this keeps the auto-derived
+    aliases below from being polluted by generic type names.
+    """
+    if not type_name:
+        return []
+    text = _strip_shape_annotations(type_name)
+    text = re.sub(r"(\w+)\s*of\s*length\s*\d+", r"\1", text)
+    tokens = []
+    for part in re.split(r"\s*\|\s*|\s+or\s+|,", text):
+        part = part.strip().strip("`")
+        match = re.match(r"instance of ([\w\.]+)", part)
+        part = match.group(1) if match else part.split(" of ", 1)[-1].strip()
+        part = part.rsplit(".", 1)[-1]
+        if part and part[0].isupper() and part != "None":
+            tokens.append(part)
+    return tokens
+
+
+def _collect_object_aliases(objects):
+    """Derive object port aliases from how parameters are actually named.
+
+    For every documented parameter whose type resolves to a class name (e.g.
+    "instance of Covariance"), the parameter's own arg_name is recorded as an
+    alias of that class (e.g. Covariance -> {"cov", "noise_cov"}), instead of
+    hand-maintaining a table that easily gets out of sync (and is compared
+    case-sensitively) with the actual class names.
+    """
+    aliases = defaultdict(set)
+    for module_dict in objects.values():
+        for plugin_name, obj_list in module_dict.items():
+            for obj_item in obj_list:
+                sub_modules = obj_item.split(".")[:-1]
+                obj_name = obj_item.split(".")[-1]
+                module_name = ".".join([plugin_name] + sub_modules)
+                try:
+                    module = importlib.import_module(module_name)
+                    obj = getattr(module, obj_name)
+                except (ImportError, AttributeError):
+                    continue
+                if inspect.isclass(obj):
+                    aliases.setdefault(obj_name.lower(), set())
+                elif not inspect.isfunction(obj):
+                    continue
+                docstring = inspect.getdoc(obj)
+                if not docstring:
+                    continue
+                doc = docstring_parser.parse(docstring)
+                for meta_param in doc.meta:
+                    if "param" not in meta_param.args:
+                        continue
+                    for arg_name in meta_param.arg_name.split(","):
+                        arg_name = arg_name.strip().lower()
+                        if not arg_name or not arg_name[0].isalpha():
+                            continue
+                        for token in _extract_type_tokens(meta_param.type_name):
+                            key = token.lower()
+                            if key and arg_name != key:
+                                aliases[key].add(arg_name)
+    return {key: sorted(names) for key, names in aliases.items()}
 
 
 # %%
@@ -320,6 +376,119 @@ api_categories = {
 objects = {}
 for category, category_path in api_categories.items():
     objects[category] = parse_rst_functions(category_path)
+
+class_alias = _collect_object_aliases(objects)
+
+
+def _is_known_object(name):
+    """Whether name (case-insensitive) refers to a recognized object/class alias."""
+    key = name.lower()
+    if key in class_alias:
+        return True
+    return any(key in aliases for aliases in class_alias.values())
+
+
+def _s_variants(name):
+    """Return name plus its singular/plural counterpart (e.g. "surf"/"surfs")."""
+    if name.endswith("s"):
+        return (name, name[:-1])
+    return (name, name + "s")
+
+
+def _expand_alias_variants(names):
+    """Expand a list of alias names with their singular/plural counterparts."""
+    expanded = []
+    for name in names:
+        for variant in _s_variants(name):
+            if variant not in expanded:
+                expanded.append(variant)
+    return expanded
+
+
+# %% Extract read/write functions from the (otherwise excluded) file_io category.
+# Only functions taking a single fname/filename argument plus (for writers) a
+# single object argument are considered; anything more ambiguous is skipped.
+io_read_entries = []
+io_write_entries = []
+file_io_path = mnedev_api_path / "file_io.rst"
+if file_io_path.exists():
+    for plugin_name, obj_list in parse_rst_functions(file_io_path).items():
+        for obj_item in obj_list:
+            obj_name = obj_item.split(".")[-1]
+            if not (obj_name.startswith("read_") or obj_name.startswith("write_")):
+                continue
+            sub_modules = obj_item.split(".")[:-1]
+            module_name = ".".join([plugin_name] + sub_modules)
+            try:
+                module = importlib.import_module(module_name)
+                obj = getattr(module, obj_name)
+            except (ImportError, AttributeError):
+                continue
+            if not inspect.isfunction(obj):
+                continue
+            docstring = inspect.getdoc(obj)
+            if not docstring:
+                continue
+            doc = docstring_parser.parse(docstring)
+            try:
+                sig = inspect.signature(obj)
+            except ValueError:
+                continue
+            fname_param = next(
+                (
+                    p
+                    for p in sig.parameters
+                    if "fname" in p.lower() or p.lower() == "filename"
+                ),
+                None,
+            )
+            if fname_param is None:
+                continue
+            var_kinds = (inspect.Parameter.VAR_POSITIONAL, inspect.Parameter.VAR_KEYWORD)
+            required = [
+                p
+                for p, v in sig.parameters.items()
+                if v.default is inspect.Parameter.empty and v.kind not in var_kinds
+            ]
+            if fname_param not in required:
+                continue
+            if obj_name.startswith("read_"):
+                # Only accept functions with a single required (fname) param.
+                # Some functions (e.g. read_events) conditionally return extra
+                # values (via a kwarg like return_event_id); use the first
+                # documented return as the primary object.
+                if len(required) != 1 or not doc.many_returns:
+                    continue
+                return_name = doc.many_returns[0].return_name
+                if not return_name or "," in return_name:
+                    continue
+                aliases = _expand_alias_variants(
+                    _accepted_names(return_name, *_accepted_aliases(return_name))
+                )
+                io_read_entries.append(
+                    {
+                        "function": obj_name,
+                        "aliases": aliases,
+                        "obj": obj,
+                        "module_name": module_name,
+                    }
+                )
+            else:
+                # Only accept functions taking exactly one object besides fname.
+                if len(required) != 2:
+                    continue
+                object_param = next(p for p in required if p != fname_param)
+                aliases = _expand_alias_variants(
+                    _accepted_names(object_param, *_accepted_aliases(object_param))
+                )
+                io_write_entries.append(
+                    {
+                        "function": obj_name,
+                        "aliases": aliases,
+                        "obj": obj,
+                        "module_name": module_name,
+                    }
+                )
 
 
 def get_param_config(param, sig, obj_config):
@@ -419,13 +588,13 @@ def get_param_config(param, sig, obj_config):
     types = [t for t in types if not _is_quoted(t)]
     if len(options) > 0:
         types.append("combo")
-    # Missing types
-    missing = [t for t in types if t not in default_type_guis]
-    if param.arg_name in always_inputs or len(types) == 0 or len(missing) > 0:
-        # Add params with missing types or no Default as inputs
-        for mis in missing:
-            if mis not in always_inputs:
-                missing_types[mis].add(param.arg_name)  # type: ignore
+    # Non-primitive types (object references) are treated as node inputs.
+    non_primitive = [t for t in types if t not in default_type_guis]
+    if _is_known_object(param.arg_name) or len(types) == 0 or len(non_primitive) > 0:
+        # Report only genuinely unrecognized types, not known object classes.
+        for t in non_primitive:
+            if not _is_known_object(t):
+                missing_types[t].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
             "accepted_ports": _accepted_names(
                 param.arg_name, *_accepted_names_from_types(types)
@@ -617,6 +786,7 @@ def iter_public_class_methods(cls):
 # %% Generate config
 config = {}
 missing_types = DefaultDict(set)
+
 for category, module_dict in objects.items():
     for plugin_name, obj_list in module_dict.items():
         m_split = plugin_name.split(".")
@@ -668,10 +838,76 @@ for category, module_dict in objects.items():
                     _, method_config = method_config_result
                     config[method_path] = method_config
 
+# Fallback for objects with no free write_* function (e.g. Epochs, saved via
+# Epochs.save()): map each class's accepted port names to its "<Class>.save" entry.
+save_method_lookup = {}
+for key, cfg in config.items():
+    if key.endswith(".save") and cfg.get("class_name"):
+        for alias in _accepted_names(
+            cfg["class_name"].lower(), *_accepted_aliases(cfg["class_name"].lower())
+        ):
+            save_method_lookup.setdefault(alias, key)
+
+# Ensure every referenced file_io read/write function has its own config entry
+# (a node like any other function), reusing it if already present via its
+# domain category (e.g. read_cov/write_cov already exist under "covariance").
+for entry in io_read_entries + io_write_entries:
+    obj_name = entry["function"]
+    if obj_name in config:
+        continue
+    io_config_result = build_object_config(
+        entry["obj"], module_name=entry["module_name"], category="file_io", sub_category=None
+    )
+    if io_config_result is None:
+        continue
+    io_doc, io_obj_config = io_config_result
+    if should_skip_object(io_doc):
+        continue
+    config[obj_name] = io_obj_config
+
+# Annotate inputs/outputs with a reference to the matching file_io read/write
+# function, if any. The function itself (and its parameters) lives in its own
+# config entry above, so only the name is stored here to avoid duplication.
+for obj_config in config.values():
+    for input_cfg in obj_config["inputs"].values():
+        accepted_ports = input_cfg.get("accepted_ports", [])
+        for entry in io_read_entries:
+            if set(entry["aliases"]) & set(accepted_ports):
+                input_cfg["read"] = entry["function"]
+                suffix = _suffix_for_ports(accepted_ports)
+                if suffix:
+                    input_cfg["suffix"] = suffix
+                break
+    for output_cfg in obj_config["outputs"].values():
+        accepted_ports = output_cfg.get("accepted_ports", [])
+        for entry in io_write_entries:
+            if set(entry["aliases"]) & set(accepted_ports):
+                output_cfg["write"] = entry["function"]
+                suffix = _suffix_for_ports(accepted_ports)
+                if suffix:
+                    output_cfg["suffix"] = suffix
+                break
+        else:
+            save_key = next(
+                (save_method_lookup[p] for p in accepted_ports if p in save_method_lookup),
+                None,
+            )
+            if save_key:
+                output_cfg["write"] = save_key
+                suffix = _suffix_for_ports(accepted_ports)
+                if suffix:
+                    output_cfg["suffix"] = suffix
+
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
     json.dump(config, file, indent=4, cls=TypedJSONEncoder)
+
+# Save the auto-derived object aliases for inspection (to spot-check
+# associations and find classes that might still be missing aliases).
+aliases_path = Path(__file__).parent / "object_aliases.json"
+with open(aliases_path, "w") as file:
+    json.dump(dict(sorted(class_alias.items())), file, indent=4, cls=TypedJSONEncoder)
 
 # Sort dictionary keys on length of their lists
 missing_types = dict(sorted(missing_types.items(), key=lambda item: len(item[1]), reverse=True))
@@ -682,4 +918,5 @@ with open(missing_path, "w") as file:
     json.dump(missing_types, file, indent=4, cls=TypedJSONEncoder)
 print(f"Scraped {len(config)} functions/classes from mne")
 print(f"Config saved to {config_path}")
+print(f"Aliases saved to {aliases_path}")
 print(f"Missing types saved to {missing_path}")

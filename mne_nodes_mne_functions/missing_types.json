@@ -1,73 +1,44 @@
 {
-    "SourceSpaces": [
-        "vertices",
-        "src_from",
-        "src_to",
-        "src_orig",
-        "restrict_vertices",
-        "src"
-    ],
     "scalar": [
-        "tstep",
-        "tstart",
         "tmin",
-        "tstop",
-        "width"
+        "tstart",
+        "width",
+        "tstep",
+        "tstop"
     ],
     "object": [
-        "figure",
-        "base_estimator",
         "estimator",
-        "model"
+        "model",
+        "figure",
+        "base_estimator"
     ],
     "iterable": [
         "selection",
-        "cv",
         "ch_names",
-        "stc"
-    ],
-    "Label": [
-        "label",
-        "lh",
-        "rh",
-        "labels"
+        "stc",
+        "cv"
     ],
     "float in [0": [
+        "smooth",
         "alpha",
         "opacity",
-        "smooth",
         "l1_ratio"
     ],
     "list of Evoked": [
-        "evokeds",
         "all_inst",
         "all_evoked",
+        "evokeds",
         "evoked"
-    ],
-    "Transform": [
-        "mri_head_t",
-        "trans",
-        "destination"
-    ],
-    "Forward": [
-        "fwd",
-        "forward",
-        "src"
     ],
     "optional": [
         "surf_ori",
-        "force_fixed",
-        "patch_stats"
-    ],
-    "InverseOperator": [
-        "inv",
-        "inverse_operator",
-        "src"
+        "patch_stats",
+        "force_fixed"
     ],
     "list of Label": [
+        "idx",
         "label",
-        "labels",
-        "idx"
+        "labels"
     ],
     "1]": [
         "alpha",
@@ -80,23 +51,19 @@
         "inst"
     ],
     "float between ``0`` and ``1": [
-        "n_grad",
         "n_eeg",
+        "n_grad",
         "n_mag"
     ],
     "mne.Evoked": [
-        "ecg_evoked",
         "eog_evoked",
+        "ecg_evoked",
         "inst"
     ],
     "list of ndarray": [
         "pos",
         "vertices_to",
         "labels"
-    ],
-    "ConductorModel": [
-        "bem",
-        "sphere"
     ],
     "matplotlib colormap": [
         "mask_cmap",
@@ -110,93 +77,49 @@
         "mask_cmap",
         "cmap"
     ],
-    "Axes": [
-        "axes",
-        "ax"
-    ],
     "list of Axes": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "instance of ~numpy.random.RandomState": [
-        "seed",
-        "random_state"
-    ],
-    "Figure3D": [
-        "figure",
-        "fig"
+        "random_state",
+        "seed"
     ],
     ")": [
         "conductivity",
         "buffer"
     ],
-    "Dipole": [
-        "dipole",
-        "dipoles"
-    ],
     "list of SpatialImage": [
-        "flash30",
-        "flash5"
+        "flash5",
+        "flash30"
     ],
     "np.inf": [
-        "dgap_freq",
-        "fmax"
-    ],
-    "CrossSpectralDensity": [
-        "csd",
-        "noise_csd"
-    ],
-    "EpochsTFR": [
-        "epochs_tfr",
-        "tfr"
+        "fmax",
+        "dgap_freq"
     ],
     "matplotlib": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "list-like": [
-        "factor_levels",
-        "times"
-    ],
-    "DigMontage": [
-        "sensors",
-        "montage"
-    ],
-    "Figure": [
-        "figure",
-        "fig"
+        "times",
+        "factor_levels"
     ],
     "mne.Epochs": [
-        "inst",
-        "epochs"
+        "epochs",
+        "inst"
     ],
     "path-line": [
-        "ecg_evoked",
-        "eog_evoked"
-    ],
-    "AverageTFR": [
-        "all_inst",
-        "tfr"
+        "eog_evoked",
+        "ecg_evoked"
     ],
     "instance of (Vol": [
-        "stc_true",
-        "stc_est"
-    ],
-    "Mixed)SourceEstimate": [
-        "stc_true",
-        "stc_est"
-    ],
-    "BiHemiLabel": [
-        "label",
-        "labels"
+        "stc_est",
+        "stc_true"
     ],
     "scipy.sparse.csr_array": [
-        "vol_morph_mat",
-        "morph_mat"
-    ],
-    "VectorSourceEstimate": [
-        "stc_from",
-        "stc"
+        "morph_mat",
+        "vol_morph_mat"
     ],
     "list of AverageTFR": [
         "all_tfr",
@@ -227,12 +150,6 @@
     "dict of float": [
         "std"
     ],
-    "Unzip": [
-        "processor"
-    ],
-    "Untar": [
-        "processor"
-    ],
     "'epoch' (default 'concat')": [
         "cov_est"
     ],
@@ -241,9 +158,6 @@
     ],
     "'alternate' (default 'mutual_info')": [
         "component_order"
-    ],
-    "BaseEstimator": [
-        "estimator"
     ],
     "['r2'": [
         "scoring"
@@ -278,20 +192,11 @@
     "list[dict[str": [
         "extras"
     ],
-    "None]": [
-        "extras"
-    ],
-    "Raw object": [
-        "raw"
-    ],
     "mne.Annotations": [
         "annotations"
     ],
     "list of Epochs instances": [
         "epochs_list"
-    ],
-    "Evoked instance": [
-        "evoked"
     ],
     "list of Evoked instances": [
         "evoked"
@@ -305,23 +210,8 @@
     "list of Dipole": [
         "dipole"
     ],
-    "Nifti1Image": [
-        "flash5_img"
-    ],
-    "True": [
-        "flash5"
-    ],
-    "Evoked object": [
-        "evoked"
-    ],
-    "Epochs object": [
-        "epochs"
-    ],
     "int (or None)": [
         "buffer_size"
-    ],
-    "EpochsTFR object": [
-        "epochs_tfr"
     ],
     "list of instances of Evoked": [
         "evoked"
@@ -338,17 +228,11 @@
     "list of instances of Dipole": [
         "dipoles"
     ],
-    "Beamformer": [
-        "filters"
-    ],
     "list of matplotlib Axes": [
         "ax"
     ],
     "file-like": [
         "fname"
-    ],
-    "Annotations": [
-        "annotations"
     ],
     "numpy.dtype": [
         "dtype"
@@ -358,9 +242,6 @@
     ],
     "Raw instance": [
         "raws"
-    ],
-    "Axes3D": [
-        "axes"
     ],
     "sequence of {\"his_id\"": [
         "keep_his"
@@ -374,14 +255,8 @@
     "'amplitude'}": [
         "estimate"
     ],
-    "Layout": [
-        "layout"
-    ],
     "list of (n_epochs) list (of n_channels)": [
         "epoch_colors"
-    ],
-    "colormap": [
-        "cmap"
     ],
     "dict of list of Axes": [
         "axes"
@@ -391,9 +266,6 @@
     ],
     "iterator of dict": [
         "pts"
-    ],
-    "DiffeomorphicMap": [
-        "sdr_morph"
     ],
     "{'mag'": [
         "ch_type"
@@ -434,17 +306,8 @@
     "nibabel.spatialimages.SpatialImage": [
         "base_image"
     ],
-    "Calibration": [
-        "calibration"
-    ],
-    "RawKIT": [
-        "raw"
-    ],
     "iterable of mne.Projection": [
         "projs"
-    ],
-    "ICA": [
-        "ica"
     ],
     "pathlib.Path": [
         "code"
@@ -458,23 +321,11 @@
     "array-like of Figure3D": [
         "fig"
     ],
-    "Spectrum": [
-        "all_inst"
-    ],
     "(optional)": [
         "exclude"
     ],
     "1D array": [
         "times"
-    ],
-    "SourceEstimate object": [
-        "stc"
-    ],
-    "Covariance object": [
-        "cov"
-    ],
-    "SourceSimulator": [
-        "stc"
     ],
     "(n_events": [
         "waveform"
@@ -500,18 +351,6 @@
     "None}": [
         "hemi"
     ],
-    "SourceMorph": [
-        "src"
-    ],
-    "AffineMap": [
-        "pre_affine"
-    ],
-    "VolSourceEstimate": [
-        "stc_from"
-    ],
-    "VolVectorSourceEstimate": [
-        "stc_from"
-    ],
     "list (or generator) of SourceEstimate": [
         "stcs"
     ],
@@ -531,9 +370,6 @@
         "covariates"
     ],
     "scipy.sparse.spmatrix": [
-        "adjacency"
-    ],
-    "False": [
         "adjacency"
     ],
     "bool array": [
@@ -556,9 +392,6 @@
     ],
     "float ``\u2265 2.0": [
         "time_bandwidth"
-    ],
-    "RawTFR": [
-        "tfr"
     ],
     "list of RawTFR": [
         "tfr"
@@ -602,18 +435,6 @@
     "2)": [
         "axes"
     ],
-    "Colormap": [
-        "cmap"
-    ],
-    "Axes instance": [
-        "axes"
-    ],
-    "EOGRegression": [
-        "model"
-    ],
-    "MixedVectorSourceEstimate": [
-        "stc"
-    ],
     "list of instances of SourceEstimate": [
         "stcs"
     ],
@@ -631,8 +452,5 @@
     ],
     "'matplotlib'}": [
         "backend_name"
-    ],
-    "UIEvent": [
-        "event"
     ]
 }

@@ -1,0 +1,291 @@
+{
+    "acqparserfif": [],
+    "affinemap": [
+        "pre_affine"
+    ],
+    "annotations": [],
+    "averagetfr": [
+        "all_inst",
+        "all_tfr",
+        "tfr"
+    ],
+    "averagetfrarray": [],
+    "axes": [
+        "ax"
+    ],
+    "axes instance": [
+        "axes"
+    ],
+    "axes3d": [
+        "axes"
+    ],
+    "baseestimator": [
+        "estimator"
+    ],
+    "basetfr": [],
+    "beamformer": [
+        "filters"
+    ],
+    "bihemilabel": [
+        "label",
+        "labels"
+    ],
+    "brain": [
+        "fig"
+    ],
+    "calibration": [],
+    "clickableimage": [],
+    "colormap": [
+        "cmap"
+    ],
+    "colormaprange": [],
+    "conductormodel": [
+        "bem",
+        "sphere"
+    ],
+    "contours": [],
+    "coregistration": [],
+    "covariance": [
+        "cov",
+        "data_cov",
+        "inst",
+        "noise_cov",
+        "orig",
+        "signal_cov"
+    ],
+    "covariance object": [
+        "cov"
+    ],
+    "crossspectraldensity": [
+        "csd",
+        "noise_csd"
+    ],
+    "csp": [],
+    "dataframe": [
+        "metadata"
+    ],
+    "diffeomorphicmap": [
+        "sdr_morph"
+    ],
+    "digmontage": [
+        "montage"
+    ],
+    "dipole": [
+        "dipoles"
+    ],
+    "dipolefixed": [],
+    "ems": [],
+    "eogregression": [
+        "model"
+    ],
+    "epochs": [
+        "evoked",
+        "inst"
+    ],
+    "epochs instances": [
+        "epochs_list"
+    ],
+    "epochs object": [
+        "epochs"
+    ],
+    "epochsspectrum": [],
+    "epochsspectrumarray": [],
+    "epochstfr": [
+        "epochs_tfr",
+        "tfr"
+    ],
+    "epochstfr object": [
+        "epochs_tfr"
+    ],
+    "epochstfrarray": [],
+    "evoked": [
+        "all_evoked",
+        "all_inst",
+        "evokeds",
+        "inst"
+    ],
+    "evoked instance": [
+        "evoked"
+    ],
+    "evoked instances": [
+        "evoked"
+    ],
+    "evoked object": [
+        "evoked"
+    ],
+    "evokedfield": [],
+    "false": [
+        "adjacency"
+    ],
+    "figure": [
+        "fig"
+    ],
+    "figure3d": [
+        "fig",
+        "figure"
+    ],
+    "figureclosing": [],
+    "filterestimator": [],
+    "forward": [
+        "fwd",
+        "fwds",
+        "src"
+    ],
+    "generalizingestimator": [],
+    "hedannotations": [],
+    "ica": [
+        "icas"
+    ],
+    "info": [
+        "info_from",
+        "info_to",
+        "montage",
+        "pos"
+    ],
+    "inverseoperator": [
+        "inv",
+        "inverse_operator",
+        "src"
+    ],
+    "label": [
+        "idx",
+        "labels",
+        "lh",
+        "rh"
+    ],
+    "layout": [],
+    "linearmodel": [],
+    "mixed)sourceestimate": [
+        "stc_est",
+        "stc_true"
+    ],
+    "mixedsourceestimate": [],
+    "mixedvectorsourceestimate": [
+        "stc"
+    ],
+    "nifti1image": [
+        "flash5_img"
+    ],
+    "none (default 'empirical')": [
+        "method"
+    ],
+    "none (default none)": [
+        "cov_method_params",
+        "flat",
+        "method_params",
+        "n_components",
+        "picks",
+        "preload",
+        "projs",
+        "reg",
+        "reject",
+        "scalings",
+        "tmax",
+        "tmin"
+    ],
+    "none]": [
+        "extras"
+    ],
+    "normalize": [
+        "cnorm"
+    ],
+    "playbackspeed": [],
+    "projection": [
+        "projs"
+    ],
+    "psdestimator": [],
+    "randomstate": [
+        "random_state",
+        "seed"
+    ],
+    "raw": [
+        "evoked",
+        "inst",
+        "other",
+        "raw_er",
+        "raw_event"
+    ],
+    "raw object": [
+        "raw"
+    ],
+    "rawkit": [
+        "raw"
+    ],
+    "rawtfr": [
+        "tfr"
+    ],
+    "rawtfrarray": [],
+    "receptivefield": [],
+    "report": [],
+    "scaler": [],
+    "slidingestimator": [],
+    "sourceestimate": [
+        "inst",
+        "src",
+        "stc",
+        "stcs",
+        "weights"
+    ],
+    "sourceestimate object": [
+        "stc"
+    ],
+    "sourcemorph": [
+        "src"
+    ],
+    "sourcesimulator": [
+        "stc"
+    ],
+    "sourcespaces": [
+        "src",
+        "src_from",
+        "src_to",
+        "vertices"
+    ],
+    "spatialfilter": [],
+    "spatialimage": [
+        "base_image",
+        "bg_img",
+        "flash30",
+        "flash5",
+        "moving",
+        "static"
+    ],
+    "spectrum": [
+        "all_inst",
+        "all_spectrum"
+    ],
+    "spectrumarray": [],
+    "spoc": [],
+    "ssd": [],
+    "temporalfilter": [],
+    "timechange": [],
+    "timedelayingridge": [],
+    "timefrequency": [],
+    "transform": [
+        "destination",
+        "mri_head_t",
+        "trans"
+    ],
+    "true": [
+        "flash5"
+    ],
+    "uievent": [
+        "event"
+    ],
+    "unsupervisedspatialfilter": [],
+    "untar": [
+        "processor"
+    ],
+    "unzip": [
+        "processor"
+    ],
+    "vectorizer": [],
+    "vectorsourceestimate": [
+        "stc"
+    ],
+    "vertexselect": [],
+    "volsourceestimate": [],
+    "volvectorsourceestimate": [],
+    "xdawn": [],
+    "xdawntransformer": []
+}
