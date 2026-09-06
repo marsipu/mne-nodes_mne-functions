@@ -94,6 +94,14 @@ always_inputs = [
     "SpatialImage"
 ]
 
+object_suffixes = {
+    "epochs": "epo",
+    "evokeds": "ave",
+    "covariance": "cov",
+    "forward": "fwd",
+    "transform": "trans",
+}
+
 group_functions = {
     "mne.grand_average",
 }
@@ -419,7 +427,7 @@ def get_param_config(param, sig, obj_config):
             if mis not in always_inputs:
                 missing_types[mis].add(param.arg_name)  # type: ignore
         input_config = {  # type: ignore
-            "accepted": _accepted_names(
+            "accepted_ports": _accepted_names(
                 param.arg_name, *_accepted_names_from_types(types)
             ),
             "optional": default is not inspect.Parameter.empty,
@@ -536,7 +544,7 @@ def build_object_config(
     if class_name is not None:
         lower_name = class_name.lower()
         input_config = {
-            "accepted": _accepted_names(lower_name, *_accepted_aliases(lower_name)),
+            "accepted_ports": _accepted_names(lower_name, *_accepted_aliases(lower_name)),
             "optional": False,
         }
         obj_config["inputs"][lower_name] = input_config
@@ -567,7 +575,7 @@ def build_object_config(
         output_key = obj.__name__.lower()
         accepted = _accepted_aliases(output_key)
         output_key = accepted[0]
-        return_config = {"accepted": accepted}  # type: ignore
+        return_config = {"accepted_ports": accepted}  # type: ignore
         obj_config["outputs"][output_key] = return_config  # type: ignore
     else:
         for ret in doc.many_returns:
@@ -583,7 +591,7 @@ def build_object_config(
                 *_accepted_aliases(output_name),
                 *_accepted_names_from_type_name(ret.type_name),
             )
-            return_config = {"accepted": accepted}  # type: ignore
+            return_config = {"accepted_ports": accepted}  # type: ignore
             obj_config["outputs"][output_name] = return_config  # type: ignore
     return doc, obj_config
 
