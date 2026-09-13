@@ -86,7 +86,10 @@ object_suffixes = {
     "covariance": "cov",
     "forward": "fwd",
     "transform": "trans",
-    "sourcespaces": "src"
+    "sourcespaces": "src",
+    "averagetfr": "tfr",
+    "rawtfr": "tfr",
+    "epochstfr": "tfr",
 }
 
 group_functions = {
@@ -420,20 +423,29 @@ def _expand_alias_variants(names):
     return expanded
 
 
-# %% Extract read/write functions from the (otherwise excluded) file_io category.
-# Only functions taking a single fname/filename argument plus (for writers) a
-# single object argument are considered; anything more ambiguous is skipped.
+# %% Extract read/write functions from every api rst file (not just file_io.rst,
+# since domain-specific I/O functions like mne.time_frequency.write_tfrs live
+# in their own category file). Only functions taking a single fname/filename
+# argument plus (for writers) a single object argument are considered;
+# anything more ambiguous is skipped.
 io_read_entries = []
 io_write_entries = []
-file_io_path = mnedev_api_path / "file_io.rst"
-if file_io_path.exists():
-    for plugin_name, obj_list in parse_rst_functions(file_io_path).items():
+_seen_io_functions = set()
+for rst_path in sorted(Path(mnedev_api_path).glob("*.rst")):
+    for plugin_name, obj_list in parse_rst_functions(rst_path).items():
         for obj_item in obj_list:
             obj_name = obj_item.split(".")[-1]
             if not (obj_name.startswith("read_") or obj_name.startswith("write_")):
                 continue
+            # Raw file importers (read_raw_fif, read_raw_edf, ...) are handled
+            # by the pipeline's dedicated raw-data import, not as generic I/O.
+            if obj_name.startswith("read_raw"):
+                continue
             sub_modules = obj_item.split(".")[:-1]
             module_name = ".".join([plugin_name] + sub_modules)
+            if (obj_name, module_name) in _seen_io_functions:
+                continue
+            _seen_io_functions.add((obj_name, module_name))
             try:
                 module = importlib.import_module(module_name)
                 obj = getattr(module, obj_name)
@@ -477,12 +489,18 @@ if file_io_path.exists():
                 return_name = doc.many_returns[0].return_name
                 if not return_name or "," in return_name:
                     continue
+                primary_names = _expand_alias_variants([return_name])
                 aliases = _expand_alias_variants(
-                    _accepted_names(return_name, *_accepted_aliases(return_name))
+                    _accepted_names(
+                        return_name,
+                        *_accepted_aliases(return_name),
+                        *_accepted_names_from_type_name(doc.many_returns[0].type_name),
+                    )
                 )
                 io_read_entries.append(
                     {
                         "function": obj_name,
+                        "primary_names": primary_names,
                         "aliases": aliases,
                         "obj": obj,
                         "module_name": module_name,
@@ -493,12 +511,14 @@ if file_io_path.exists():
                 if len(required) != 2:
                     continue
                 object_param = next(p for p in required if p != fname_param)
+                primary_names = _expand_alias_variants([object_param])
                 aliases = _expand_alias_variants(
                     _accepted_names(object_param, *_accepted_aliases(object_param))
                 )
                 io_write_entries.append(
                     {
                         "function": obj_name,
+                        "primary_names": primary_names,
                         "aliases": aliases,
                         "obj": obj,
                         "module_name": module_name,
@@ -892,43 +912,74 @@ for entry in io_read_entries + io_write_entries:
         continue
     config[obj_name] = io_obj_config
 
+def _find_io_entry(port, entries):
+    """Find io entry matching port name by primary name first, then by aliases."""
+    return next(
+        (e for e in entries if port in e.get("primary_names", [])),
+        next((e for e in entries if port in e["aliases"]), None),
+    )
+
+
 # Annotate inputs/outputs with a reference to the matching file_io read/write
 # function, if any. The function itself (and its parameters) lives in its own
 # config entry above, so only the name is stored here to avoid duplication.
 for obj_config in config.values():
     for input_cfg in obj_config["inputs"].values():
-        accepted_ports = input_cfg.get("accepted_ports", [])
-        for entry in io_read_entries:
-            if set(entry["aliases"]) & set(accepted_ports):
-                input_cfg["read"] = entry["function"]
-                suffix = _suffix_for_ports(accepted_ports)
+        read_map = {}
+        suffix_map = {}
+        for port in input_cfg.get("accepted_ports", []):
+            entry = _find_io_entry(port, io_read_entries)
+            if entry is not None:
+                read_map[port] = entry["function"]
+                suffix = _suffix_for_ports([port]) or _suffix_for_ports(
+                    entry.get("primary_names", [])
+                )
                 if suffix:
-                    input_cfg["suffix"] = suffix
-                break
+                    suffix_map[port] = suffix
+        if read_map:
+            input_cfg["read"] = read_map
+        if suffix_map:
+            input_cfg["suffix"] = suffix_map
+
     for output_cfg in obj_config["outputs"].values():
-        accepted_ports = output_cfg.get("accepted_ports", [])
-        for entry in io_write_entries:
-            if set(entry["aliases"]) & set(accepted_ports):
-                output_cfg["write"] = entry["function"]
-                suffix = _suffix_for_ports(accepted_ports)
+        write_map = {}
+        suffix_map = {}
+        for port in output_cfg.get("accepted_ports", []):
+            entry = _find_io_entry(port, io_write_entries)
+            if entry is not None:
+                write_map[port] = entry["function"]
+                suffix = _suffix_for_ports([port]) or _suffix_for_ports(
+                    entry.get("primary_names", [])
+                )
                 if suffix:
-                    output_cfg["suffix"] = suffix
-                break
-        else:
-            save_key = next(
-                (save_method_lookup[p] for p in accepted_ports if p in save_method_lookup),
-                None,
-            )
-            if save_key:
-                output_cfg["write"] = save_key
-                suffix = _suffix_for_ports(accepted_ports)
+                    suffix_map[port] = suffix
+            elif port in save_method_lookup:
+                write_map[port] = save_method_lookup[port]
+                suffix = _suffix_for_ports([port])
                 if suffix:
-                    output_cfg["suffix"] = suffix
+                    suffix_map[port] = suffix
+        if write_map:
+            output_cfg["write"] = write_map
+        if suffix_map:
+            output_cfg["suffix"] = suffix_map
+
+# Split out I/O read/write functions into their own config file, since they
+# are referenced by name from other nodes' inputs/outputs "read"/"write" maps
+# rather than needing to be duplicated inline. This also includes "<Class>.save"
+# methods used as the write fallback for classes without a free write_* function.
+io_function_names = {entry["function"] for entry in io_read_entries + io_write_entries}
+io_function_names.update(save_method_lookup.values())
+io_config = {name: config.pop(name) for name in list(config) if name in io_function_names}
 
 # Save config
 config_path = Path(__file__).parent / "mne_functions_config.json"
 with open(config_path, "w") as file:
     json.dump(config, file, indent=4, cls=TypedJSONEncoder)
+
+# Save I/O functions config
+io_config_path = Path(__file__).parent / "mne_io_functions_config.json"
+with open(io_config_path, "w") as file:
+    json.dump(io_config, file, indent=4, cls=TypedJSONEncoder)
 
 # Save the auto-derived object aliases for inspection (to spot-check
 # associations and find classes that might still be missing aliases).
@@ -945,5 +996,6 @@ with open(missing_path, "w") as file:
     json.dump(missing_types, file, indent=4, cls=TypedJSONEncoder)
 print(f"Scraped {len(config)} functions/classes from mne")
 print(f"Config saved to {config_path}")
+print(f"I/O functions config saved to {io_config_path} ({len(io_config)} entries)")
 print(f"Aliases saved to {aliases_path}")
 print(f"Missing types saved to {missing_path}")

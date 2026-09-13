@@ -1,38 +1,38 @@
 {
     "scalar": [
-        "tstop",
-        "tstart",
         "width",
+        "tstep",
         "tmin",
-        "tstep"
+        "tstart",
+        "tstop"
     ],
     "object": [
-        "figure",
-        "estimator",
         "base_estimator",
-        "model"
+        "model",
+        "figure",
+        "estimator"
     ],
     "iterable": [
-        "stc",
+        "selection",
         "cv",
-        "ch_names",
-        "selection"
+        "stc",
+        "ch_names"
     ],
     "float in [0": [
-        "l1_ratio",
         "opacity",
-        "smooth",
-        "alpha"
+        "alpha",
+        "l1_ratio",
+        "smooth"
     ],
     "list of Evoked": [
-        "all_inst",
         "evoked",
+        "evokeds",
         "all_evoked",
-        "evokeds"
+        "all_inst"
     ],
     "optional": [
-        "surf_ori",
         "patch_stats",
+        "surf_ori",
         "force_fixed"
     ],
     "list of Label": [
@@ -41,24 +41,24 @@
         "labels"
     ],
     "1]": [
-        "l1_ratio",
         "opacity",
-        "alpha"
+        "alpha",
+        "l1_ratio"
     ],
     "mne.io.Raw": [
-        "raw_event",
         "inst",
+        "raw_event",
         "raw"
     ],
     "float between ``0`` and ``1": [
+        "n_mag",
         "n_grad",
-        "n_eeg",
-        "n_mag"
+        "n_eeg"
     ],
     "mne.Evoked": [
-        "ecg_evoked",
         "inst",
-        "eog_evoked"
+        "eog_evoked",
+        "ecg_evoked"
     ],
     "list of ndarray": [
         "vertices_to",
@@ -90,48 +90,48 @@
         "buffer"
     ],
     "list of SpatialImage": [
-        "flash30",
-        "flash5"
+        "flash5",
+        "flash30"
     ],
     "np.inf": [
-        "dgap_freq",
-        "fmax"
+        "fmax",
+        "dgap_freq"
     ],
     "matplotlib": [
         "axes",
         "ax"
     ],
     "list-like": [
-        "times",
-        "factor_levels"
+        "factor_levels",
+        "times"
     ],
     "mne.Epochs": [
-        "epochs",
-        "inst"
+        "inst",
+        "epochs"
     ],
     "path-line": [
-        "ecg_evoked",
-        "eog_evoked"
+        "eog_evoked",
+        "ecg_evoked"
     ],
     "instance of (Vol": [
-        "stc_true",
-        "stc_est"
+        "stc_est",
+        "stc_true"
     ],
     "Mixed)SourceEstimate": [
-        "stc_true",
-        "stc_est"
+        "stc_est",
+        "stc_true"
     ],
     "scipy.sparse.csr_array": [
         "vol_morph_mat",
         "morph_mat"
     ],
     "list of AverageTFR": [
-        "all_tfr",
-        "tfr"
+        "tfr",
+        "all_tfr"
     ],
     "matplotlib-style color": [
-        "color",
-        "colors"
+        "colors",
+        "color"
     ],
     "mne.Info": [
         "info"
