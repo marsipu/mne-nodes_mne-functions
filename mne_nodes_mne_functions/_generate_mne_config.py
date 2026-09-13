@@ -1,5 +1,4 @@
 # %%
-from ast import literal_eval
 import importlib
 
 import inspect
@@ -15,82 +14,16 @@ import docstring_parser
 from docutils.core import publish_parts
 
 from mne_nodes.pipeline.io import TypedJSONEncoder
-from mne_nodes.gui.parameter import (
-    ArrayGui,
-    BoolGui,
-    ColorGui,
-    ComboGui,
-    DataFrameGui,
-    DateTimeGui,
-    DictGui,
-    DualTupleGui,
-    FloatGui,
-    CallableGui,
-    IntGui,
-    ListGui,
-    PathGui,
-    StringGui,
-    SliceGui,
-    TupleGui,
+from mne_nodes.pipeline.function_parser import (
+    DEFAULT_TYPE_GUIS as default_type_guis,
+    TYPE_DEFAULTS as type_defaults,
+    parse_docstring_type,
+    strip_shape_annotations,
+    reconcile_default_type,
+    suffix_for_ports as _suffix_for_ports,
 )
+from mne_nodes.gui.parameter import DualTupleGui
 from tqdm import tqdm
-
-default_type_guis = {
-    "int": IntGui,
-    "float": FloatGui,
-    "str": StringGui,
-    "bool": BoolGui,
-    "list": ListGui,
-    "dict": DictGui,
-    "tuple": TupleGui,
-    "combo": ComboGui,
-    "path": PathGui,
-    "slice": SliceGui,
-    "DataFrame": DataFrameGui,
-    "array": ArrayGui,
-    "color": ColorGui,
-    "callable": CallableGui,
-    "datetime": DateTimeGui,
-}
-
-array_type_aliases = {
-    "array-like": "array",
-    "array_like": "array",
-    "ndarray": "array",
-    "np.ndarray": "array",
-    "numpy array": "array",
-}
-array_container_types = ("array",)
-
-color_type_aliases = {"color object": "color", "matplotlib color": "color"}
-path_type_aliases = {"path-like": "path", "path_like": "path"}
-
-type_defaults = {
-            "int": 0,
-            "float": 0.0,
-            "bool": False,
-            "str": "",
-            "list": [],
-            "dict": {},
-            "tuple": (0, 0),
-            "combo": "",
-            "checklist": [],
-            "slider": 0.0,
-            "path": "",
-            "slice": slice(0, 1),
-        }
-
-object_suffixes = {
-    "epochs": "epo",
-    "evokeds": "ave",
-    "covariance": "cov",
-    "forward": "fwd",
-    "transform": "trans",
-    "sourcespaces": "src",
-    "averagetfr": "tfr",
-    "rawtfr": "tfr",
-    "epochstfr": "tfr",
-}
 
 group_functions = {
     "mne.grand_average",
@@ -109,49 +42,6 @@ exclude_categories = [
     "file_io",
     "reading_raw_data",
 ]
-
-def _strip_shape_annotations(text):
-    """Remove "(of/with) shape (...)" segments from a type description.
-
-    Docstrings often annotate array types with their shape, e.g.
-    "array, shape (n_samples, n_channels)" or "array-like of shape ``(2,)``".
-    Since the dimensions use free-form names (not just digits) and may be
-    wrapped in nested/mismatched brackets or rst markup (backticks), a plain
-    regex can't reliably match them; a leftover fragment like "n_channels)"
-    would otherwise be split off as a bogus type later on. This scans the
-    text and drops each such segment using bracket-depth tracking.
-    """
-    open_brackets = "([{"
-    close_brackets = ")]}"
-    result = []
-    i = 0
-    n = len(text)
-    while i < n:
-        m = re.match(r"(?:of|with)?\s*shape\s*", text[i:], re.IGNORECASE)
-        if m:
-            j = i + m.end()
-            # Skip markup/quote characters surrounding the shape, e.g. ``(...)``
-            while j < n and text[j] in "`'\"= ":
-                j += 1
-            if j < n and text[j] in open_brackets:
-                depth = 0
-                k = j
-                while k < n:
-                    if text[k] in open_brackets:
-                        depth += 1
-                    elif text[k] in close_brackets:
-                        depth -= 1
-                        if depth == 0:
-                            k += 1
-                            break
-                    k += 1
-                while k < n and text[k] in "`'\"":
-                    k += 1
-                i = k
-                continue
-        result.append(text[i])
-        i += 1
-    return "".join(result)
 
 
 def _rst_to_qt_rich_text(text):
@@ -257,16 +147,6 @@ def _accepted_names(*names):
     return accepted
 
 
-def _suffix_for_ports(port_names):
-    """Return the object_suffixes value matching any of the given port names."""
-    for port in port_names:
-        stripped = port.rstrip("s")
-        for key, suffix in object_suffixes.items():
-            if stripped == key.rstrip("s"):
-                return suffix
-    return None
-
-
 def _extract_type_tokens(type_name):
     """Split a docstring type string into raw class-name tokens.
 
@@ -280,7 +160,7 @@ def _extract_type_tokens(type_name):
     """
     if not type_name:
         return []
-    text = _strip_shape_annotations(type_name)
+    text = strip_shape_annotations(type_name)
     text = re.sub(r"(\w+)\s*of\s*length\s*\d+", r"\1", text)
     tokens = []
     for part in re.split(r"\s*\|\s*|\s+or\s+|,", text):
@@ -530,99 +410,17 @@ def get_param_config(param, sig, obj_config):
     # Skip parameters that don't have a valid name (e.g. *args, **kwargs)
     if not param.arg_name[0].isalpha():  # type: ignore
         return
-    if param.arg_name == "epochs":
-        pass
-    type_name = param.type_name  # type: ignore
-    is_dual_tuple = bool(
-        re.search(r"\btuple\s+of\s+length\s+2\b", type_name, re.IGNORECASE)
-    )
-    # Filter (<type> of length <length>)
-    type_name = re.sub(r"(\w+)\s*of\s*length\s*\d+", r"\1", type_name)
-    # Strip shape annotations, e.g. "array, shape (n_samples, n_channels)"
-    type_name = _strip_shape_annotations(type_name)
-    types = type_name.split("|")
-    # split or
-    types = [item for sublist in types for item in sublist.split(" or ")]
-    # split ,
-    types = [item for sublist in types for item in sublist.split(",")]
-    # Remove spaces
-    types = [t.strip() for t in types]
-    # Strip rst inline-code markup, e.g. "``'auto'``" -> "'auto'"
-    types = [t.strip("`") for t in types]
-    types = [
-        array_type_aliases.get(
-            t, color_type_aliases.get(t, path_type_aliases.get(t, t))
-        )
-        for t in types
-    ]
-    # Remove duplicates while preserving order
-    types = list(dict.fromkeys(types))
-    # Get instance of <class> and use lower case
-    pattern = r"instance of ([\w\.]+)"
-    for idx, t in enumerate(types):
-        match = re.match(pattern, t)
-        if match:
-            instance_type = match.group(1).split(".")[-1]
-            types[idx] = instance_type
-    # Get containers, e.g. "list of int" -> "list" or "array of int" -> "array"
-    array_dtypes = {}
-    pattern = r"(\w+(?:-\w+)*)\s*of\s*(\w+)"
-    for idx, t in enumerate(types):
-        match = re.match(pattern, t)
-        if match:
-            container_type = array_type_aliases.get(match.group(1), match.group(1))
-            contained_type = match.group(2)
-            if (
-                container_type in ["list", "tuple"]
-                and contained_type in default_type_guis
-            ):
-                types[idx] = container_type
-            elif container_type in array_container_types and (
-                contained_type in default_type_guis
-                or contained_type in ("int", "float")
-            ):
-                types[idx] = container_type
-                if contained_type in ("int", "float"):
-                    array_dtypes[container_type] = contained_type
     # Get default from inspection signature
     default = sig.parameters[param.arg_name].default  # type: ignore
-    # Get "type (default ***)" pattern
-    pattern = r"(\w+)\s*\(default\s*([\w'\.]+)\)"
-    for idx, t in enumerate(types):
-        match = re.match(pattern, t)
-        if match:
-            tp = match.group(1)
-            types[idx] = tp
-            # Only try getting default from string if not gotten from signature
-            if default is inspect.Parameter.empty:
-                default_str = match.group(2)
-                if default_str.startswith("'") and default_str.endswith("'"):
-                    default = default_str.strip("'")
-                else:
-                    try:
-                        default = literal_eval(default_str)
-                    except (ValueError, SyntaxError):
-                        default = default_str
-    # Remove empty strings
-    types = [t for t in types if t != ""]
-    # # Remove parentheses
-    # types = [t.replace("(", "").replace(")", "") for t in types]
-    if "None" in types:
-        none_select = True
-        types.remove("None")
-    else:
-        # If default is None, still enable none_select
-        none_select = default is None
-    # Get string options and remove them from types
-    def _is_quoted(t):
-        return (t.startswith("'") and t.endswith("'")) or (
-            t.startswith('"') and t.endswith('"')
-        )
-
-    options = [t.strip("'\"") for t in types if _is_quoted(t)]
-    types = [t for t in types if not _is_quoted(t)]
-    if len(options) > 0:
-        types.append("combo")
+    parsed = parse_docstring_type(param.type_name)  # type: ignore
+    types = parsed["types"]
+    options = parsed["options"]
+    array_dtypes = parsed["array_dtypes"]
+    is_dual_tuple = parsed["is_dual_tuple"]
+    # Only use the type description's default if the signature had none.
+    if default is inspect.Parameter.empty and parsed["default"] is not inspect.Parameter.empty:
+        default = parsed["default"]
+    none_select = parsed["none_select"] or default is None
     # Non-primitive types (object references) are treated as node inputs.
     non_primitive = [t for t in types if t not in default_type_guis]
     # A name matching a known class/io alias only forces a param into being an
@@ -654,24 +452,7 @@ def get_param_config(param, sig, obj_config):
     if default is inspect.Parameter.empty:
         default = type_defaults.get(types[0], None)
         none_select = default is None or none_select
-    # Check default with type for sometimes mismatch between type description and types
-    if default is not None and type(default).__name__ not in types:
-        if isinstance(default, int) and "float" in types:
-            default = float(default)
-        elif isinstance(default, float) and "int" in types:
-            if default.is_integer():
-                default = int(default)
-        elif isinstance(default, tuple) and "list" in types:
-            default = list(default)
-        elif isinstance(default, list) and "tuple" in types:
-            default = tuple(default)
-        elif isinstance(default, str) and "path" in types:
-            pass  # Skip path since path-gui suffices
-        else:
-            types.append(type(default).__name__)
-    # Functions/other callables aren't JSON serializable; store as their name
-    if callable(default) and not isinstance(default, type):
-        default = getattr(default, "__name__", repr(default))
+    default, types = reconcile_default_type(default, types)
     # If types is "str" and "combo", then remove "str" and keep "combo"
     if len(types) == 2 and "str" in types and "combo" in types:
         types.remove("str")

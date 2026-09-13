@@ -1,54 +1,48 @@
 {
     "scalar": [
+        "tstart",
+        "tstop",
         "width",
         "tstep",
-        "tmin",
-        "tstart",
-        "tstop"
-    ],
-    "object": [
-        "base_estimator",
-        "model",
-        "figure",
-        "estimator"
+        "tmin"
     ],
     "iterable": [
         "selection",
         "cv",
-        "stc",
-        "ch_names"
+        "ch_names",
+        "stc"
     ],
     "float in [0": [
         "opacity",
-        "alpha",
         "l1_ratio",
+        "alpha",
         "smooth"
     ],
     "list of Evoked": [
+        "all_evoked",
         "evoked",
         "evokeds",
-        "all_evoked",
         "all_inst"
     ],
     "optional": [
         "patch_stats",
-        "surf_ori",
-        "force_fixed"
+        "force_fixed",
+        "surf_ori"
     ],
     "list of Label": [
-        "idx",
+        "labels",
         "label",
-        "labels"
+        "idx"
     ],
     "1]": [
-        "opacity",
+        "l1_ratio",
         "alpha",
-        "l1_ratio"
+        "opacity"
     ],
     "mne.io.Raw": [
         "inst",
-        "raw_event",
-        "raw"
+        "raw",
+        "raw_event"
     ],
     "float between ``0`` and ``1": [
         "n_mag",
@@ -57,29 +51,29 @@
     ],
     "mne.Evoked": [
         "inst",
-        "eog_evoked",
-        "ecg_evoked"
+        "ecg_evoked",
+        "eog_evoked"
     ],
     "list of ndarray": [
-        "vertices_to",
         "pos",
-        "labels"
+        "labels",
+        "vertices_to"
     ],
     "matplotlib colormap": [
-        "cmap",
-        "mask_cmap"
+        "mask_cmap",
+        "cmap"
     ],
     "(colormap": [
-        "cmap",
-        "mask_cmap"
+        "mask_cmap",
+        "cmap"
     ],
     "bool)": [
-        "cmap",
-        "mask_cmap"
+        "mask_cmap",
+        "cmap"
     ],
     "list of Axes": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "instance of ~numpy.random.RandomState": [
         "random_state",
@@ -90,48 +84,48 @@
         "buffer"
     ],
     "list of SpatialImage": [
-        "flash5",
-        "flash30"
+        "flash30",
+        "flash5"
     ],
     "np.inf": [
-        "fmax",
-        "dgap_freq"
+        "dgap_freq",
+        "fmax"
     ],
     "matplotlib": [
-        "axes",
-        "ax"
+        "ax",
+        "axes"
     ],
     "list-like": [
         "factor_levels",
         "times"
     ],
     "mne.Epochs": [
-        "inst",
-        "epochs"
+        "epochs",
+        "inst"
     ],
     "path-line": [
-        "eog_evoked",
-        "ecg_evoked"
+        "ecg_evoked",
+        "eog_evoked"
     ],
     "instance of (Vol": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
     ],
     "Mixed)SourceEstimate": [
-        "stc_est",
-        "stc_true"
+        "stc_true",
+        "stc_est"
     ],
     "scipy.sparse.csr_array": [
         "vol_morph_mat",
         "morph_mat"
     ],
     "list of AverageTFR": [
-        "tfr",
-        "all_tfr"
+        "all_tfr",
+        "tfr"
     ],
     "matplotlib-style color": [
-        "colors",
-        "color"
+        "color",
+        "colors"
     ],
     "mne.Info": [
         "info"

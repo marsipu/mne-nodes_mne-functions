@@ -3427,19 +3427,15 @@
         "class_name": "FilterEstimator"
     },
     "LinearModel": {
-        "inputs": {
+        "inputs": {},
+        "parameters": {
             "model": {
-                "accepted_ports": [
-                    "model",
-                    "object"
-                ],
-                "optional": true,
-                "read": {
-                    "model": "read_eog_regression"
-                }
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>A linear model from scikit-learn with a fit method\nthat updates a <span style=\"font-family: monospace;\">coef_</span> attribute.\nIf None the model will be\n:class:`sklearn.linear_model.LogisticRegression`.</p>"
             }
         },
-        "parameters": {},
         "outputs": {
             "linearmodel": {
                 "accepted_ports": [
@@ -4937,16 +4933,14 @@
         "class_name": "TimeDelayingRidge"
     },
     "SlidingEstimator": {
-        "inputs": {
-            "base_estimator": {
-                "accepted_ports": [
-                    "base_estimator",
-                    "object"
-                ],
-                "optional": false
-            }
-        },
+        "inputs": {},
         "parameters": {
+            "base_estimator": {
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>The base estimator to iteratively fit on a subset of the dataset.</p>"
+            },
             "scoring": {
                 "types": [
                     "callable",
@@ -5283,16 +5277,14 @@
         "class_name": "SlidingEstimator"
     },
     "GeneralizingEstimator": {
-        "inputs": {
-            "base_estimator": {
-                "accepted_ports": [
-                    "base_estimator",
-                    "object"
-                ],
-                "optional": false
-            }
-        },
+        "inputs": {},
         "parameters": {
+            "base_estimator": {
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>The base estimator to iteratively fit on a subset of the dataset.</p>"
+            },
             "scoring": {
                 "types": [
                     "callable",
@@ -8045,16 +8037,14 @@
         "class_name": null
     },
     "get_coef": {
-        "inputs": {
-            "estimator": {
-                "accepted_ports": [
-                    "estimator",
-                    "object"
-                ],
-                "optional": false
-            }
-        },
+        "inputs": {},
         "parameters": {
+            "estimator": {
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>An estimator from scikit-learn.</p>"
+            },
             "attr": {
                 "gui": "StringGui",
                 "default": "filters_",
@@ -111270,16 +111260,14 @@
         "class_name": null
     },
     "set_3d_view": {
-        "inputs": {
-            "figure": {
-                "accepted_ports": [
-                    "figure",
-                    "object"
-                ],
-                "optional": false
-            }
-        },
+        "inputs": {},
         "parameters": {
+            "figure": {
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>The scene which is modified.</p>"
+            },
             "azimuth": {
                 "gui": "FloatGui",
                 "default": null,
@@ -111335,16 +111323,14 @@
         "class_name": null
     },
     "set_3d_title": {
-        "inputs": {
-            "figure": {
-                "accepted_ports": [
-                    "figure",
-                    "object"
-                ],
-                "optional": false
-            }
-        },
+        "inputs": {},
         "parameters": {
+            "figure": {
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>The scene which is modified.</p>"
+            },
             "title": {
                 "gui": "StringGui",
                 "default": "",
@@ -111464,16 +111450,15 @@
         "class_name": null
     },
     "close_3d_figure": {
-        "inputs": {
+        "inputs": {},
+        "parameters": {
             "figure": {
-                "accepted_ports": [
-                    "figure",
-                    "object"
-                ],
-                "optional": false
+                "gui": "MultiTypeGui",
+                "default": null,
+                "none_select": true,
+                "description": "<p>The scene which needs to be closed.</p>"
             }
         },
-        "parameters": {},
         "outputs": {},
         "target": "file",
         "category": "visualization",
