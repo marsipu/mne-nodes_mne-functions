@@ -1,43 +1,43 @@
 {
     "scalar": [
-        "tstart",
+        "tmin",
         "tstop",
         "width",
         "tstep",
-        "tmin"
+        "tstart"
     ],
     "iterable": [
-        "selection",
-        "cv",
+        "stc",
         "ch_names",
-        "stc"
+        "selection",
+        "cv"
     ],
     "float in [0": [
         "opacity",
-        "l1_ratio",
+        "smooth",
         "alpha",
-        "smooth"
+        "l1_ratio"
     ],
     "list of Evoked": [
-        "all_evoked",
-        "evoked",
+        "all_inst",
         "evokeds",
-        "all_inst"
+        "evoked",
+        "all_evoked"
     ],
     "optional": [
-        "patch_stats",
         "force_fixed",
+        "patch_stats",
         "surf_ori"
     ],
     "list of Label": [
         "labels",
-        "label",
-        "idx"
+        "idx",
+        "label"
     ],
     "1]": [
-        "l1_ratio",
+        "opacity",
         "alpha",
-        "opacity"
+        "l1_ratio"
     ],
     "mne.io.Raw": [
         "inst",
@@ -45,31 +45,31 @@
         "raw_event"
     ],
     "float between ``0`` and ``1": [
-        "n_mag",
         "n_grad",
+        "n_mag",
         "n_eeg"
     ],
     "mne.Evoked": [
-        "inst",
         "ecg_evoked",
+        "inst",
         "eog_evoked"
     ],
     "list of ndarray": [
         "pos",
-        "labels",
-        "vertices_to"
+        "vertices_to",
+        "labels"
     ],
     "matplotlib colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "(colormap": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "bool)": [
-        "mask_cmap",
-        "cmap"
+        "cmap",
+        "mask_cmap"
     ],
     "list of Axes": [
         "ax",
@@ -80,16 +80,16 @@
         "seed"
     ],
     ")": [
-        "conductivity",
-        "buffer"
+        "buffer",
+        "conductivity"
     ],
     "list of SpatialImage": [
         "flash30",
         "flash5"
     ],
     "np.inf": [
-        "dgap_freq",
-        "fmax"
+        "fmax",
+        "dgap_freq"
     ],
     "matplotlib": [
         "ax",
@@ -100,24 +100,24 @@
         "times"
     ],
     "mne.Epochs": [
-        "epochs",
-        "inst"
+        "inst",
+        "epochs"
     ],
     "path-line": [
         "ecg_evoked",
         "eog_evoked"
     ],
     "instance of (Vol": [
-        "stc_true",
-        "stc_est"
+        "stc_est",
+        "stc_true"
     ],
     "Mixed)SourceEstimate": [
-        "stc_true",
-        "stc_est"
+        "stc_est",
+        "stc_true"
     ],
     "scipy.sparse.csr_array": [
-        "vol_morph_mat",
-        "morph_mat"
+        "morph_mat",
+        "vol_morph_mat"
     ],
     "list of AverageTFR": [
         "all_tfr",

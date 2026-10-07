@@ -1898,14 +1898,19 @@
         "class_name": null
     },
     "load_data": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "IntGui",
-                "default": 0,
-                "none_select": false,
-                "description": "<p>Subject to use. Must be of class \u00ecnt in the range from 1 to 18.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "int"
+                ],
+                "optional": false,
+                "read": {
+                    "int": "read_events"
+                }
+            }
+        },
+        "parameters": {
             "path": {
                 "gui": "StringGui",
                 "default": null,
@@ -9932,28 +9937,21 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict",
+                    "callable",
+                    "combo"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
-            "event_id": {
-                "types": [
-                    "dict",
-                    "callable",
-                    "combo",
-                    "str"
-                ],
-                "gui": "MultiTypeGui",
-                "type_kwargs": {
-                    "combo": {
-                        "options": [
-                            "auto"
-                        ]
-                    }
-                },
-                "default": "auto",
-                "none_select": true,
-                "description": "<p>Can be:</p>\n<ul>\n<li><p><strong>dict</strong>: map descriptions (keys) to integer event codes (values).\nOnly the descriptions present will be mapped, others will be ignored.</p></li>\n<li><p><strong>callable</strong>: must take a string input and return an integer event\ncode, or return <span style=\"font-family: monospace;\">None</span> to ignore the event.</p></li>\n<li><p><strong>None</strong>: Map descriptions to unique integer values based on their\n<span style=\"font-family: monospace;\">sorted</span> order.</p></li>\n<li><p><strong>'auto' (default)</strong>: prefer a raw-format-specific parser:</p>\n<ul>\n<li><p>Brainvision: map stimulus events to their integer part; response\nevents to integer part + 1000; optic events to integer part + 2000;\n'SyncStatus/Sync On' to 99998; 'New Segment/' to 99999;\nall others like <span style=\"font-family: monospace;\">None</span> with an offset of 10000.</p></li>\n<li><p>Other raw formats: Behaves like None.</p></li>\n</ul>\n</li>\n</ul>"
-            },
             "regexp": {
                 "gui": "StringGui",
                 "default": "^(?![Bb][Aa][Dd]|[Ee][Dd][Gg][Ee]).*$",
@@ -10587,15 +10585,19 @@
                     "events": "read_events",
                     "array": "read_surface"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": false,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
-            "event_id": {
-                "gui": "DictGui",
-                "default": {},
-                "none_select": false,
-                "description": "<p>A mapping from event names (keys) to event IDs (values). The event\nnames will be incorporated as columns of the returned metadata\n:class:`~pandas.DataFrame`.</p>"
-            },
             "tmin": {
                 "types": [
                     "float",
@@ -11846,15 +11848,16 @@
                 "read": {
                     "trans": "read_trans"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The name of the subject.</p>"
-            },
             "subjects_dir": {
                 "gui": "StringGui",
                 "default": null,
@@ -12270,6 +12273,13 @@
     },
     "make_bem_model": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "conductivity": {
                 "accepted_ports": [
                     "conductivity",
@@ -12285,12 +12295,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "ico": {
                 "gui": "IntGui",
                 "default": 4,
@@ -12688,15 +12692,16 @@
                     "trans": "read_trans",
                     "dict": "read_bem_surfaces"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The subject name corresponding to FreeSurfer environment\nvariable SUBJECT. If None, map for EEG data will not be available.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -13118,14 +13123,16 @@
         "class_name": null
     },
     "setup_source_space": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "spacing": {
                 "gui": "StringGui",
                 "default": "oct6",
@@ -13202,6 +13209,13 @@
     },
     "setup_volume_source_space": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "pos": {
                 "accepted_ports": [
                     "pos",
@@ -13245,12 +13259,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject to process. If None, the path to the MRI volume must be\nabsolute to get a volume source space. If a subject name\nis provided the <span style=\"font-family: monospace;\">T1.mgz</span> file will be found automatically.\nDefaults to None.</p>"
-            },
             "mri": {
                 "gui": "PathGui",
                 "default": null,
@@ -13627,14 +13635,16 @@
         "class_name": null
     },
     "make_watershed_bem": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>Subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -13717,6 +13727,13 @@
     },
     "make_flash_bem": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "flash5_img": {
                 "accepted_ports": [
                     "flash5_img",
@@ -13727,12 +13744,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "overwrite": {
                 "gui": "BoolGui",
                 "default": false,
@@ -13784,14 +13795,16 @@
         "class_name": null
     },
     "make_scalp_surfaces": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -13856,6 +13869,13 @@
     },
     "convert_flash_mris": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "flash30": {
                 "accepted_ports": [
                     "flash30",
@@ -13886,12 +13906,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "unwarp": {
                 "gui": "BoolGui",
                 "default": false,
@@ -18905,6 +18919,13 @@
                     "dict": "read_bem_surfaces"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "ax": {
                 "accepted_ports": [
                     "ax",
@@ -18923,12 +18944,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name (will be used to set the FreeSurfer\nenvironment variable <span style=\"font-family: monospace;\">SUBJECT</span>).\nCan be <span style=\"font-family: monospace;\">None</span> with mode set to <span style=\"font-family: monospace;\">'3d'</span>.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -19075,6 +19090,13 @@
                     "dipoles": "read_dipole"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "trans": {
                 "accepted_ports": [
                     "trans",
@@ -19092,12 +19114,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -19146,6 +19162,13 @@
                     "dipoles": "read_dipole"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "trans": {
                 "accepted_ports": [
                     "trans",
@@ -19163,12 +19186,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -19232,15 +19249,16 @@
                     "trans": "read_trans",
                     "dict": "read_bem_surfaces"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "fsaverage",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "aseg": {
                 "gui": "StringGui",
                 "default": "aparc+aseg",
@@ -21409,6 +21427,16 @@
                 "suffix": {
                     "covariance": "cov"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
@@ -21606,12 +21634,6 @@
                 "default": "auto",
                 "none_select": false,
                 "description": "<p>Amount to decimate the data during display for speed purposes.\nYou should only decimate if the data are sufficiently low-passed,\notherwise aliasing can occur. The 'auto' mode (default) uses\nthe decimation that results in a sampling rate least three times\nlarger than <span style=\"font-family: monospace;\"><span>min(info['lowpass'],</span> lowpass)</span> (e.g., a 40 Hz lowpass\nwill result in at least a 120 Hz displayed sample rate).</p>"
-            },
-            "event_id": {
-                "gui": "DictGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Event IDs used to show at event markers (default None shows\nthe event numbers).</p>"
             },
             "show_scrollbars": {
                 "gui": "BoolGui",
@@ -25447,22 +25469,24 @@
                     "events": "read_events",
                     "array": "read_surface"
                 }
-            }
-        },
-        "parameters": {
+            },
             "event_id": {
-                "types": [
+                "accepted_ports": [
+                    "event_id",
                     "int",
                     "list",
                     "dict",
-                    "str",
-                    "list"
+                    "str"
                 ],
-                "gui": "MultiTypeGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The id of the :term:`events` to consider. If dict, the keys can later be\nused to access associated :term:`events`. Example:\ndict(auditory=1, visual=3). If int, a dict will be created with the id as\nstring. If a list of int, all :term:`events` with the IDs specified in the list\nare used. If a str or list of str, <span style=\"font-family: monospace;\">events</span> must be <span style=\"font-family: monospace;\">None</span> to use annotations\nand then the IDs must be the name(s) of the annotations to use.\nIf None, all :term:`events` will be used and a dict is created\nwith string integer names corresponding to the event id integers.</p>"
-            },
+                "optional": true,
+                "read": {
+                    "int": "read_events",
+                    "list": "read_bem_surfaces",
+                    "dict": "read_bem_surfaces"
+                }
+            }
+        },
+        "parameters": {
             "tmin": {
                 "gui": "FloatGui",
                 "default": -0.2,
@@ -26143,6 +26167,17 @@
                     "(n_epochs) list (of n_channels)"
                 ],
                 "optional": true
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "bool",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
@@ -26256,16 +26291,6 @@
                 "default": true,
                 "none_select": false,
                 "description": "<p>Whether to show scale bars when the plot is initialized. Can be toggled\nafter initialization by pressing :kbd:`s` while the plot window is focused.\nDefault is <span style=\"font-family: monospace;\">True</span>.</p>"
-            },
-            "event_id": {
-                "types": [
-                    "bool",
-                    "dict"
-                ],
-                "gui": "MultiTypeGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Determines to label the event markers on the plot. If <span style=\"font-family: monospace;\">True</span>, uses\n<span style=\"font-family: monospace;\">epochs.event_id</span>. If <span style=\"font-family: monospace;\">False</span>, uses integer event codes instead of IDs.\nIf a <span style=\"font-family: monospace;\">dict</span> is passed, uses its <em>keys</em> as event labels on the plot for\nentries whose <em>values</em> are integer codes for events being drawn. Ignored if\n<span style=\"font-family: monospace;\">events=False</span>.</p>"
             },
             "group_by": {
                 "gui": "StringGui",
@@ -26627,6 +26652,13 @@
                     "epochs": "epo",
                     "evoked": "ave"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -26641,12 +26673,6 @@
                 "default": 20,
                 "none_select": false,
                 "description": "<p>Maximum number of channels to show stats for.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The subject name to use in the title of the plot. If <span style=\"font-family: monospace;\">None</span>, do not\ndisplay a subject name.</p>"
             },
             "color": {
                 "types": [
@@ -38974,14 +39000,16 @@
         "class_name": "Info"
     },
     "get_mni_fiducials": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -39016,14 +39044,16 @@
         "class_name": null
     },
     "estimate_head_mri_t": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -39083,15 +39113,16 @@
                     "montage": "read_dig_polhemus_isotrak",
                     "digmontage": "read_dig_polhemus_isotrak"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -39137,6 +39168,13 @@
     },
     "coregistration": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "trans": {
                 "accepted_ports": [
                     "trans",
@@ -39169,12 +39207,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>Path to an instance file containing the digitizer data. Compatible for\nRaw, Epochs, and Evoked files.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Name of the mri subject.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -39321,6 +39353,13 @@
                     "array": "read_surface"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "mri_head_t": {
                 "accepted_ports": [
                     "mri_head_t",
@@ -39335,12 +39374,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -39389,6 +39422,13 @@
                     "array": "read_surface"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "mri_head_t": {
                 "accepted_ports": [
                     "mri_head_t",
@@ -39403,12 +39443,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -39488,14 +39522,16 @@
         "class_name": null
     },
     "read_talxfm": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -40161,6 +40197,13 @@
                     "int": "read_events",
                     "list": "read_bem_surfaces"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
@@ -40173,12 +40216,6 @@
                 "default": 0,
                 "none_select": false,
                 "description": "<p>Hemisphere(s) the vertices belong to.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
             },
             "subjects_dir": {
                 "gui": "StringGui",
@@ -40233,15 +40270,16 @@
                     "montage": "read_dig_polhemus_isotrak",
                     "pos": "read_info"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -42177,15 +42215,16 @@
                     "digmontage": "read_dig_polhemus_isotrak",
                     "montage": "read_dig_polhemus_isotrak"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -45886,19 +45925,21 @@
                     "all_inst": "ave",
                     "evokeds": "ave"
                 }
-            }
-        },
-        "parameters": {
+            },
             "event_id": {
-                "types": [
+                "accepted_ports": [
+                    "event_id",
                     "dict",
                     "list"
                 ],
-                "gui": "MultiTypeGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The kind of event to apply. if None, a dict of inst will be return\none for each type of event xdawn has been fitted.</p>"
-            },
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces",
+                    "list": "read_bem_surfaces"
+                }
+            }
+        },
+        "parameters": {
             "include": {
                 "gui": "ArrayGui",
                 "dtype": "int",
@@ -47409,6 +47450,16 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
@@ -47516,12 +47567,6 @@
                 "default": false,
                 "none_select": false,
                 "description": "<p>Exclude the SSP projectors currently in the fiff file.</p>"
-            },
-            "event_id": {
-                "gui": "IntGui",
-                "default": 999,
-                "none_select": false,
-                "description": "<p>ID to use for events.</p>"
             },
             "ecg_l_freq": {
                 "gui": "FloatGui",
@@ -47660,6 +47705,16 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
@@ -47763,12 +47818,6 @@
                 "default": false,
                 "none_select": false,
                 "description": "<p>Exclude the SSP projectors currently in the fiff file.</p>"
-            },
-            "event_id": {
-                "gui": "IntGui",
-                "default": 998,
-                "none_select": false,
-                "description": "<p>ID to use for events.</p>"
             },
             "eog_l_freq": {
                 "gui": "FloatGui",
@@ -48080,6 +48129,16 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
@@ -48088,12 +48147,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The name of the channel to use for ECG peak detection.\nIf <span style=\"font-family: monospace;\">None</span> (default), ECG channel is used if present. If <span style=\"font-family: monospace;\">None</span> and\n<strong>no</strong> ECG channel is present, a synthetic ECG channel is created from\nthe cross-channel average. This synthetic channel can only be created from\nMEG channels.</p>"
-            },
-            "event_id": {
-                "gui": "IntGui",
-                "default": 999,
-                "none_select": false,
-                "description": "<p>The index to assign to found ECG events.</p>"
             },
             "picks": {
                 "types": [
@@ -48230,6 +48283,16 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
@@ -48242,12 +48305,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The name of the channel(s) to use for EOG peak detection. If a string,\ncan be an arbitrary channel. This doesn't have to be a channel of\n<span style=\"font-family: monospace;\">eog</span> type; it could, for example, also be an ordinary EEG channel\nthat was placed close to the eyes, like <span style=\"font-family: monospace;\">Fp1</span> or <span style=\"font-family: monospace;\">Fp2</span>.</p>\n<p>Multiple channel names can be passed as a list of strings.</p>\n<p>If <span style=\"font-family: monospace;\">None</span> (default), use the channel(s) in <span style=\"font-family: monospace;\">raw</span> with type <span style=\"font-family: monospace;\">eog</span>.</p>"
-            },
-            "event_id": {
-                "gui": "IntGui",
-                "default": 998,
-                "none_select": false,
-                "description": "<p>The index to assign to found events.</p>"
             },
             "picks": {
                 "types": [
@@ -48670,15 +48727,19 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
-            "event_id": {
-                "gui": "IntGui",
-                "default": 999,
-                "none_select": false,
-                "description": "<p>The index to assign to found ECG events.</p>"
-            },
             "ch_name": {
                 "gui": "StringGui",
                 "default": null,
@@ -48801,15 +48862,19 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
-            "event_id": {
-                "gui": "IntGui",
-                "default": 998,
-                "none_select": false,
-                "description": "<p>The index to assign to found events.</p>"
-            },
             "l_freq": {
                 "gui": "FloatGui",
                 "default": 1.0,
@@ -48929,15 +48994,19 @@
                     "events": "read_events",
                     "array": "read_surface"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
-            "event_id": {
-                "gui": "IntGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The id of the events generating the stimulation artifacts.\nIf None, read all events. Required only when inst is Raw.</p>"
-            },
             "tmin": {
                 "gui": "FloatGui",
                 "default": 0.0,
@@ -49025,6 +49094,16 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
@@ -49033,12 +49112,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>ICA source resembling ECG to find peaks from.</p>"
-            },
-            "event_id": {
-                "gui": "IntGui",
-                "default": 999,
-                "none_select": false,
-                "description": "<p>The index to assign to found events.</p>"
             },
             "tstart": {
                 "gui": "FloatGui",
@@ -49126,6 +49199,16 @@
                 "suffix": {
                     "evoked": "ave"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events"
+                }
             }
         },
         "parameters": {
@@ -49134,12 +49217,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>ICA source resembling EOG to find peaks from.</p>"
-            },
-            "event_id": {
-                "gui": "IntGui",
-                "default": 998,
-                "none_select": false,
-                "description": "<p>The index to assign to found events.</p>"
             },
             "l_freq": {
                 "gui": "FloatGui",
@@ -50851,15 +50928,16 @@
                     "trans": "read_trans",
                     "dict": "read_bem_surfaces"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -53111,14 +53189,16 @@
         "class_name": null
     },
     "read_ras_mni_t": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The subject.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -53154,7 +53234,15 @@
         "class_name": null
     },
     "Report": {
-        "inputs": {},
+        "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            }
+        },
         "parameters": {
             "info_fname": {
                 "gui": "StringGui",
@@ -53167,12 +53255,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The path to the directory containing the FreeSurfer subjects\nreconstructions. If <span style=\"font-family: monospace;\">None</span>, defaults to the <span style=\"font-family: monospace;\">SUBJECTS_DIR</span> environment\nvariable.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject name.</p>"
             },
             "title": {
                 "gui": "StringGui",
@@ -53779,6 +53861,13 @@
                     "stcs": "read_source_estimate",
                     "weights": "read_source_estimate"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -53787,12 +53876,6 @@
                 "default": "",
                 "none_select": false,
                 "description": "<p>The title to add.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The name of the FreeSurfer subject the STC belongs to. The name is\nnot stored with the STC data and therefore needs to be specified.\nIf <span style=\"font-family: monospace;\">None</span>, will use the value of <span style=\"font-family: monospace;\">subject</span> passed on report\ncreation.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -53874,6 +53957,13 @@
                 "suffix": {
                     "forward": "fwd"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -53882,12 +53972,6 @@
                 "default": "",
                 "none_select": false,
                 "description": "<p>The title corresponding to forward solution.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The name of the FreeSurfer subject <span style=\"font-family: monospace;\">forward</span> belongs to.\nIf <span style=\"font-family: monospace;\">None</span>, will use the value of <span style=\"font-family: monospace;\">subject</span> passed on report creation.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -53960,6 +54044,13 @@
                     "inv": "read_inverse_operator",
                     "src": "read_source_spaces"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -53968,12 +54059,6 @@
                 "default": "",
                 "none_select": false,
                 "description": "<p>The title corresponding to the inverse operator object.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The name of the FreeSurfer subject <span style=\"font-family: monospace;\">inverse_op</span> belongs to\nIf <span style=\"font-family: monospace;\">None</span>, will use the value of <span style=\"font-family: monospace;\">subject</span>\npassed on report creation.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -54064,6 +54149,13 @@
                     "montage": "read_dig_polhemus_isotrak",
                     "pos": "read_info"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -54072,12 +54164,6 @@
                 "default": "",
                 "none_select": false,
                 "description": "<p>The title to add.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The name of the FreeSurfer subject the <span style=\"font-family: monospace;\">trans</span> belongs to. The\nname is not stored with the <span style=\"font-family: monospace;\">trans</span> and therefore needs to be\nspecified. If <span style=\"font-family: monospace;\">None</span>, will use the value of <span style=\"font-family: monospace;\">subject</span> passed on\nreport creation.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -54253,6 +54339,16 @@
                     "events": "read_events",
                     "array": "read_surface"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
@@ -54261,12 +54357,6 @@
                 "default": "",
                 "none_select": false,
                 "description": "<p>The title corresponding to the events.</p>"
-            },
-            "event_id": {
-                "gui": "DictGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>A dictionary mapping event names (keys) to event codes (values).</p>"
             },
             "sfreq": {
                 "gui": "FloatGui",
@@ -55001,15 +55091,16 @@
                     "report"
                 ],
                 "optional": false
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "title": {
                 "gui": "StringGui",
                 "default": "",
@@ -57157,6 +57248,13 @@
                 "read": {
                     "int": "read_events"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -57187,12 +57285,6 @@
                 "default": "random",
                 "none_select": false,
                 "description": "<p>The label location to choose. Can be <span style=\"font-family: monospace;\">'random'</span> (default) or\n<span style=\"font-family: monospace;\">'center'</span> to use :func:`mne.Label.center_of_mass`. Note that for\n<span style=\"font-family: monospace;\">'center'</span> mode the label values are used as weights.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The subject the label is defined for.\nOnly used with <span style=\"font-family: monospace;\"><span>location='center'</span></span>.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -57278,6 +57370,13 @@
                 "read": {
                     "int": "read_events"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -57286,12 +57385,6 @@
                 "default": "random",
                 "none_select": false,
                 "description": "<p>The label location to choose. Can be 'random' (default) or 'center'\nto use :func:`mne.Label.center_of_mass` (restricting to vertices\nboth in the label and in the source space). Note that for 'center'\nmode the label values are used as weights.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The subject the label is defined for.\nOnly used with <span style=\"font-family: monospace;\"><span>location='center'</span></span>.</p>"
             },
             "subjects_dir": {
                 "gui": "PathGui",
@@ -58115,6 +58208,13 @@
                     "pos": "read_info",
                     "array": "read_surface"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -58151,12 +58251,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>Kept as information but not used by the object itself.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
             },
             "color": {
                 "gui": "ColorGui",
@@ -58411,15 +58505,16 @@
                     "lh": "read_label",
                     "rh": "read_label"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
-            },
             "smooth": {
                 "gui": "IntGui",
                 "default": 2,
@@ -58612,15 +58707,16 @@
                     "str"
                 ],
                 "optional": true
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -58786,6 +58882,13 @@
                     "rh": "read_label"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "restrict_vertices": {
                 "accepted_ports": [
                     "restrict_vertices",
@@ -58812,12 +58915,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -58864,15 +58961,16 @@
                     "lh": "read_label",
                     "rh": "read_label"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -58940,15 +59038,16 @@
                     "lh": "read_label",
                     "rh": "read_label"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -59014,6 +59113,13 @@
                     "scalar"
                 ],
                 "optional": true
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -59026,12 +59132,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The data in source space. The data can either be a single array or\na tuple with two arrays: &quot;kernel&quot; shape (n_vertices, n_sensors) and\n&quot;sens_data&quot; shape (n_sensors, n_times). In this case, the source\nspace data corresponds to <span style=\"font-family: monospace;\">np.dot(kernel, sens_data)</span>.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. While not necessary, it is safer to set the\nsubject parameter to avoid analysis errors.</p>"
             },
             "verbose": {
                 "types": [
@@ -59476,6 +59576,13 @@
                     "mixedsourceestimate": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "colormap": {
                 "accepted_ports": [
                     "colormap",
@@ -59520,12 +59627,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "surface": {
                 "gui": "StringGui",
                 "default": "inflated",
@@ -60770,6 +60871,13 @@
                     "scalar"
                 ],
                 "optional": true
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -60778,12 +60886,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The data in source space. Each dipole contains three vectors that\ndenote the dipole strength in X, Y and Z directions over time.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. While not necessary, it is safer to set the\nsubject parameter to avoid analysis errors.</p>"
             },
             "verbose": {
                 "types": [
@@ -60961,6 +61063,13 @@
                     "stc": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "colormap": {
                 "accepted_ports": [
                     "colormap",
@@ -61005,12 +61114,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "hemi": {
                 "gui": "ComboGui",
                 "options": [
@@ -62682,6 +62785,13 @@
                     "scalar"
                 ],
                 "optional": false
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -62694,12 +62804,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The data in source space. When it is a single array, the\nleft hemisphere is stored in data[:len(vertices[0])] and the right\nhemisphere is stored in data[-len(vertices[1]):].\nWhen data is a tuple, it contains two arrays:</p>\n<ul>\n<li><p>&quot;kernel&quot; shape (n_vertices, n_sensors) and</p></li>\n<li><p>&quot;sens_data&quot; shape (n_sensors, n_times).</p></li>\n</ul>\n<p>In this case, the source space data corresponds to\n<span style=\"font-family: monospace;\">np.dot(kernel, sens_data)</span>.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. While not necessary, it is safer to set the\nsubject parameter to avoid analysis errors.</p>"
             },
             "verbose": {
                 "types": [
@@ -62889,6 +62993,13 @@
                     "weights": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "restrict_vertices": {
                 "accepted_ports": [
                     "restrict_vertices",
@@ -62915,12 +63026,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The subject the stc is defined for.</p>"
-            },
             "hemi": {
                 "gui": "IntGui",
                 "default": null,
@@ -63669,6 +63774,13 @@
                     "weights": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "colormap": {
                 "accepted_ports": [
                     "colormap",
@@ -63713,12 +63825,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "surface": {
                 "gui": "StringGui",
                 "default": "inflated",
@@ -65127,6 +65233,13 @@
                     "scalar"
                 ],
                 "optional": true
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -65135,12 +65248,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The data in source space. Each dipole contains three vectors that\ndenote the dipole strength in X, Y and Z directions over time.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. While not necessary, it is safer to set the\nsubject parameter to avoid analysis errors.</p>"
             },
             "verbose": {
                 "types": [
@@ -65321,6 +65428,13 @@
                     "stc": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "colormap": {
                 "accepted_ports": [
                     "colormap",
@@ -65365,12 +65479,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "hemi": {
                 "gui": "ComboGui",
                 "options": [
@@ -67266,6 +67374,13 @@
                     "scalar"
                 ],
                 "optional": false
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -67278,12 +67393,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The data in source space. The data can either be a single array or\na tuple with two arrays: &quot;kernel&quot; shape (n_vertices, n_sensors) and\n&quot;sens_data&quot; shape (n_sensors, n_times). In this case, the source\nspace data corresponds to <span style=\"font-family: monospace;\">np.dot(kernel, sens_data)</span>.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. While not necessary, it is safer to set the\nsubject parameter to avoid analysis errors.</p>"
             },
             "verbose": {
                 "types": [
@@ -67324,6 +67433,13 @@
                 "read": {
                     "volsourceestimate": "read_source_estimate"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             },
             "colormap": {
                 "accepted_ports": [
@@ -67369,12 +67485,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "surface": {
                 "gui": "StringGui",
                 "default": "white",
@@ -67632,6 +67742,13 @@
                     "sourcespaces": "src"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "bg_img": {
                 "accepted_ports": [
                     "bg_img",
@@ -67655,12 +67772,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -69337,6 +69448,13 @@
                     "scalar"
                 ],
                 "optional": true
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
@@ -69345,12 +69463,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The data in source space. Each dipole contains three vectors that\ndenote the dipole strength in X, Y and Z directions over time.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. While not necessary, it is safer to set the\nsubject parameter to avoid analysis errors.</p>"
             },
             "verbose": {
                 "types": [
@@ -69388,6 +69500,13 @@
                     "volvectorsourceestimate"
                 ],
                 "optional": false
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             },
             "colormap": {
                 "accepted_ports": [
@@ -69433,12 +69552,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "hemi": {
                 "gui": "ComboGui",
                 "options": [
@@ -69693,6 +69806,13 @@
                     "sourcespaces": "src"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "bg_img": {
                 "accepted_ports": [
                     "bg_img",
@@ -69716,12 +69836,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -71938,14 +72052,16 @@
         "class_name": null
     },
     "grade_to_vertices": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>Name of the subject.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "grade": {
                 "types": [
                     "int",
@@ -72000,6 +72116,13 @@
     },
     "select_sources": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "label": {
                 "accepted_ports": [
                     "label",
@@ -72032,12 +72155,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "location": {
                 "types": [
                     "int",
@@ -72115,6 +72232,13 @@
     },
     "grow_labels": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "colors": {
                 "accepted_ports": [
                     "colors",
@@ -72129,12 +72253,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "seeds": {
                 "types": [
                     "int",
@@ -72302,6 +72420,13 @@
                     "list": "read_bem_surfaces"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "src": {
                 "accepted_ports": [
                     "src",
@@ -72341,12 +72466,6 @@
                 "default": 1.0,
                 "none_select": false,
                 "description": "<p>The tstep to use for the STC.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.</p>"
             },
             "verbose": {
                 "types": [
@@ -72463,6 +72582,13 @@
     },
     "random_parcellation": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "random_state": {
                 "accepted_ports": [
                     "random_state",
@@ -72477,12 +72603,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "n_parcel": {
                 "gui": "IntGui",
                 "default": 0,
@@ -72534,14 +72654,16 @@
         "class_name": null
     },
     "read_labels_from_annot": {
-        "inputs": {},
-        "parameters": {
+        "inputs": {
             "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            }
+        },
+        "parameters": {
             "parc": {
                 "gui": "StringGui",
                 "default": "aparc",
@@ -72648,15 +72770,16 @@
                     "tuple"
                 ],
                 "optional": true
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Subject which this label belongs to. Should only be specified if it is not\nspecified in the label.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -72838,6 +72961,13 @@
                     "dict": "read_bem_surfaces"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "src": {
                 "accepted_ports": [
                     "src",
@@ -72860,12 +72990,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The subject name.</p>"
-            },
             "distance": {
                 "gui": "FloatGui",
                 "default": 0.01,
@@ -73036,15 +73160,16 @@
                     "lh": "read_label",
                     "rh": "read_label"
                 }
+            },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "parc": {
                 "gui": "StringGui",
                 "default": null,
@@ -73564,6 +73689,16 @@
                     "array": "read_surface"
                 }
             },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
+            },
             "covariates": {
                 "accepted_ports": [
                     "covariates",
@@ -73573,12 +73708,6 @@
             }
         },
         "parameters": {
-            "event_id": {
-                "gui": "DictGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>As in Epochs; a dictionary where the values may be integers or\niterables of integers, corresponding to the 3rd column of\nevents, and the keys are condition names.\nIf None, uses all events in the events array.</p>"
-            },
             "tmin": {
                 "types": [
                     "float",
@@ -74539,6 +74668,13 @@
     },
     "summarize_clusters_stc": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "vertices": {
                 "accepted_ports": [
                     "vertices",
@@ -74595,12 +74731,6 @@
                 "default": 0,
                 "none_select": false,
                 "description": "<p>The time of the first sample.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": "fsaverage",
-                "none_select": false,
-                "description": "<p>The name of the subject.</p>"
             }
         },
         "outputs": {
@@ -84290,6 +84420,16 @@
                     "array": "read_surface"
                 }
             },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
+            },
             "selection": {
                 "accepted_ports": [
                     "selection",
@@ -84339,12 +84479,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>Comment on the method used to compute the data, e.g., <span style=\"font-family: monospace;\">&quot;hilbert&quot;</span>.\nDefault is <span style=\"font-family: monospace;\">None</span>.</p>"
-            },
-            "event_id": {
-                "gui": "DictGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Mapping from condition descriptions (strings) to integer event codes.If <span style=\"font-family: monospace;\">None</span>,\nall events in <span style=\"font-family: monospace;\">events</span> will be included, and the <span style=\"font-family: monospace;\">event_id</span> attribute\nwill be a :class:`dict` mapping a string version of each integer event ID\nto the corresponding integer.</p>"
             },
             "drop_log": {
                 "gui": "TupleGui",
@@ -95800,6 +95934,21 @@
                     "array": "read_surface"
                 }
             },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "int",
+                    "list",
+                    "dict",
+                    "str"
+                ],
+                "optional": true,
+                "read": {
+                    "int": "read_events",
+                    "list": "read_bem_surfaces",
+                    "dict": "read_bem_surfaces"
+                }
+            },
             "weights": {
                 "accepted_ports": [
                     "weights",
@@ -95824,19 +95973,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The frequencies in Hz.</p>"
-            },
-            "event_id": {
-                "types": [
-                    "int",
-                    "list",
-                    "dict",
-                    "str",
-                    "list"
-                ],
-                "gui": "MultiTypeGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The id of the :term:`events` to consider. If dict, the keys can later be\nused to access associated :term:`events`. Example:\ndict(auditory=1, visual=3). If int, a dict will be created with the id as\nstring. If a list of int, all :term:`events` with the IDs specified in the list\nare used. If a str or list of str, <span style=\"font-family: monospace;\">events</span> must be <span style=\"font-family: monospace;\">None</span> to use annotations\nand then the IDs must be the name(s) of the annotations to use.\nIf None, all :term:`events` will be used and a dict is created\nwith string integer names corresponding to the event id integers.</p>"
             },
             "dim_names": {
                 "gui": "TupleGui",
@@ -99715,6 +99851,13 @@
     },
     "Brain": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "alpha": {
                 "accepted_ports": [
                     "alpha",
@@ -99744,12 +99887,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>Subject name in Freesurfer subjects dir.</p>"
-            },
             "hemi": {
                 "gui": "StringGui",
                 "default": "both",
@@ -102607,6 +102744,13 @@
     },
     "plot_bem": {
         "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": false
+            },
             "src": {
                 "accepted_ports": [
                     "src",
@@ -102646,12 +102790,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": "",
-                "none_select": false,
-                "description": "<p>The FreeSurfer subject name.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -103277,6 +103415,13 @@
                     "dict": "read_bem_surfaces"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "ax": {
                 "accepted_ports": [
                     "ax",
@@ -103295,12 +103440,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name (will be used to set the FreeSurfer\nenvironment variable <span style=\"font-family: monospace;\">SUBJECT</span>).\nCan be <span style=\"font-family: monospace;\">None</span> with mode set to <span style=\"font-family: monospace;\">'3d'</span>.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -103435,7 +103574,15 @@
         "class_name": null
     },
     "plot_drop_log": {
-        "inputs": {},
+        "inputs": {
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            }
+        },
         "parameters": {
             "drop_log": {
                 "gui": "ListGui",
@@ -103454,12 +103601,6 @@
                 "default": 20,
                 "none_select": false,
                 "description": "<p>Maximum number of channels to show stats for.</p>"
-            },
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The subject name to use in the title of the plot. If <span style=\"font-family: monospace;\">None</span>, do not\ndisplay a subject name.</p>"
             },
             "color": {
                 "types": [
@@ -103569,6 +103710,17 @@
                     "(n_epochs) list (of n_channels)"
                 ],
                 "optional": true
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "bool",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
@@ -103682,16 +103834,6 @@
                 "default": true,
                 "none_select": false,
                 "description": "<p>Whether to show scale bars when the plot is initialized. Can be toggled\nafter initialization by pressing :kbd:`s` while the plot window is focused.\nDefault is <span style=\"font-family: monospace;\">True</span>.</p>"
-            },
-            "event_id": {
-                "types": [
-                    "bool",
-                    "dict"
-                ],
-                "gui": "MultiTypeGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Determines to label the event markers on the plot. If <span style=\"font-family: monospace;\">True</span>, uses\n<span style=\"font-family: monospace;\">epochs.event_id</span>. If <span style=\"font-family: monospace;\">False</span>, uses integer event codes instead of IDs.\nIf a <span style=\"font-family: monospace;\">dict</span> is passed, uses its <em>keys</em> as event labels on the plot for\nentries whose <em>values</em> are integer codes for events being drawn. Ignored if\n<span style=\"font-family: monospace;\">events=False</span>.</p>"
             },
             "group_by": {
                 "gui": "StringGui",
@@ -104103,6 +104245,16 @@
                     "array": "read_surface"
                 }
             },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
+            },
             "axes": {
                 "accepted_ports": [
                     "axes",
@@ -104129,12 +104281,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>Dictionary of event_id integers as keys and colors as values. If None,\ncolors are automatically drawn from a default list (cycled through if\nnumber of events longer than list of default colors). Color can be any\nvalid :ref:`matplotlib color &lt;matplotlib:colors_def&gt;`.</p>"
-            },
-            "event_id": {
-                "gui": "DictGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Dictionary of event labels (e.g. 'aud_l') as keys and their associated\nevent_id values. Labels are used to plot a legend. If None, no legend\nis drawn.</p>"
             },
             "equal_spacing": {
                 "gui": "BoolGui",
@@ -107957,6 +108103,16 @@
                 "suffix": {
                     "covariance": "cov"
                 }
+            },
+            "event_id": {
+                "accepted_ports": [
+                    "event_id",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
@@ -108154,12 +108310,6 @@
                 "default": "auto",
                 "none_select": false,
                 "description": "<p>Amount to decimate the data during display for speed purposes.\nYou should only decimate if the data are sufficiently low-passed,\notherwise aliasing can occur. The 'auto' mode (default) uses\nthe decimation that results in a sampling rate least three times\nlarger than <span style=\"font-family: monospace;\"><span>min(info['lowpass'],</span> lowpass)</span> (e.g., a 40 Hz lowpass\nwill result in at least a 120 Hz displayed sample rate).</p>"
-            },
-            "event_id": {
-                "gui": "DictGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Event IDs used to show at event markers (default None shows\nthe event numbers).</p>"
             },
             "show_scrollbars": {
                 "gui": "BoolGui",
@@ -108995,6 +109145,13 @@
                     "weights": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "colormap": {
                 "accepted_ports": [
                     "colormap",
@@ -109039,12 +109196,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "surface": {
                 "gui": "StringGui",
                 "default": "inflated",
@@ -109351,6 +109502,13 @@
                     "sourcespaces": "src"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "bg_img": {
                 "accepted_ports": [
                     "bg_img",
@@ -109374,12 +109532,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
@@ -109477,6 +109629,13 @@
                     "vectorsourceestimate": "read_source_estimate"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "colormap": {
                 "accepted_ports": [
                     "colormap",
@@ -109521,12 +109680,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name.\nIf <span style=\"font-family: monospace;\">None</span>, <span style=\"font-family: monospace;\">stc.subject</span> will be used.</p>"
-            },
             "hemi": {
                 "gui": "ComboGui",
                 "options": [
@@ -110620,6 +110773,13 @@
                     "dict": "read_bem_surfaces"
                 }
             },
+            "subject": {
+                "accepted_ports": [
+                    "subject",
+                    "str"
+                ],
+                "optional": true
+            },
             "fwd": {
                 "accepted_ports": [
                     "fwd",
@@ -110683,12 +110843,6 @@
             }
         },
         "parameters": {
-            "subject": {
-                "gui": "StringGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>The FreeSurfer subject name. Can be omitted if <span style=\"font-family: monospace;\">src</span> is provided.</p>"
-            },
             "subjects_dir": {
                 "gui": "PathGui",
                 "default": null,
