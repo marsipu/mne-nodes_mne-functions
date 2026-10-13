@@ -1,28 +1,28 @@
 {
     "scalar": [
-        "tmin",
-        "tstop",
-        "width",
         "tstep",
-        "tstart"
+        "tstop",
+        "tmin",
+        "tstart",
+        "width"
     ],
     "iterable": [
+        "cv",
         "stc",
         "ch_names",
-        "selection",
-        "cv"
+        "selection"
     ],
     "float in [0": [
+        "l1_ratio",
         "opacity",
         "smooth",
-        "alpha",
-        "l1_ratio"
+        "alpha"
     ],
     "list of Evoked": [
-        "all_inst",
-        "evokeds",
         "evoked",
-        "all_evoked"
+        "evokeds",
+        "all_evoked",
+        "all_inst"
     ],
     "optional": [
         "force_fixed",
@@ -30,70 +30,70 @@
         "surf_ori"
     ],
     "list of Label": [
+        "label",
         "labels",
-        "idx",
-        "label"
+        "idx"
     ],
     "1]": [
+        "l1_ratio",
         "opacity",
-        "alpha",
-        "l1_ratio"
+        "alpha"
     ],
     "mne.io.Raw": [
+        "raw_event",
         "inst",
-        "raw",
-        "raw_event"
+        "raw"
     ],
     "float between ``0`` and ``1": [
-        "n_grad",
+        "n_eeg",
         "n_mag",
-        "n_eeg"
+        "n_grad"
     ],
     "mne.Evoked": [
-        "ecg_evoked",
         "inst",
+        "ecg_evoked",
         "eog_evoked"
     ],
     "list of ndarray": [
+        "labels",
         "pos",
-        "vertices_to",
-        "labels"
+        "vertices_to"
     ],
     "matplotlib colormap": [
-        "cmap",
-        "mask_cmap"
+        "mask_cmap",
+        "cmap"
     ],
     "(colormap": [
-        "cmap",
-        "mask_cmap"
+        "mask_cmap",
+        "cmap"
     ],
     "bool)": [
-        "cmap",
-        "mask_cmap"
+        "mask_cmap",
+        "cmap"
     ],
     "list of Axes": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "instance of ~numpy.random.RandomState": [
         "random_state",
         "seed"
     ],
     ")": [
-        "buffer",
-        "conductivity"
+        "conductivity",
+        "buffer"
     ],
     "list of SpatialImage": [
-        "flash30",
-        "flash5"
+        "flash5",
+        "flash30"
     ],
     "np.inf": [
-        "fmax",
-        "dgap_freq"
+        "dgap_freq",
+        "fmax"
     ],
     "matplotlib": [
-        "ax",
-        "axes"
+        "axes",
+        "ax"
     ],
     "list-like": [
         "factor_levels",
@@ -120,12 +120,12 @@
         "vol_morph_mat"
     ],
     "list of AverageTFR": [
-        "all_tfr",
-        "tfr"
+        "tfr",
+        "all_tfr"
     ],
     "matplotlib-style color": [
-        "color",
-        "colors"
+        "colors",
+        "color"
     ],
     "mne.Info": [
         "info"

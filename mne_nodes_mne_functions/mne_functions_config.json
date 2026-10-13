@@ -12323,8 +12323,13 @@
             "surfaces": {
                 "accepted_ports": [
                     "surfaces",
+                    "surfs",
                     "dict"
-                ]
+                ],
+                "write": {
+                    "surfaces": "write_bem_surfaces",
+                    "surfs": "write_bem_surfaces"
+                }
             }
         },
         "target": "file",
@@ -12339,6 +12344,7 @@
             "surfs": {
                 "accepted_ports": [
                     "surfs",
+                    "surfaces",
                     "list"
                 ],
                 "optional": false,
@@ -13256,6 +13262,17 @@
                     "conductormodel": "read_bem_solution",
                     "sphere": "read_bem_solution"
                 }
+            },
+            "surface": {
+                "accepted_ports": [
+                    "surface",
+                    "path",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "dict": "read_bem_surfaces"
+                }
             }
         },
         "parameters": {
@@ -13264,16 +13281,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The filename of an MRI volume (mgh or mgz) to create the\ninterpolation matrix over. Source estimates obtained in the\nvolume source space can then be morphed onto the MRI volume\nusing this interpolator. If pos is a dict, this cannot be None.\nIf subject name is provided, <span style=\"font-family: monospace;\">pos</span> is a float or <span style=\"font-family: monospace;\">volume_label</span>\nare not provided then the <span style=\"font-family: monospace;\">mri</span> parameter will default to <span style=\"font-family: monospace;\">'T1.mgz'</span>\nor <span style=\"font-family: monospace;\">aseg.mgz</span>, respectively, else it will stay None.</p>"
-            },
-            "surface": {
-                "types": [
-                    "path",
-                    "dict"
-                ],
-                "gui": "MultiTypeGui",
-                "default": null,
-                "none_select": true,
-                "description": "<p>Define source space bounds using a FreeSurfer surface file. Can\nalso be a dictionary with entries <span style=\"font-family: monospace;\">'rr'</span> and <span style=\"font-family: monospace;\">'tris'</span>, such as\nthose returned by :func:`mne.read_surface`. If provided, <span style=\"font-family: monospace;\">bem</span> must be None.</p>"
             },
             "mindist": {
                 "gui": "FloatGui",
@@ -73367,8 +73374,13 @@
             "surfaces": {
                 "accepted_ports": [
                     "surfaces",
+                    "surfs",
                     "dict"
-                ]
+                ],
+                "write": {
+                    "surfaces": "write_bem_surfaces",
+                    "surfs": "write_bem_surfaces"
+                }
             }
         },
         "target": "file",
@@ -110063,7 +110075,10 @@
                     "figure3d",
                     "fig",
                     "figure"
-                ]
+                ],
+                "write": {
+                    "surface": "write_bem_surfaces"
+                }
             }
         },
         "target": "file",
@@ -110780,6 +110795,21 @@
                 ],
                 "optional": true
             },
+            "surfaces": {
+                "accepted_ports": [
+                    "surfaces",
+                    "surfs",
+                    "str",
+                    "list",
+                    "dict"
+                ],
+                "optional": true,
+                "read": {
+                    "surfs": "read_bem_surfaces",
+                    "list": "read_bem_surfaces",
+                    "dict": "read_bem_surfaces"
+                }
+            },
             "fwd": {
                 "accepted_ports": [
                     "fwd",
@@ -110848,17 +110878,6 @@
                 "default": null,
                 "none_select": true,
                 "description": "<p>The path to the directory containing the FreeSurfer subjects\nreconstructions. If <span style=\"font-family: monospace;\">None</span>, defaults to the <span style=\"font-family: monospace;\">SUBJECTS_DIR</span> environment\nvariable.</p>"
-            },
-            "surfaces": {
-                "types": [
-                    "str",
-                    "list",
-                    "dict"
-                ],
-                "gui": "MultiTypeGui",
-                "default": "auto",
-                "none_select": false,
-                "description": "<p>Surfaces to plot. Supported values:</p>\n<ul>\n<li><p>scalp: one of 'head', 'outer_skin' (alias for 'head'),\n'head-dense', or 'seghead' (alias for 'head-dense')</p></li>\n<li><p>skull: 'outer_skull', 'inner_skull', 'brain' (alias for\n'inner_skull')</p></li>\n<li><p>brain: one of 'pial', 'white', 'inflated', or 'brain'\n(alias for 'pial').</p></li>\n</ul>\n<p>Can be dict to specify alpha values for each surface. Use None\nto specify default value. Specified values must be between 0 and 1.\nfor example:</p>\n<pre>surfaces=dict(brain=0.4, outer_skull=0.6, head=None)</pre>\n<p>Defaults to 'auto', which will look for a head surface and plot\nit if found.</p>\n<aside>\n<p>Note</p>\n<p>For single layer BEMs it is recommended to use <span style=\"font-family: monospace;\">'brain'</span>.</p>\n</aside>"
             },
             "coord_frame": {
                 "gui": "ComboGui",
