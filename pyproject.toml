@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling>=1.27", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
@@ -7,19 +7,37 @@ name = "mne-nodes_mne-functions"
 description = "This is a module scraping all functions and instantiatable classes from mne-python."
 requires-python = ">=3.11"
 dependencies = [
+    "mne-nodes",
     "mne",
     "docutils",
 ]
 dynamic = ["version"]
 readme = "README.md"
 license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+authors = [{ name = "Martin G. Schulz", email = "dev@mgschulz.de" }]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Repository = "https://github.com/marsipu/mne-nodes_mne-functions"
 
 [project.entry-points."mne_nodes.plugins"]
 mne_functions = "mne_nodes_mne_functions"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/mne_nodes_mne_functions"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/pyproject.toml", "/README.md", "/LICENSE"]
+
 [tool.hatch.version]
 source = "vcs"
 raw-options = { version_scheme = "release-branch-semver" }
+fallback-version = "0.1.0"
 
 [tool.ruff]
 line-length = 88

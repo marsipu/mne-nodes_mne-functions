@@ -67,7 +67,10 @@ def _create_controller(run_dir: Path):
     _create_config_file(config_path)
 
     controller = Controller(config_path=config_path, settings=settings)
-    plugin_path = Path(__file__).parent.parent / "mne_nodes_mne_functions" / "mne_functions_config.json"
+    plugin_path = (
+        Path(__file__).parent.parent / "src" / "mne_nodes_mne_functions"
+        / "mne_functions_config.json"
+    )
     controller.load_plugin_path(plugin_path)
     return controller
 

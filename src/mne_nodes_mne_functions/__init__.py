@@ -1,3 +1,5 @@
+"""MNE function plugin registration and packaged resources."""
+
 from pathlib import Path
 
 PLUGIN_NAME = "mne-functions"
